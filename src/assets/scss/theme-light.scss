@@ -17,8 +17,7 @@ $light-primary-palette: (
   A200: #7192ff,
   A400: #3e6bff,
   A700: #2557ff,
-  contrast: (
-    50: #000000,
+  contrast: (50: #000000,
     100: #000000,
     200: #000000,
     300: #000000,
@@ -50,8 +49,7 @@ $light-secondary-palette: (
   A200: #b2c5fe,
   A400: #7f9eff,
   A700: #658aff,
-  contrast: (
-    50: #000000,
+  contrast: (50: #000000,
     100: #000000,
     200: #000000,
     300: #000000,
@@ -83,8 +81,7 @@ $light-tertiary-palette: (
   A200: #5c84ff,
   A400: #295eff,
   A700: #0f4bff,
-  contrast: (
-    50: #000000,
+  contrast: (50: #000000,
     100: #000000,
     200: #000000,
     300: #ffffff,
@@ -116,8 +113,7 @@ $light-neutral-palette: (
   A200: #c1aef7,
   A400: #9674ff,
   A700: #835aff,
-  contrast: (
-    50: #000000,
+  contrast: (50: #000000,
     100: #000000,
     200: #000000,
     300: #000000,
@@ -138,11 +134,10 @@ $light-theme: mat.define-light-theme(
   (
     color: (
       primary: mat.define-palette($light-primary-palette, 500),
-      accent: mat.define-palette($light-secondary-palette, 900),
+      accent: mat.define-palette($light-tertiary-palette, 500),
     ),
-    typography: mat.define-typography-config(),
-    density: 0,
-  )
-);
+      typography: mat.define-typography-config(),
+      density: 0,
+  ));
 
 @include mat.all-component-themes($light-theme);
