@@ -1,2 +1,3 @@
-export * from './authentication/authentication.module';
-export * from './home/home.module';
+export * from './authentication';
+export * from './home';
+export * from './user';
