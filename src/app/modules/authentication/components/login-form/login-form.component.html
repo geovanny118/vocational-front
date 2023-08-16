@@ -1,34 +1,51 @@
 <div id="container">
-  <form [formGroup]="loginForm" novalidate (ngSubmit)="login()" id="form-container">
+  <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()" id="form-container">
     <div class="input-container">
       <div id="title">Log In</div>
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
-        <input matInput placeholder="Email" />
+        <input matInput placeholder="Email" formControlName="email" />
         <mat-icon matSuffix>person</mat-icon>
       </mat-form-field>
+      <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched" class="error-message">
+        Email es requerido.
+      </div>
+      <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched" class="error-message">
+        Ingresa un email válido.
+      </div>
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" />
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" />
+        <button mat-icon-button type="button" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide">
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
       </mat-form-field>
+      <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched" class="error-message">
+        Contraseña es requerida.
+      </div>
+      <div *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched" class="error-message">
+        La contraseña debe tener al menos 6 caracteres.
+      </div>
     </div>
     <div id="forget-password-text-container">
       <p>¿Olvidaste tu contraseña?</p>
     </div>
     <div class="input-container">
-      <button mat-raised-button id="button">iniciar sesión</button>
+      <button mat-raised-button class="enabled-button" type="submit" [disabled]="!loginForm.valid" [ngClass]="{
+          'enabled-button': loginForm.valid,
+          'disabled-button': !loginForm.valid
+        }">
+        iniciar sesión
+      </button>
     </div>
     <div id="open-account-text-container">
-        <span>¿No tienes una cuenta? </span>
-        <span id="colored-text"><a [routerLink]="'/authentication/registration'">Abrir Cuenta</a></span>
+      <span>¿No tienes una cuenta? </span>
+      <span id="colored-text"><a [routerLink]="'/authentication/registration'">Abrir Cuenta</a></span>
     </div>
   </form>
 </div>

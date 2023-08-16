@@ -30,7 +30,7 @@ mat-form-field {
   margin-bottom: 15px;
 }
 
-#button {
+.enabled-button {
   color: white;
   background-color: #082A58;
   font-weight: bold;
@@ -54,4 +54,18 @@ mat-form-field {
 
 #colored-text {
   color: #082A58;
+}
+
+.disabled-button {
+  background-color: gray;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 100%;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
 }
