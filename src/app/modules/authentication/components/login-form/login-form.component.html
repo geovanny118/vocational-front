@@ -1,0 +1,34 @@
+<div id="container">
+  <form [formGroup]="loginForm" novalidate (ngSubmit)="login()" id="form-container">
+    <div class="input-container">
+      <div id="title">Log In</div>
+    </div>
+    <div class="input-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" />
+        <mat-icon matSuffix>person</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="input-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" />
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div id="forget-password-text-container">
+      <p>¿Olvidaste tu contraseña?</p>
+    </div>
+    <div class="input-container">
+      <button mat-raised-button id="button">iniciar sesión</button>
+    </div>
+    <div id="open-account-text-container">
+        <span>¿No tienes una cuenta? </span>
+        <span id="colored-text">Abrir Cuenta</span>
+    </div>
+  </form>
+</div>

@@ -48,3 +48,6 @@ body {
   --surface-variant: #e1e2ec;
   --on-surface-variant: #44474f;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
