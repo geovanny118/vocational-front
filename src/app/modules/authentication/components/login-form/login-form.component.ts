@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { LoginCredentials } from '../../models';
+import { AuthenticationService } from '../../services';
 
 @Component({
   selector: 'app-login-form',
@@ -21,26 +22,30 @@ export class LoginFormComponent {
   status: string = 'init';
   hide: boolean = true;
 
-  loginForm: FormGroup = this.formBuilder.nonNullable.group({
+  loginForm: FormGroup = this._formBuilder.nonNullable.group({
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
   constructor(
-    private formBuilder: FormBuilder,
-    private router: Router
+    private _formBuilder: FormBuilder,
+    private _router: Router,
+    private _authenticationServices: AuthenticationService
   ) { }
 
   submit() {
     if (this.loginForm.valid) {
       this.status = 'loading';
-      const { email, password } = this.loginForm.getRawValue();
-      const credentials: LoginCredentials = { email, password };
+      const credentials: LoginCredentials = this.loginForm.getRawValue();
 
-      console.log(credentials);
+      //console.log(credentials);
       //to do login...
+      this._authenticationServices.login(credentials).subscribe({
+        next: () => { this._router.navigate(['/home'])},
+        error: () => { this.status = 'failed';}
+      });
 
-      //limpia el formulario
+      //clear the form after submitting the data
       this.loginForm.reset();
       this.loginForm.markAsPristine();
       this.loginForm.markAsUntouched();
