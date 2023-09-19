@@ -33,7 +33,8 @@
       </div>
     </div>
     <div id="forget-password-text-container">
-      <p>¿Olvidaste tu contraseña?</p>
+      <!-- <p>¿Olvidaste tu contraseña?</p> -->
+      <span id="colored-text"><a [routerLink]="'/authentication/registration'">¿Olvidaste tu contraseña?</a></span>
     </div>
     <div class="input-container">
       <button mat-raised-button class="enabled-button" type="submit" [disabled]="!loginForm.valid" [ngClass]="{

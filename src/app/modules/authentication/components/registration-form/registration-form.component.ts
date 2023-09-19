@@ -9,5 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./registration-form.component.scss']
 })
 export class RegistrationFormComponent {
-
+  
 }
