@@ -1,1 +1,74 @@
-<p>registration-form works!</p>
+<div id="container">
+    <form [formGroup]="registrationForm" novalidate (ngSubmit)="submit()" id="form-container">
+        <div class="input-container">
+            <div id="title">Registrar usuario</div>
+        </div>
+        <div class="input-container">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" formControlName="email" />
+                <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field>
+            <div *ngIf="registrationForm.get('email')?.hasError('required') && registrationForm.get('email')?.touched"
+                class="error-message">
+                Email es requerido.
+            </div>
+            <div *ngIf="registrationForm.get('email')?.hasError('email') && registrationForm.get('email')?.touched"
+                class="error-message">
+                Ingresa un email válido.
+            </div>
+        </div>
+        <div class="input-container">
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
+                <button mat-icon-button type="button" matSuffix (click)="hidePassword = !hidePassword"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                    <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
+                </button>
+            </mat-form-field>
+            <div *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched"
+                class="error-message">
+                Contraseña es requerida.
+            </div>
+            <div *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched"
+                class="error-message">
+                La contraseña debe tener al menos 6 caracteres.
+            </div>
+        </div>
+        <div class="input-container">
+            <mat-form-field appearance="outline">
+                <mat-label>Confirmar password</mat-label>
+                <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" />
+                <button mat-icon-button type="button" matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hideConfirmPassword">
+                    <mat-icon>{{ hideConfirmPassword ? "visibility_off" : "visibility" }}</mat-icon>
+                </button>
+            </mat-form-field>
+            <div *ngIf="registrationForm.get('confirmPassword')?.hasError('required') && registrationForm.get('confirmPassword')?.touched"
+                class="error-message">
+                Contraseña es requerida.
+            </div>
+            <div *ngIf="registrationForm.get('confirmPassword')?.hasError('minlength') && registrationForm.get('confirmPassword')?.touched"
+                class="error-message">
+                La contraseña debe tener al menos 6 caracteres.
+            </div>
+            <div *ngIf="registrationForm.hasError('passwordsNotMatching') && registrationForm.get('confirmPassword')?.touched"
+                class="error-message">
+                Las contraseñas no son iguales
+            </div>
+        </div>
+        <div class="input-container">
+            <button mat-raised-button class="enabled-button" type="submit" [disabled]="!registrationForm.valid" [ngClass]="{
+          'enabled-button': registrationForm.valid,
+          'disabled-button': !registrationForm.valid
+        }">
+                Registrar
+            </button>
+        </div>
+        <div id="open-account-text-container">
+            <span>¿Ya tienes una cuenta? </span>
+            <span id="colored-text"><a [routerLink]="'/authentication/login'">Inicia sesión aquí</a></span>
+        </div>
+    </form>
+</div>
