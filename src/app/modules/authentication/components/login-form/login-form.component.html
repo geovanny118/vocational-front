@@ -7,7 +7,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput placeholder="Email" formControlName="email" />
-        <mat-icon matSuffix>person</mat-icon>
+        <mat-icon matSuffix>alternate_email</mat-icon>
       </mat-form-field>
       <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched" class="error-message">
         Email es requerido.
@@ -34,7 +34,7 @@
     </div>
     <div id="forget-password-text-container">
       <!-- <p>¿Olvidaste tu contraseña?</p> -->
-      <span id="colored-text"><a [routerLink]="'/authentication/registration'">¿Olvidaste tu contraseña?</a></span>
+      <span id="colored-text"><a [routerLink]="'/authentication/password-recovery'">¿Olvidaste tu contraseña?</a></span>
     </div>
     <div class="input-container">
       <button mat-raised-button class="enabled-button" type="submit" [disabled]="!loginForm.valid" [ngClass]="{
