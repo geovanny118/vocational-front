@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -41,15 +41,36 @@ export class RegistrationFormComponent {
   hidePassword: boolean = true;
   hideConfirmPassword: boolean = true;
 
-  registrationForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
-  },
-  { validators: confirmPasswordValidator }
-  );
+  
+  registrationForm: FormGroup = this._formBuilder.group({
+    fullname: ['', [Validators.required]],
+    email: ['', [Validators.email, Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+  }, 
+  {
+    validators: confirmPasswordValidator
+  });
 
+  /*
+  registrationForm: FormGroup = this._formBuilder.group({
+    email: this._formBuilder.group({
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+    },
+    {
+      validators: confirmPasswordValidator
+    }),
+    user: this._formBuilder.group({
+      firtsname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      birthdate: ['', [Validators.required]],
+    }),
+  });
+  */
   constructor(
+    private _formBuilder: FormBuilder,
     private _router: Router,
     private _authenticationServices: AuthenticationService
   ) { }

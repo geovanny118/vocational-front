@@ -3,11 +3,22 @@
         <div class="input-container">
             <div id="title">Registrar usuario</div>
         </div>
+            <div class="input-container">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre completo</mat-label>
+                    <input matInput placeholder="Nombre completo" formControlName="fullname" />
+                    <mat-icon matSuffix>person</mat-icon>
+                </mat-form-field>
+                <div *ngIf="registrationForm.get('fullname')?.hasError('required') && registrationForm.get('fullname')?.touched"
+                    class="error-message">
+                    Nombre es requerido.
+                </div>
+            </div>
         <div class="input-container">
             <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
                 <input matInput placeholder="Email" formControlName="email" />
-                <mat-icon matSuffix>person</mat-icon>
+                <mat-icon matSuffix>alternate_email</mat-icon>
             </mat-form-field>
             <div *ngIf="registrationForm.get('email')?.hasError('required') && registrationForm.get('email')?.touched"
                 class="error-message">
