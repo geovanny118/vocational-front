@@ -2,13 +2,17 @@
 /* @import '@angular/material/prebuilt-themes/indigo-pink.css'; */
 @import 'assets/scss/theme-light.scss';
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html,
 body {
-  height: 100%;
+  height: 100vh;
 }
 
 body {
-  margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -48,6 +52,3 @@ body {
   --surface-variant: #e1e2ec;
   --on-surface-variant: #44474f;
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

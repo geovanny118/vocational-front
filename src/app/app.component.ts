@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
-import { ToolbarComponent } from './shared/components';
+import { ToolbarComponent, FooterComponent } from './shared/components';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,8 @@ import { ToolbarComponent } from './shared/components';
   imports: [
     CommonModule,
     RouterOutlet,
-    ToolbarComponent
+    ToolbarComponent, 
+    FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],

@@ -12,11 +12,15 @@ export class AuthenticationService {
 
   constructor(private _httpClient: HttpClient) { }
 
-  login(credentials: LoginCredentials){
+  login(credentials: LoginCredentials): any{
     const { email, password } = credentials;
     console.log({email, password});
     return this._httpClient.post(`${this.baseUrl}/api/v1/auth/login`, { email, password });
   }
 
   registration(){}
+
+  logout(){}
+
+  forgotPassword(){}
 }
