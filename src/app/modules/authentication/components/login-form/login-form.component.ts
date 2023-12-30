@@ -15,7 +15,6 @@ import { AuthenticationService } from '../../services';
   styleUrls: ['./login-form.component.scss'],
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule, RouterModule, NgClass, NgIf],
-
 })
 export class LoginFormComponent {
 

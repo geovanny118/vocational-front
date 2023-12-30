@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import '@angular/material/prebuilt-themes/indigo-pink.css'; */
 @import 'assets/scss/theme-light.scss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
   margin: 0;
