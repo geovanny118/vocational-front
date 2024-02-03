@@ -5,15 +5,12 @@
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="Email" formControlName="email" />
-        <mat-icon matSuffix>alternate_email</mat-icon>
+        <mat-label>Número de identificación</mat-label>
+        <input matInput placeholder="Email" formControlName="identificacion" />
+        <mat-icon matSuffix>badge</mat-icon>
       </mat-form-field>
-      <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched" class="error-message">
-        Email es requerido.
-      </div>
-      <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched" class="error-message">
-        Ingresa un email válido.
+      <div *ngIf="loginForm.get('identificacion')?.hasError('required') && loginForm.get('identificacion')?.touched" class="error-message">
+        Número de identificación es requerido.
       </div>
     </div>
     <div class="input-container">

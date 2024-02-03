@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment.development';
-import { LoginCredentials } from '../models';
+import { LoginCredentials, Usuario } from '../models';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,18 @@ export class AuthenticationService {
 
   constructor(private _httpClient: HttpClient) { }
 
-  login(credentials: LoginCredentials): any{
+  login(credentials: LoginCredentials): Observable<any> {
+    /* const { identificacion, password } = credentials;
+    console.log({ identificacion, password });
+    return this._httpClient.post(`${this.baseUrl}/auth/login`, { identificacion, password }); */
     const { identificacion, password } = credentials;
-    console.log({ identificacion, password});
-    return this._httpClient.post(`${this.baseUrl}/api/v1/auth/login`, { identificacion, password });
+    console.log({ identificacion, password });
+    return this._httpClient.post(`${this.baseUrl}/auth/login`, credentials);
   }
 
-  registration(){}
+  registration(usuario: Usuario): Observable<any> {
+    return this._httpClient.post(`${this.baseUrl}/auth/nuevo`, usuario);
+  }
 
   logout(){}
 

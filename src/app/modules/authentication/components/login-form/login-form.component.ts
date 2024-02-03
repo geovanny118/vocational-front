@@ -22,7 +22,7 @@ export class LoginFormComponent {
   hide: boolean = true;
 
   loginForm: FormGroup = this._formBuilder.nonNullable.group({
-    email: ['', [Validators.email, Validators.required]],
+    identificacion: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 

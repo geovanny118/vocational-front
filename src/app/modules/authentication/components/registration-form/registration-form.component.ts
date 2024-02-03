@@ -70,12 +70,11 @@ export class RegistrationFormComponent {
 
       console.log(user);
       //to do register...
-      /*
-      this._authenticationServices.login(user).subscribe({
+      this._authenticationServices.registration(user).subscribe({
         next: () => { this._router.navigate(['/home']) },
         error: () => { this.status = 'failed'; }
       });
-      */
+      
       //clear the form after submitting the data
       this.registrationForm.reset();
       this.registrationForm.markAsPristine();
