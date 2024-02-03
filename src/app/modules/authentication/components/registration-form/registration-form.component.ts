@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { User } from '../../models';
+import { Usuario } from '../../models';
 import { AuthenticationService } from '../../services';
 
 // validate that passwords are the same
@@ -43,7 +43,12 @@ export class RegistrationFormComponent {
 
   
   registrationForm: FormGroup = this._formBuilder.group({
-    fullname: ['', [Validators.required]],
+    identificacion: ['', [Validators.required]],
+    nombres: ['', [Validators.required]],
+    apellidos: ['', [Validators.required]],
+    telefono: ['', [Validators.required]],
+    direccion: ['', [Validators.required]],
+    ciudad: ['', [Validators.required]],
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
@@ -52,23 +57,6 @@ export class RegistrationFormComponent {
     validators: confirmPasswordValidator
   });
 
-  /*
-  registrationForm: FormGroup = this._formBuilder.group({
-    email: this._formBuilder.group({
-      email: ['', [Validators.email, Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
-    },
-    {
-      validators: confirmPasswordValidator
-    }),
-    user: this._formBuilder.group({
-      firtsname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      birthdate: ['', [Validators.required]],
-    }),
-  });
-  */
   constructor(
     private _formBuilder: FormBuilder,
     private _router: Router,
@@ -78,7 +66,7 @@ export class RegistrationFormComponent {
   submit() {
     if (this.registrationForm.valid) {
       this.status = 'loading';
-      const user: User = this.registrationForm.getRawValue();
+      const user: Usuario = this.registrationForm.getRawValue();
 
       console.log(user);
       //to do register...

@@ -1,10 +1,16 @@
 export interface LoginCredentials {
-  email: string;
+  identificacion: string;
   password: string;
 }
 
-export interface User {
-  fullname: string;
+export interface Usuario {
+  idUsuario?: number;
+  identificacion: string;
+  nombres: string;
+  apellidos: string
   email: string;
   password?: string;
+  telefono: string;
+  direccion: string;
+  ciudad: string;
 }
