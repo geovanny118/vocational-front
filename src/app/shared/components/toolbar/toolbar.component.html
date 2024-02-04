@@ -1,4 +1,5 @@
 <mat-toolbar color="primary">
   <button mat-button [routerLink]="'/home'" routerLinkActive="active-button">Inicio</button>
-  <button mat-button [routerLink]="'/authentication'" routerLinkActive="active-button">Log In</button>
+  <button mat-button *ngIf="!isLoggedIn()" [routerLink]="'/authentication'" routerLinkActive="active-button">Log In</button>
+  <button mat-button *ngIf="isLoggedIn()" (click)="logout()" routerLinkActive="active-button">Cerrar Sesión</button>
 </mat-toolbar>

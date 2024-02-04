@@ -1,9 +1,9 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
-import { LoginCredentials, Usuario, UsuarioAutenticado } from '../models';
 import { Observable } from 'rxjs/internal/Observable';
-import { BehaviorSubject, tap } from 'rxjs';
+import { LoginCredentials, Usuario, UsuarioAutenticado } from '../models';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ import { BehaviorSubject, tap } from 'rxjs';
 export class AuthenticationService {
   private _httpClient: HttpClient = inject(HttpClient);
   private _baseUrl: string = environment.API_URL;
+  private _router: Router = inject(Router);
   // undefined: estado iniciar | null: no autorizado | UsuarioAutenticado: logueado
   currentUserSig = signal<UsuarioAutenticado | undefined | null>(undefined);  
   
@@ -18,11 +19,20 @@ export class AuthenticationService {
     return this._httpClient.post(`${this._baseUrl}/auth/login`, credentials);
   }
 
-  registration(usuario: Usuario): Observable<any> {
-    return this._httpClient.post(`${this._baseUrl}/auth/nuevo`, usuario);
+  registration(user: Usuario): Observable<any> {
+    return this._httpClient.post(`${this._baseUrl}/auth/nuevo`, user);
   }
 
-  logout(){}
+  logout() {
+    // Limpiar el token almacenado en el localStorage y redireciona a la pagina de login
+    localStorage.removeItem('token');
+    this._router.navigateByUrl('/authentication/login');
+  }
+
+  isLoggedIn(): boolean {
+    // Verifica si el usuario está autenticado
+    return !!localStorage.getItem('token');
+  }
 
   forgotPassword(){}
 }

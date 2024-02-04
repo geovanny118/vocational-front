@@ -1,4 +1,3 @@
-import { UsuarioAutenticado } from './../../models/auth.model';
 import { Component, inject } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
@@ -36,14 +35,14 @@ export class LoginFormComponent {
       const credentials: LoginCredentials = this.loginForm.getRawValue();
 
       //console.log(credentials);
-      //to do login...
+      // servicio para el login
       this._authenticationServices.login(credentials).subscribe( (response) => {
         localStorage.setItem('token', response.token);
         this._authenticationServices.currentUserSig.set(response);
         this._router.navigateByUrl('/user');
       });
 
-      //clear the form after submitting the data
+      // limpia el formulario
       this.loginForm.reset();
       this.loginForm.markAsPristine();
       this.loginForm.markAsUntouched();
