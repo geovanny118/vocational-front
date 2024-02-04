@@ -15,11 +15,6 @@ export class AuthenticationService {
   currentUserSig = signal<UsuarioAutenticado | undefined | null>(undefined);  
   
   login(credentials: LoginCredentials): Observable<any> {
-    /* const { identificacion, password } = credentials;
-    console.log({ identificacion, password });
-    return this._httpClient.post(`${this.baseUrl}/auth/login`, { identificacion, password }); */
-    const { identificacion, password } = credentials;
-    console.log({ identificacion, password });
     return this._httpClient.post(`${this._baseUrl}/auth/login`, credentials);
   }
 

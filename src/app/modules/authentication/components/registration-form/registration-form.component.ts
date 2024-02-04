@@ -71,7 +71,7 @@ export class RegistrationFormComponent {
       console.log(user);
       //to do register...
       this._authenticationServices.registration(user).subscribe({
-        next: () => { this._router.navigate(['/home']) },
+        next: () => { this._router.navigate(['/authentication/login']) },
         error: () => { this.status = 'failed'; }
       });
       
