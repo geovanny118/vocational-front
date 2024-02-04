@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { UsuarioAutenticado } from './../../models/auth.model';
+import { Component, inject } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -17,6 +18,9 @@ import { AuthenticationService } from '../../services';
   imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule, RouterModule, NgClass, NgIf],
 })
 export class LoginFormComponent {
+  private _router: Router = inject(Router);
+  private _formBuilder: FormBuilder = inject(FormBuilder);
+  private _authenticationServices: AuthenticationService = inject(AuthenticationService);
 
   status: string = 'init';
   hide: boolean = true;
@@ -26,12 +30,6 @@ export class LoginFormComponent {
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  constructor(
-    private _formBuilder: FormBuilder,
-    private _router: Router,
-    private _authenticationServices: AuthenticationService
-  ) { }
-
   submit() {
     if (this.loginForm.valid) {
       this.status = 'loading';
@@ -39,9 +37,10 @@ export class LoginFormComponent {
 
       //console.log(credentials);
       //to do login...
-      this._authenticationServices.login(credentials).subscribe({
-        next: () => { this._router.navigate(['/home'])},
-        error: () => { this.status = 'failed';}
+      this._authenticationServices.login(credentials).subscribe( (response) => {
+        localStorage.setItem('token', response.token);
+        this._authenticationServices.currentUserSig.set(response);
+        this._router.navigateByUrl('/user');
       });
 
       //clear the form after submitting the data
