@@ -9,22 +9,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { Usuario } from '../../models';
 import { AuthenticationService } from '../../services';
 
-// validate that passwords are the same
+// valida que las contraseñas sean iguales
 const confirmPasswordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   let password = control.get('password');
   let confirmPassword = control.get('confirmPassword');
 
-  // if any of the fields are empty, disable validation.
+  // si cualquier campo esta vacio deshabilita la validacion
   if (!password?.value || !confirmPassword?.value) {
     return null;
   }
 
-  // if both fields have values, check if they match
+  // si ambos campos tiene valores, verifica si las contraseñas son iguales
   if (password.value !== confirmPassword.value) {
     return { passwordsNotMatching: true };
   }
 
-  // if the fields match, the validation is successful
+  // si ambas contraseñas son iguales, pasa la validacion
   return null;
 };
 
@@ -69,13 +69,13 @@ export class RegistrationFormComponent {
       const user: Usuario = this.registrationForm.getRawValue();
 
       console.log(user);
-      //to do register...
+      // llama al servicio para el registro, si es correcto redirige a la pantalla de login
       this._authenticationServices.registration(user).subscribe({
         next: () => { this._router.navigate(['/authentication/login']) },
         error: () => { this.status = 'failed'; }
       });
       
-      //clear the form after submitting the data
+      // limpia el formulario despues de enviar la informacion
       this.registrationForm.reset();
       this.registrationForm.markAsPristine();
       this.registrationForm.markAsUntouched();
