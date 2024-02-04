@@ -13,13 +13,13 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent {
-  private _authenticationService: AuthenticationService = inject(AuthenticationService);
+  authenticationService: AuthenticationService = inject(AuthenticationService);
 
   isLoggedIn(): boolean {
-    return this._authenticationService.isLoggedIn();
+    return this.authenticationService.isLoggedIn();
   }
 
   logout(): void {
-    this._authenticationService.logout();
+    this.authenticationService.logout();
   }
 }

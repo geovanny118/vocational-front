@@ -6,7 +6,7 @@
     <div class="input-container">
       <mat-form-field appearance="outline">
         <mat-label>Número de identificación</mat-label>
-        <input matInput placeholder="Email" formControlName="identificacion" />
+        <input matInput placeholder="Número de identificación" formControlName="identificacion" />
         <mat-icon matSuffix>badge</mat-icon>
       </mat-form-field>
       <div *ngIf="loginForm.get('identificacion')?.hasError('required') && loginForm.get('identificacion')?.touched" class="error-message">
