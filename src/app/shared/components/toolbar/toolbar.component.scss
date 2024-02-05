@@ -1,3 +1,7 @@
+mat-toolbar {
+  gap: 0.7em;
+}
+
 .active-button {
   background-color: #082a58;
   color: white;
@@ -7,4 +11,11 @@
 
 #username {
   font-size: 0.7em;
+}
+
+#user-options-container {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.7em;
 }

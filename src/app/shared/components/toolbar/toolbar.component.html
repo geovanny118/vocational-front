@@ -1,7 +1,15 @@
 <mat-toolbar color="primary">
-  <button *ngIf="!isLoggedIn()" mat-button [routerLink]="'/home'" routerLinkActive="active-button">Inicio</button>
-  <div *ngIf="isLoggedIn()" id="username">{{ authenticationService.currentUserSig()?.identificacion }} </div>
-  <button mat-button *ngIf="!isLoggedIn()" [routerLink]="'/authentication'" routerLinkActive="active-button">Log In</button>
-  <button mat-button *ngIf="isLoggedIn()" (click)="logout()" routerLinkActive="active-button">Cerrar Sesión</button>
-  
+  <div>
+    <mat-icon aria-hidden="false" aria-label="Example school icon" fontIcon="school"></mat-icon>
+  </div>
+  <div *ngIf="showTitle">
+    <h1>Vocational</h1>
+  </div>
+  <div *ngIf="!showTitle" id="user-options-container">
+    <button *ngIf="!isLoggedIn()" mat-button [routerLink]="'/home'" routerLinkActive="active-button">Inicio</button>
+    <div *ngIf="isLoggedIn()" id="username">{{ authenticationService.currentUserSig()?.identificacion }} </div>
+    <button mat-button *ngIf="!isLoggedIn()" [routerLink]="'/authentication'" routerLinkActive="active-button">Log
+      In</button>
+    <button mat-button *ngIf="isLoggedIn()" (click)="logout()" routerLinkActive="active-button">Cerrar Sesión</button>
+  </div>
 </mat-toolbar>
