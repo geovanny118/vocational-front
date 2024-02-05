@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent, PasswordRecoveryComponent, RegistrationComponent } from './pages';
 import { LoginFormComponent, PasswordRecoveryFormComponent, RegistrationFormComponent } from './components';
 import { MatCardModule } from '@angular/material/card';
-import { MatStepperModule } from '@angular/material/stepper';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     RegistrationFormComponent,
     PasswordRecoveryFormComponent,
     MatCardModule,
-    MatStepperModule
+    MatProgressBarModule
   ]
 })
 export class AuthenticationModule { }

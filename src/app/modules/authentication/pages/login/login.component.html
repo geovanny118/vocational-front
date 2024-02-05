@@ -1,9 +1,12 @@
 <div id="login-container">
   <div id="login-form-container">
-    <mat-card id="custom-card">
+    <mat-card  id="{{ loading ? 'custom-card-loading' : 'custom-card' }}">
       <mat-card-content>
           <app-login-form/>
       </mat-card-content>
+      <mat-card-footer>
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+      </mat-card-footer>
     </mat-card>
   </div>
 </div>
