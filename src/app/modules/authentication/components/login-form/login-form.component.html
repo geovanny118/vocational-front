@@ -12,6 +12,10 @@
       <div *ngIf="loginForm.get('identificacion')?.hasError('required') && loginForm.get('identificacion')?.touched" class="error-message">
         Número de identificación es requerido.
       </div>
+      <div *ngIf="loginForm.get('identificacion')?.hasError('pattern') && loginForm.get('identificacion')?.touched"
+        class="error-message">
+        Este campo debe contener solo números.
+      </div>
     </div>
     <div class="input-container">
       <mat-form-field appearance="outline">
