@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
   loading: boolean = false;
+
+  onLoginFormSubmit(isSubmitted: boolean) {
+    this.loading = isSubmitted;
+  }
 }
