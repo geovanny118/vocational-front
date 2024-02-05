@@ -32,15 +32,15 @@ mat-form-field {
 }
 
 .enabled-button {
-  color: white;
-  background-color: #082A58;
+  color: white !important;
+  background-color: #082A58 !important;
   font-weight: bold;
   font-size: 1rem;
   width: 100%;
 }
 
 #forget-password-text-container {
-  width: 50%;
+  width: 75%;
   color: #082A58;
   font-size: 0.9rem;
   display: flex;
