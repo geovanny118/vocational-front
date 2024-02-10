@@ -7,7 +7,7 @@
   </div>
   <div *ngIf="!showTitle" id="user-options-container">
     <button *ngIf="!isLoggedIn()" mat-button [routerLink]="'/home'" routerLinkActive="active-button">Inicio</button>
-    <div *ngIf="isLoggedIn()" id="username">{{ authenticationService.currentUserSig()?.identificacion }} </div>
+    <div *ngIf="isLoggedIn()" id="username">{{ authenticationService.currentUserSig()?.nombres }} </div>
     <button mat-button *ngIf="!isLoggedIn()" [routerLink]="'/authentication'" routerLinkActive="active-button">Log
       In</button>
     <button mat-button *ngIf="isLoggedIn()" (click)="logout()" routerLinkActive="active-button">Cerrar Sesión</button>

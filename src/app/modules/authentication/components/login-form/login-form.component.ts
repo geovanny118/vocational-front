@@ -39,7 +39,8 @@ export class LoginFormComponent {
       // servicio para el login
       this._authenticationServices.login(credentials).subscribe( (response) => {
         localStorage.setItem('token', response.token);
-        this._authenticationServices.currentUserSig.set(response);
+        localStorage.setItem('identificacion', response.identificacion);
+        //this._authenticationServices.currentUserSig.set(response);
         this._router.navigateByUrl('/user');
       });
 

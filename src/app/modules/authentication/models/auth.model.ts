@@ -13,6 +13,7 @@ export interface Usuario {
   telefono: string;
   direccion: string;
   ciudad: string;
+  roles: string[];
 }
 
 export interface UsuarioAutenticado {

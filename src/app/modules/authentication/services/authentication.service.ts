@@ -10,10 +10,11 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationService {
   private _httpClient: HttpClient = inject(HttpClient);
-  private _baseUrl: string = environment.API_URL;
+  private _baseUrl: string = environment.apiBaseUrl;
   private _router: Router = inject(Router);
   // undefined: estado iniciar | null: no autorizado | UsuarioAutenticado: logueado
-  currentUserSig = signal<UsuarioAutenticado | undefined | null>(undefined);  
+  //currentUserSig = signal<UsuarioAutenticado | undefined | null>(undefined);  
+  currentUserSig = signal<Usuario | undefined | null>(undefined);  
   
   login(credentials: LoginCredentials): Observable<UsuarioAutenticado | any> {
     return this._httpClient.post(`${this._baseUrl}/auth/login`, credentials);
@@ -26,12 +27,18 @@ export class AuthenticationService {
   logout(): void {
     // Limpiar el token almacenado en el localStorage y redireciona a la pagina de login
     localStorage.removeItem('token');
+    localStorage.removeItem('identificacion');
+    this.currentUserSig.set(null);
     this._router.navigateByUrl('/authentication/login');
   }
 
   isLoggedIn(): boolean {
     // Verifica si el usuario está autenticado
     return !!localStorage.getItem('token');
+  }
+
+  getLoggedInUserInfo(userId: string): Observable<Usuario> {
+    return this._httpClient.get<Usuario>(`${this._baseUrl}/auth/obtain/${userId}`);
   }
 
   forgotPassword(){}
