@@ -39,19 +39,19 @@ export class LoginFormComponent {
       
       // servicio para el login
       this._authenticationServices.login(credentials).pipe(
-        catchError(error => {
-          if (error.status === 401) {
-            // Manejar el error 401 aquí
-            console.error('Error de autenticación:', error);
-            this._snackBar.open('credenciales incorrectas', '', {
-            //this._snackBar.open(error?.error?.message, 'cerrar', {
+        catchError(HttpErrorResponse => {
+          if (HttpErrorResponse.status === 404) {
+            // Manejar el error 404 aquí
+            //console.error('Error de autenticación:', HttpErrorResponse?.error?.mensajes);
+            //this._snackBar.open('credenciales incorrectas', '', {
+            this._snackBar.open(HttpErrorResponse?.error?.mensajes, '', {
               duration: 2000
             });
           }
-          return error; // Propagar el error para que lo maneje el código que llama a esta función
+          return HttpErrorResponse; // Propagar el error para que lo maneje el código que llama a esta función
         })
       ).subscribe((response) => {
-        console.log(response);
+        //console.log(response);
         localStorage.setItem('token', response.token);
         localStorage.setItem('identificacion', response.identificacion);
         //this._authenticationServices.currentUserSig.set(response);
