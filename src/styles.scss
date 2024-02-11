@@ -1,1 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import '@angular/material/prebuilt-themes/indigo-pink.css'; */
+@import 'assets/scss/theme-light.scss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100vh;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+  /// primary
+  --primary: #2c5cae;
+  --on-primary: #ffffff;
+  --primary-container: #d8e2ff;
+  --on-primary-container: #001a42;
+
+  /// secondary
+  --secondary: #575e71;
+  --on-secondary: #ffffff;
+  --secondary-container: #dbe2f9;
+  --on-secondary-container: #141b2c;
+
+  /// tertiary
+  --tertiary: #2e5da8;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #d7e2ff;
+  --on-tertiary-container: #001b40;
+
+  /// error
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  --on-error-container: #410002;
+
+  /// background
+  --background: #fefbff;
+  --on-background: #1b1b1f;
+  --surface: #fefbff;
+  --on-surface: #1b1b1f;
+
+  /// outline
+  --outline: #75777f;
+  --surface-variant: #e1e2ec;
+  --on-surface-variant: #44474f;
+}
