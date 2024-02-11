@@ -6,20 +6,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoginCredentials } from '../../models';
 import { AuthenticationService } from '../../services';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule, RouterModule, NgClass, NgIf],
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule, RouterModule, NgClass, NgIf, MatSnackBarModule],
 })
 export class LoginFormComponent {
   private _router: Router = inject(Router);
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private _authenticationServices: AuthenticationService = inject(AuthenticationService);
+  private _snackBar: MatSnackBar = inject(MatSnackBar); 
 
   // variable utilizada para la accion de mostrar y ocultar contraseñas
   hide: boolean = true;
@@ -35,7 +38,20 @@ export class LoginFormComponent {
       const credentials: LoginCredentials = this.loginForm.getRawValue();
       
       // servicio para el login
-      this._authenticationServices.login(credentials).subscribe( (response) => {
+      this._authenticationServices.login(credentials).pipe(
+        catchError(error => {
+          if (error.status === 401) {
+            // Manejar el error 401 aquí
+            console.error('Error de autenticación:', error);
+            this._snackBar.open('credenciales incorrectas', '', {
+            //this._snackBar.open(error?.error?.message, 'cerrar', {
+              duration: 2000
+            });
+          }
+          return error; // Propagar el error para que lo maneje el código que llama a esta función
+        })
+      ).subscribe((response) => {
+        console.log(response);
         localStorage.setItem('token', response.token);
         localStorage.setItem('identificacion', response.identificacion);
         //this._authenticationServices.currentUserSig.set(response);
@@ -48,8 +64,10 @@ export class LoginFormComponent {
       this.loginForm.markAsUntouched();
       Object.keys(this.loginForm.controls).forEach(key => {
         this.loginForm.get(key)?.setErrors(null);
+        this.loginForm.get(key)?.updateValueAndValidity();
       });
       this._authenticationServices.loginLoadingSignal.set(false);
+      console.log(this.loginForm.valid);
     } else {
       this.loginForm.markAllAsTouched();
       this._authenticationServices.loginLoadingSignal.set(false);
