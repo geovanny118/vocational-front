@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AuthenticationService } from 'src/app/modules/authentication/services';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -6,9 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  loading: boolean = false;
-
-  onLoginFormSubmit(isSubmitted: boolean) {
-    this.loading = isSubmitted;
-  }
+  authenticationService: AuthenticationService = inject(AuthenticationService);
 }

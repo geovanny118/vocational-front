@@ -12,9 +12,10 @@ export class AuthenticationService {
   private _httpClient: HttpClient = inject(HttpClient);
   private _baseUrl: string = environment.apiBaseUrl;
   private _router: Router = inject(Router);
-  // undefined: estado iniciar | null: no autorizado | UsuarioAutenticado: logueado
-  //currentUserSig = signal<UsuarioAutenticado | undefined | null>(undefined);  
-  currentUserSig = signal<Usuario | undefined | null>(undefined);  
+  // undefined: estado iniciar | null: no autorizado | Usuario: logueado
+  currentUserSignal = signal<Usuario | undefined | null>(undefined);
+  // señal para mostrar el loading en la pagina de login
+  loginLoadingSignal = signal<boolean>(false);  
   
   login(credentials: LoginCredentials): Observable<UsuarioAutenticado | any> {
     return this._httpClient.post(`${this._baseUrl}/auth/login`, credentials);
@@ -28,7 +29,7 @@ export class AuthenticationService {
     // Limpiar el token almacenado en el localStorage y redireciona a la pagina de login
     localStorage.removeItem('token');
     localStorage.removeItem('identificacion');
-    this.currentUserSig.set(null);
+    this.currentUserSignal.set(null);
     this._router.navigateByUrl('/authentication/login');
   }
 

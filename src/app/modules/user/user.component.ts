@@ -25,10 +25,10 @@ export class UserComponent {
       this.authenticationServices.getLoggedInUserInfo(userId).subscribe({
         next: (response) => {
           console.log('response', response);
-          this.authenticationServices.currentUserSig.set(response);
+          this.authenticationServices.currentUserSignal.set(response);
         },
         error: () => {
-          this.authenticationServices.currentUserSig.set(null);
+          this.authenticationServices.currentUserSignal.set(null);
         }
       });
     }

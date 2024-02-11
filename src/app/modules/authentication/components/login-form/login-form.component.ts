@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -23,7 +23,6 @@ export class LoginFormComponent {
 
   // variable utilizada para la accion de mostrar y ocultar contraseñas
   hide: boolean = true;
-  @Output() submitEvent = new EventEmitter<boolean>();
 
   loginForm: FormGroup = this._formBuilder.nonNullable.group({
     identificacion: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
@@ -31,11 +30,10 @@ export class LoginFormComponent {
   });
 
   submit() {
+    this._authenticationServices.loginLoadingSignal.set(true);
     if (this.loginForm.valid) {
-      this.submitEvent.emit(true);
       const credentials: LoginCredentials = this.loginForm.getRawValue();
-
-      //console.log(credentials);
+      
       // servicio para el login
       this._authenticationServices.login(credentials).subscribe( (response) => {
         localStorage.setItem('token', response.token);
@@ -51,10 +49,10 @@ export class LoginFormComponent {
       Object.keys(this.loginForm.controls).forEach(key => {
         this.loginForm.get(key)?.setErrors(null);
       });
-      this.submitEvent.emit(false);
+      this._authenticationServices.loginLoadingSignal.set(false);
     } else {
       this.loginForm.markAllAsTouched();
-      this.submitEvent.emit(false);
+      this._authenticationServices.loginLoadingSignal.set(false);
     }
   }
 }
