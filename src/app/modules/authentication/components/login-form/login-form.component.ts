@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoginCredentials } from '../../models';
 import { AuthenticationService } from '../../services';
-import { catchError, throwError } from 'rxjs';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-login-form',
@@ -32,7 +32,7 @@ export class LoginFormComponent {
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  submit() {
+  submit(): void {
     this._authenticationServices.loginLoadingSignal.set(true);
     if (this.loginForm.valid) {
       const credentials: LoginCredentials = this.loginForm.getRawValue();
@@ -41,9 +41,16 @@ export class LoginFormComponent {
       this._authenticationServices.login(credentials).pipe(
         catchError(HttpErrorResponse => {
           if (HttpErrorResponse.status === 404) {
-            // Manejar el error 404 aquí
-            //console.error('Error de autenticación:', HttpErrorResponse?.error?.mensajes);
-            //this._snackBar.open('credenciales incorrectas', '', {
+            if (HttpErrorResponse?.error?.mensajes === 'Identificacion No Encontrada') {
+              // Borra los campos del formulario
+              this.loginForm.get('identificacion')?.reset();
+              this.loginForm.get('password')?.reset();
+            }
+            if (HttpErrorResponse?.error?.mensajes === 'Contraseña Incorrecta'){
+              // Borra el campo de la contraseña
+              this.loginForm.get('password')?.reset();
+            }
+            // muestra el error 404 aquí
             this._snackBar.open(HttpErrorResponse?.error?.mensajes, '', {
               duration: 2000
             });
@@ -59,15 +66,14 @@ export class LoginFormComponent {
       });
 
       // limpia el formulario
-      this.loginForm.reset();
-      this.loginForm.markAsPristine();
-      this.loginForm.markAsUntouched();
       Object.keys(this.loginForm.controls).forEach(key => {
-        this.loginForm.get(key)?.setErrors(null);
-        this.loginForm.get(key)?.updateValueAndValidity();
+        const control = this.loginForm.get(key);
+        if (control && control.invalid) {
+          control.markAsPristine();
+          control.markAsUntouched();
+        }
       });
       this._authenticationServices.loginLoadingSignal.set(false);
-      console.log(this.loginForm.valid);
     } else {
       this.loginForm.markAllAsTouched();
       this._authenticationServices.loginLoadingSignal.set(false);

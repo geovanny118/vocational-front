@@ -12,16 +12,8 @@ export class UserComponent {
   authenticationServices = inject(AuthenticationService); 
 
   ngOnInit(): void {
-    
     const userId = localStorage.getItem('identificacion');
     if (userId) {
-      /*
-      this.authenticationServices.getLoggedInUserInfo(userId).subscribe(response => {
-        this.user = response;
-        this.authenticationServices.currentUserSig.set(response);
-        console.log(this.user);
-      });
-      */
       this.authenticationServices.getLoggedInUserInfo(userId).subscribe({
         next: (response) => {
           console.log('response', response);

@@ -7,5 +7,5 @@ export const routes: Routes = [
   { path: 'authentication', loadChildren: () => import('./modules').then(modules => modules.AuthenticationModule) },
   { path: 'user', loadChildren: () => import('./modules').then(modules => modules.UserModule), canMatch: [AuthGuard] },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', component: NotFoundComponent },
+  { path: '**', title: 'Not found', component: NotFoundComponent },
 ];
