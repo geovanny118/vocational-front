@@ -1,5 +1,30 @@
 <app-toolbar/>
-<div class="main-container">
-  <router-outlet/>
-</div>
-<app-footer/>
+@if(authenticationService.isLoggedIn()){
+  <mat-drawer-container>
+    <mat-drawer #drawer mode="side" opened>
+      <mat-nav-list>
+        <mat-list-item>
+          <button mat-button><mat-icon>extension</mat-icon>Test</button>
+        </mat-list-item>
+        <mat-list-item>
+          <button mat-button><mat-icon>upload_file</mat-icon>Saber 11</button>
+        </mat-list-item>
+        <mat-list-item>
+          <button mat-button><mat-icon>pie_chart</mat-icon>Resultados</button>
+        </mat-list-item>
+        <mat-list-item>
+          <button mat-button><mat-icon>settings</mat-icon>Configuración</button>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div class="main-container">
+        <router-outlet />
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+}
+@else {
+  <router-outlet />
+  <app-footer />
+}
