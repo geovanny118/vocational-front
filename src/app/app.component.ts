@@ -2,14 +2,8 @@ import { AuthenticationService } from './modules/authentication/services/authent
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 
-
-import { ToolbarComponent, FooterComponent } from './shared/components';
+import { ToolbarComponent, FooterComponent, MenuComponent } from './shared/components';
 
 @Component({
   selector: 'app-root',
@@ -19,20 +13,12 @@ import { ToolbarComponent, FooterComponent } from './shared/components';
     RouterOutlet,
     ToolbarComponent, 
     FooterComponent,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatButtonModule
+    MenuComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   authenticationService: AuthenticationService = inject(AuthenticationService);
-  router: Router = inject(Router);
   title = 'vocational-app';
-  
-  redirectTo(route: string) {
-    this.router.navigate([route]);
-  }
 }

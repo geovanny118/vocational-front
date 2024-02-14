@@ -12,6 +12,7 @@ export class AuthenticationService {
   private _httpClient: HttpClient = inject(HttpClient);
   private _baseUrl: string = environment.apiBaseUrl;
   private _router: Router = inject(Router);
+  
   // undefined: estado iniciar | null: no autorizado | Usuario: logueado
   currentUserSignal = signal<Usuario | undefined | null>(undefined);
   // señal para mostrar el loading en la pagina de login

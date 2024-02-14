@@ -20,11 +20,13 @@ const routes: Routes = [
     path: 'registration',
     component: RegistrationComponent,
     title: 'Inscripción',
+    canActivate: [RedirectIfAuthenticatedGuard]
   },
   {
     path: 'password-recovery',
     component: PasswordRecoveryComponent,
     title: 'Recuperación de contraseña',
+    canActivate: [RedirectIfAuthenticatedGuard]
   },
 ];
 
