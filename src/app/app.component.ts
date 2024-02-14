@@ -29,5 +29,10 @@ import { ToolbarComponent, FooterComponent } from './shared/components';
 })
 export class AppComponent {
   authenticationService: AuthenticationService = inject(AuthenticationService);
+  router: Router = inject(Router);
   title = 'vocational-app';
+  
+  redirectTo(route: string) {
+    this.router.navigate([route]);
+  }
 }

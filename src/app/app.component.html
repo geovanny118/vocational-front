@@ -4,16 +4,16 @@
     <mat-drawer #drawer mode="side" opened>
       <mat-nav-list>
         <mat-list-item>
-          <button mat-button><mat-icon>extension</mat-icon>Test</button>
+          <button mat-button (click)="redirectTo('chaside-test')"><mat-icon>extension</mat-icon>Test</button>
         </mat-list-item>
         <mat-list-item>
-          <button mat-button><mat-icon>upload_file</mat-icon>Saber 11</button>
+          <button mat-button (click)="redirectTo('icfes')"><mat-icon>upload_file</mat-icon>Saber 11</button>
         </mat-list-item>
         <mat-list-item>
-          <button mat-button><mat-icon>pie_chart</mat-icon>Resultados</button>
+          <button mat-button (click)="redirectTo('result')"><mat-icon>pie_chart</mat-icon>Resultados</button>
         </mat-list-item>
         <mat-list-item>
-          <button mat-button><mat-icon>settings</mat-icon>Configuración</button>
+          <button mat-button (click)="redirectTo('user')"><mat-icon>settings</mat-icon>Configuración</button>
         </mat-list-item>
       </mat-nav-list>
     </mat-drawer>
