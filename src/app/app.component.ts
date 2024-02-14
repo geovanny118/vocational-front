@@ -2,10 +2,12 @@ import { AuthenticationService } from './modules/authentication/services/authent
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+
 
 import { ToolbarComponent, FooterComponent } from './shared/components';
 

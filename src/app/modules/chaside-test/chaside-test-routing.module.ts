@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserComponent } from '.';
+import { ChasideTestComponent } from '.';
 
 const routes: Routes = [
-  { path: '', title: 'Dashboard', component: UserComponent },
+  { path: '', title: 'Chaside Test', component: ChasideTestComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UserRoutingModule { }
+export class ChasideTestRoutingModule { }
