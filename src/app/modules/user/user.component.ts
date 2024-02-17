@@ -23,7 +23,6 @@ export class UserComponent {
           this.authenticationServices.currentUserSignal.set(null);
         }
       });
-    }
-    
+    }  
   }
 }
