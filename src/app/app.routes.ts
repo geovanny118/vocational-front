@@ -21,7 +21,7 @@ export const routes: Routes = [
     canMatch: [AuthGuard],
   },
   {
-    path: 'chaside-test',
+    path: 'chaside',
     loadChildren: () =>
       import('./modules').then((modules) => modules.ChasideTestModule),
     canMatch: [AuthGuard],
