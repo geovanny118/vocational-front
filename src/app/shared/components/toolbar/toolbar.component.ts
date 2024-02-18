@@ -17,9 +17,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ToolbarComponent {
   router = inject(Router);
-  showTitle = signal<boolean>(false);
+  showTitleSignal = signal<boolean>(false);
   httpClient: HttpClient = inject(HttpClient);
   authenticationService: AuthenticationService = inject(AuthenticationService);
+  username: string | undefined = '';
 
   constructor() {
     // Suscribirse al evento NavigationEnd para obtener notificaciones cuando cambia la URL
@@ -30,7 +31,7 @@ export class ToolbarComponent {
         // URL específica que quieres comparar
         const urlHome = '/home';
         // Lógica para decidir si mostrar o no los elementos basándote en la URL
-        this.showTitle.update(value => currentUrl === urlHome);
+        this.showTitleSignal.set(currentUrl === urlHome);
       }
     });
   }

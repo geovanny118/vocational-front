@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { AuthenticationService } from './modules/authentication/services/authentication.service';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
-import { ToolbarComponent, FooterComponent } from './shared/components';
+import { ToolbarComponent, FooterComponent, MenuComponent } from './shared/components';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,13 @@ import { ToolbarComponent, FooterComponent } from './shared/components';
     CommonModule,
     RouterOutlet,
     ToolbarComponent, 
-    FooterComponent
+    FooterComponent,
+    MenuComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  authenticationService: AuthenticationService = inject(AuthenticationService);
   title = 'vocational-app';
 }

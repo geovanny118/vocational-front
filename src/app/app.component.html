@@ -1,5 +1,8 @@
 <app-toolbar/>
-<div class="main-container">
-  <router-outlet/>
-</div>
-<app-footer/>
+@if(authenticationService.isLoggedIn()){
+  <app-menu/>
+}
+@else {
+  <router-outlet />
+  <app-footer />
+}

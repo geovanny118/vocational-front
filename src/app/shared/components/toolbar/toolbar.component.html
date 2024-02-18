@@ -2,14 +2,14 @@
   <div>
     <mat-icon aria-hidden="false" aria-label="Example school icon" fontIcon="school"></mat-icon>
   </div>
-  @if(showTitle()) {
+  @if(showTitleSignal()) {
     <div>
       <h1>Vocational</h1>
     </div>
   } @else {
     <div id="user-options-container">
       @if(isLoggedIn()) {
-        <div id="username"> {{ authenticationService.currentUserSig()?.nombres }}</div>
+        <div id="username"> {{ authenticationService.currentUserSignal()?.nombres }}</div>
         <button mat-button (click)="logout()" routerLinkActive="active-button">Cerrar Sesión</button>
       } @else {
         <button *ngIf="!isLoggedIn()" mat-button [routerLink]="'/home'" routerLinkActive="active-button">Inicio</button>
