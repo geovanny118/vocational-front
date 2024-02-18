@@ -1,12 +1,18 @@
 <p>test-application works!</p>
 <div id="questions-container">
-    @for (question of questions; track question) {
+    <form [formGroup]="chasideTestForm" novalidate (ngSubmit)="sendAnswer()" id="form-container">
+        @for (question of questions; track question) {
         <div>
             <app-question>{{question}}</app-question>
         </div>
-    } @empty {
-        Empty list of questions
-    }
+        } @empty {
+            Empty list of questions
+        }
+        <div>
+            <button mat-raised-button class="enabled-button">Iniciar Test</button>
+        </div>
+    </form>
+
 </div>
 
 
