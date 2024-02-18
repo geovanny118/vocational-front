@@ -3,13 +3,13 @@ import { AuthenticationService } from '../authentication/services';
 import { Usuario } from '../authentication/models';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  selector: 'app-result',
+  templateUrl: './result.component.html',
+  styleUrl: './result.component.scss'
 })
-export class UserComponent {
+export class ResultComponent {
   user: Usuario | undefined;
-  authenticationServices = inject(AuthenticationService); 
+  authenticationServices = inject(AuthenticationService);
 
   ngOnInit(): void {
     const userId = localStorage.getItem('identificacion');
@@ -23,6 +23,6 @@ export class UserComponent {
           this.authenticationServices.currentUserSignal.set(null);
         }
       });
-    }  
+    }
   }
 }
