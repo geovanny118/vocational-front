@@ -1,0 +1,14 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+}
+
+.fila {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.item {
+    width: 48%;
+}

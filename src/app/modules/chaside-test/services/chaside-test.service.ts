@@ -12,6 +12,7 @@ export class ChasideTestService {
   private _baseUrl: string = environment.apiBaseUrl;
 
   submitAnswers(answer: number[]): Observable<ChasideResult | any> {
-    return this._httpClient.post(`${this._baseUrl}/test-chaside/result`, answer);
+    const requestBody = { testQuestion: answer };
+    return this._httpClient.post(`${this._baseUrl}/test-chaside/result`, requestBody);
   }
 }

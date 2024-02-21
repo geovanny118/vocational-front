@@ -1,9 +1,23 @@
 <p>test-application works!</p>
 <div id="questions-container">
     <form [formGroup]="chasideTestForm" novalidate (ngSubmit)="sendAnswer()" id="form-container">
-        @for (question of questions; track question) {
+        @for (question of questions; track question; let idx = $index) {
         <div>
-            <app-question>{{question}}</app-question>
+            <div>
+                <mat-card>
+                    <mat-card-content>
+                        <div>
+                            <ng-content></ng-content>
+                        </div>
+                        <div>
+                            <mat-radio-group [formControlName]="'answer_' + idx" aria-label="Select an option">
+                                <mat-radio-button value="si">Si</mat-radio-button>
+                                <mat-radio-button value="no">No</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </div>
         } @empty {
             Empty list of questions
@@ -12,7 +26,6 @@
             <button mat-raised-button class="enabled-button">Iniciar Test</button>
         </div>
     </form>
-
 </div>
 
 
