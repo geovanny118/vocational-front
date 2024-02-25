@@ -3,11 +3,11 @@
     <form [formGroup]="chasideTestForm" novalidate (ngSubmit)="sendAnswer()" id="form-container">
         @for (question of questions; track question; let idx = $index) {
         <div>
-            <div>
+            <div class="question-card">
                 <mat-card>
                     <mat-card-content>
                         <div>
-                            <ng-content></ng-content>
+                            {{ question }}
                         </div>
                         <div>
                             <mat-radio-group [formControlName]="'answer_' + idx" aria-label="Select an option">
@@ -23,7 +23,7 @@
             Empty list of questions
         }
         <div>
-            <button mat-raised-button class="enabled-button">Iniciar Test</button>
+            <button mat-raised-button class="enabled-button">Enviar respuestas</button>
         </div>
     </form>
 </div>

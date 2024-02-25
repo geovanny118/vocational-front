@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
-import { ChasideResult } from '../../models';
+import { ChasideResult, QUESTIONS } from '../../models';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -22,13 +22,7 @@ export class TestApplicationComponent {
   chasideTestForm: FormGroup;
   answers: number[] = [];
 
-  questions: string[] = [
-    '¿Aceptarías trabajar escribiendo artículos en la sección económica de un diario?',
-    '¿Te ofrecerías para organizar la despedida de soltero o soltera de uno de tus amigos o amigas?',
-    '¿Te gustaría dirigir un proyecto de urbanización en tu provincia?',
-    '¿A una frustración siempre opones un pensamiento positivo?',
-    '¿Te dedicarías a socorrer a personas accidentadas o atacadas por asaltantes?'
-  ];
+  questions: string[] = QUESTIONS;
 
   constructor(){
     this.chasideTestForm = this.initializeForm();
