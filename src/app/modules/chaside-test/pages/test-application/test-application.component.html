@@ -1,4 +1,3 @@
-<p>test-application works!</p>
 <div id="questions-container">
     <form [formGroup]="chasideTestForm" novalidate (ngSubmit)="sendAnswer()" id="form-container">
         @for (question of questions; track question; let idx = $index) {

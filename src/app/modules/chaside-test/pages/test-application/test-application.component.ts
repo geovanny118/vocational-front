@@ -1,13 +1,15 @@
 import { ChasideTestService } from './../../services';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { ChasideResult, QUESTIONS } from '../../models';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/modules/authentication/services';
+import { Usuario } from 'src/app/modules/authentication/models';
 
 @Component({
   selector: 'app-test-application',
@@ -19,6 +21,10 @@ import { Observable } from 'rxjs';
 export class TestApplicationComponent {
   private _chasideTestServices: ChasideTestService = inject(ChasideTestService);
   private _formBuilder: FormBuilder = inject(FormBuilder);
+  private _router: Router = inject(Router);
+  authenticationServices = inject(AuthenticationService);
+  
+  user: Usuario | undefined;
   chasideTestForm: FormGroup;
   answers: number[] = [];
 
@@ -26,6 +32,20 @@ export class TestApplicationComponent {
 
   constructor(){
     this.chasideTestForm = this.initializeForm();
+  }
+
+  ngOnInit(): void {
+    const userId = localStorage.getItem('identificacion');
+    if (userId) {
+      this.authenticationServices.getLoggedInUserInfo(userId).subscribe({
+        next: (response) => {
+          this.authenticationServices.currentUserSignal.set(response);
+        },
+        error: () => {
+          this.authenticationServices.currentUserSignal.set(null);
+        }
+      });
+    }
   }
 
   initializeForm(): FormGroup {
@@ -36,8 +56,7 @@ export class TestApplicationComponent {
     return this._formBuilder.group(formControls);
   }
 
-  sendAnswer(): void {  
-    console.log('entro');  
+  sendAnswer(): void {   
     this.answers = [];
 
     for (let i = 0; i < this.questions.length; i++) {
@@ -52,8 +71,9 @@ export class TestApplicationComponent {
     this._chasideTestServices.submitAnswers(this.answers).subscribe(
       (results: ChasideResult[]) => {
         console.log('Respuestas del test:', results);
-        // Asignar los resultados a una variable local si es necesario
-        // this.test_results = results;
+        // Asignar los resultados a una señal en chaside-test-service
+        this._chasideTestServices.currentChasideResultSignal.set(results);
+        this._router.navigateByUrl('/chaside/result');
       },
       (error) => {
         console.error('Error al enviar las respuestas:', error);
