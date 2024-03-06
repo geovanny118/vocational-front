@@ -16,7 +16,7 @@ export class UserComponent {
     if (userId) {
       this.authenticationServices.getLoggedInUserInfo(userId).subscribe({
         next: (response) => {
-          console.log('response', response);
+          //console.log('response', response);
           this.authenticationServices.currentUserSignal.set(response);
         },
         error: () => {

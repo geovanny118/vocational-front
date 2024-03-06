@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '@environments/environment';
 import { ChasideResult } from '../models';
 import { Observable } from 'rxjs';
@@ -10,6 +10,9 @@ import { Observable } from 'rxjs';
 export class ChasideTestService {
   private _httpClient: HttpClient = inject(HttpClient);
   private _baseUrl: string = environment.apiBaseUrl;
+  
+  // undefined: estado inicial | null: sin asignar | ChasideResult resultados
+  currentChasideResultSignal = signal<ChasideResult[] | undefined | null>(undefined);
 
   submitAnswers(answer: number[]): Observable<ChasideResult | any> {
     const requestBody = { testQuestion: answer };

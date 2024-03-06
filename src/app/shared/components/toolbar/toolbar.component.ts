@@ -36,10 +36,6 @@ export class ToolbarComponent {
     });
   }
 
-  ngOnInit(): void {
-
-  }
-
   isLoggedIn(): boolean {
     return this.authenticationService.isLoggedIn();
   }
