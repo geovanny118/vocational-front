@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { ChasideResult, QUESTIONS } from '../../models';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/modules/authentication/services';
@@ -15,7 +14,7 @@ import { Usuario } from 'src/app/modules/authentication/models';
 @Component({
   selector: 'app-test-application',
   standalone: true,
-  imports: [ReactiveFormsModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatCardModule, MatRadioModule, MatPaginatorModule],
+  imports: [ReactiveFormsModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatCardModule, MatRadioModule],
   templateUrl: './test-application.component.html',
   styleUrl: './test-application.component.scss'
 })
