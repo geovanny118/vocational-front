@@ -23,3 +23,9 @@
     width: 100%;
     cursor: not-allowed;
 }
+
+#paginator-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

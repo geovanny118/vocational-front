@@ -1,6 +1,6 @@
 <div id="questions-container">
     <form [formGroup]="chasideTestForm" novalidate (ngSubmit)="sendAnswer()" id="form-container">
-        @for (question of questions; track question) {
+        @for (question of questions | paginate: { itemsPerPage: 10, currentPage: p } ; track question) {
         <div>
             <div class="question-card">
                 <mat-card>
@@ -21,6 +21,9 @@
         } @empty {
             Empty list of questions
         }
+        <div id="paginator-container">
+            <pagination-controls (pageChange)="p = $event" previousLabel="anterior" nextLabel="siguiente"></pagination-controls>
+        </div>
         <div>
             <button mat-raised-button class="enabled-button">Enviar respuestas</button>
         </div>

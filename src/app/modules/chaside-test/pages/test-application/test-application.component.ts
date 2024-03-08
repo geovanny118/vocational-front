@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ChasidePregunta, ChasideResult, QUESTIONS } from '../../models';
+import { ChasidePregunta, ChasideResult } from '../../models';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/modules/authentication/services';
 import { Usuario } from 'src/app/modules/authentication/models';
@@ -29,9 +29,8 @@ export class TestApplicationComponent {
   chasideTestForm: FormGroup = new FormGroup({});
   answers: number[] = [];
 
-  //questions: string[] = QUESTIONS;
   questions: ChasidePregunta[] = [];
-  questionPage: number = 1;
+  p: number = 1;
 
   ngOnInit(): void {
     const userId = localStorage.getItem('identificacion');
@@ -47,7 +46,7 @@ export class TestApplicationComponent {
     }
     this._chasideTestServices.getQuestions().subscribe(
       (response: ChasidePregunta[]) => {
-        console.log(response);
+        //console.log(response);
         this.questions = response;
         this.chasideTestForm = this.initializeForm();
       }
@@ -69,8 +68,7 @@ export class TestApplicationComponent {
       // Verificar si la pregunta fue respondida con "sí"
       const answerControl = this.chasideTestForm.get(`answer_${i}`); 
       if (answerControl instanceof FormControl && answerControl.value === 'si') {
-        this.answers.push(i+1);
-        //this.answers.push(answerControl.);
+        this.answers.push(i);
       }
     }
 
