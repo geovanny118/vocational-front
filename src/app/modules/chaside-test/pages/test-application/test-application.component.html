@@ -1,17 +1,17 @@
 <div id="questions-container">
     <form [formGroup]="chasideTestForm" novalidate (ngSubmit)="sendAnswer()" id="form-container">
-        @for (question of questions; track question; let idx = $index) {
+        @for (question of questions; track question) {
         <div>
             <div class="question-card">
                 <mat-card>
                     <mat-card-content>
                         <div>
-                            {{ question }}
+                            {{ question.descripcionPregunta }}
                         </div>
                         <div>
-                            <mat-radio-group [formControlName]="'answer_' + idx" aria-label="Select an option">
-                                <mat-radio-button value="si">Si</mat-radio-button>
-                                <mat-radio-button value="no">No</mat-radio-button>
+                            <mat-radio-group [formControlName]="'answer_' + question.ordenPregunta" id="answer_{{question.ordenPregunta}}" aria-label="Select an option">
+                                <mat-radio-button value="si" for="si">Si</mat-radio-button>
+                                <mat-radio-button value="no" for="no">No</mat-radio-button>
                             </mat-radio-group>
                         </div>
                     </mat-card-content>

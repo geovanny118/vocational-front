@@ -10,3 +10,19 @@ export const QUESTIONS: string[] = [
     '¿Te ofrecerías para explicar a tus compañeros un determinado tema que ellos no entendieron?',
     '¿Sos exigente y crítico con tu equipo de trabajo?'
 ];
+
+export interface UsuarioAutenticado {
+    token: string;
+    bearer: number;
+    identificacion: string;
+    authorities: string[];
+}
+
+export interface ChasidePregunta {
+    id: number;
+    descripcionPregunta: string;
+    opcion1: string;
+    opcion2: string;
+    tipoTest: string;
+    ordenPregunta: number;
+}
