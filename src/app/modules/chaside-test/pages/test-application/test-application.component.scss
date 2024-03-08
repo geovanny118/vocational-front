@@ -1,7 +1,10 @@
 #questions-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+}
+
+.question-card {
+    margin-bottom: 1rem;
 }
 
 .enabled-button {
@@ -19,4 +22,10 @@
     font-size: 1rem;
     width: 100%;
     cursor: not-allowed;
+}
+
+#paginator-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

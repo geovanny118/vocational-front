@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 import { UserRoutingModule } from './user-routing.module';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -9,7 +10,8 @@ import { UserRoutingModule } from './user-routing.module';
   declarations: [UserComponent],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    MatCardModule
   ]
 })
 export class UserModule { }

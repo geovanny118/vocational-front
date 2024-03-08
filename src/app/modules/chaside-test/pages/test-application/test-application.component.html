@@ -1,18 +1,33 @@
-<p>test-application works!</p>
 <div id="questions-container">
     <form [formGroup]="chasideTestForm" novalidate (ngSubmit)="sendAnswer()" id="form-container">
-        @for (question of questions; track question) {
+        @for (question of questions | paginate: { itemsPerPage: 10, currentPage: p } ; track question) {
         <div>
-            <app-question>{{question}}</app-question>
+            <div class="question-card">
+                <mat-card>
+                    <mat-card-content>
+                        <div>
+                            {{ question.descripcionPregunta }}
+                        </div>
+                        <div>
+                            <mat-radio-group [formControlName]="'answer_' + question.ordenPregunta" id="answer_{{question.ordenPregunta}}" aria-label="Select an option">
+                                <mat-radio-button value="si" for="si">Si</mat-radio-button>
+                                <mat-radio-button value="no" for="no">No</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
         </div>
         } @empty {
             Empty list of questions
         }
+        <div id="paginator-container">
+            <pagination-controls (pageChange)="p = $event" previousLabel="anterior" nextLabel="siguiente"></pagination-controls>
+        </div>
         <div>
-            <button mat-raised-button class="enabled-button">Iniciar Test</button>
+            <button mat-raised-button class="enabled-button">Enviar respuestas</button>
         </div>
     </form>
-
 </div>
 
 
