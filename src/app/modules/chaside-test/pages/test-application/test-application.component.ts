@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ChasidePregunta, ChasideResult } from '../../models';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/modules/authentication/services';
@@ -15,7 +16,7 @@ import { Usuario } from 'src/app/modules/authentication/models';
 @Component({
   selector: 'app-test-application',
   standalone: true,
-  imports: [ReactiveFormsModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatCardModule, MatRadioModule, NgxPaginationModule],
+  imports: [ReactiveFormsModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatCardModule, MatRadioModule, NgxPaginationModule, MatProgressBarModule],
   templateUrl: './test-application.component.html',
   styleUrl: './test-application.component.scss'
 })
@@ -31,6 +32,10 @@ export class TestApplicationComponent {
 
   questions: ChasidePregunta[] = [];
   p: number = 1;
+  progressBarValue:number = 0;
+
+  // Objeto para mantener un registro del estado de cada grupo de radio-buttons
+  radioGroupState: { [key: string]: boolean } = {};
 
   ngOnInit(): void {
     const userId = localStorage.getItem('identificacion');
@@ -54,6 +59,7 @@ export class TestApplicationComponent {
   }
 
   initializeForm(): FormGroup {
+    //limpia el formulario
     const formControls: { [key: string]: FormControl } = {};
     this.questions.forEach((question, index) => {
       formControls[`answer_${index + 1}`] = new FormControl('');
@@ -84,5 +90,17 @@ export class TestApplicationComponent {
         console.error('Error al enviar las respuestas:', error);
       }
     );
+  }
+
+  // Función que se ejecuta cuando cambia el estado del radio button
+  onRadioButtonChange(event: any, groupName: string) {
+    if (this.progressBarValue > 100) {
+      this.progressBarValue = 100;
+    }
+    if (!this.radioGroupState[groupName]) {
+      this.progressBarValue += (100/98);
+      // Marcar este grupo como seleccionado para evitar incrementar más de una vez
+      this.radioGroupState[groupName] = true;
+    }
   }
 }

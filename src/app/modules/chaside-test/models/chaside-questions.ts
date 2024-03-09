@@ -1,10 +1,3 @@
-export interface UsuarioAutenticado {
-    token: string;
-    bearer: number;
-    identificacion: string;
-    authorities: string[];
-}
-
 export interface ChasidePregunta {
     id: number;
     descripcionPregunta: string;
