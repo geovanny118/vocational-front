@@ -29,7 +29,11 @@
             </mat-progress-bar>
         </div>
         <div id="paginator-container">
-            <pagination-controls (pageChange)="currentPage = $event" previousLabel="anterior" nextLabel="siguiente"></pagination-controls>
+            <pagination-controls 
+                (pageChange)="onPageChange($event)" 
+                previousLabel="anterior" 
+                nextLabel="siguiente">
+            </pagination-controls>
         </div>
         <div>
             <button mat-raised-button 

@@ -109,4 +109,39 @@ export class TestApplicationComponent {
       this.radioGroupState[groupName] = true;
     }
   }
+
+  onPageChange(event: number): void {
+    if (this.isPageComplete(event)) {
+      this.currentPage = event;
+    }
+  }
+
+  isPageComplete(page: number): boolean {
+    let currentPage = page - 1;
+    let startIndex;
+    let endIndex;
+
+    // Si se dirige a la pagina 1, evita start index tome numeros negativos
+    if(currentPage === 0 && page === 1){
+      startIndex = 0; 
+      endIndex = 10; 
+    }
+    else {
+      startIndex = (currentPage - 1) * 10; 
+      endIndex = Math.min(startIndex + 10, this.questions.length); 
+    }
+
+    for (let i = startIndex; i < endIndex; i++) {
+      const control = this.chasideTestForm.get(`answer_${i + 1}`);
+      if (!control || !control.value) {
+        console.log(false, 'pagina actual#: ', currentPage, 'index: ', i);
+        return false; // Retorna falso si alguna respuesta está vacía o si el control no existe
+      }
+    }
+
+    console.log(true, 'pagina actual#: ', currentPage);
+    return true; // Retorna verdadero si todas las respuestas están seleccionadas
+  }
+
+
 }
