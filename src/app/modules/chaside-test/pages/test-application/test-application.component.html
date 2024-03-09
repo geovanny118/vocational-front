@@ -1,6 +1,6 @@
 <div id="questions-container">
     <form [formGroup]="chasideTestForm" novalidate (ngSubmit)="sendAnswer()" id="form-container">
-        @for (question of questions | paginate: { itemsPerPage: 5, currentPage: currentPage } ; track question) {
+        @for (question of questions | paginate: { itemsPerPage: 10, currentPage: currentPage } ; track question) {
         <div>
             <div class="question-card">
                 <mat-card>

@@ -1,6 +1,6 @@
 import { ChasideTestService } from './../../services';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -69,7 +69,8 @@ export class TestApplicationComponent {
   initializeForm(): FormGroup {
     const formControls: { [key: string]: FormControl } = {};
     this.questions.forEach((question, index) => {
-      formControls[`answer_${index + 1}`] = new FormControl('');
+      //formControls[`answer_${index + 1}`] = new FormControl(''); //--- deshabilita validación, solo para pruebas
+      formControls[`answer_${index + 1}`] = new FormControl('', Validators.required);
     });
     return this._formBuilder.group(formControls);
   }
