@@ -1,6 +1,6 @@
 <div id="questions-container">
     <form [formGroup]="chasideTestForm" novalidate (ngSubmit)="sendAnswer()" id="form-container">
-        @for (question of questions | paginate: { itemsPerPage: 10, currentPage: p } ; track question) {
+        @for (question of questions | paginate: { itemsPerPage: 5, currentPage: currentPage } ; track question) {
         <div>
             <div class="question-card">
                 <mat-card>
@@ -23,16 +23,23 @@
         }
         <div id="progress-bar-container">
             <mat-progress-bar 
-                class="example-margin" 
-                mode="determinate" 
+                id="progresss-bar-custom" 
+                mode="determinate"
                 [value]="progressBarValue">
             </mat-progress-bar>
         </div>
         <div id="paginator-container">
-            <pagination-controls (pageChange)="p = $event" previousLabel="anterior" nextLabel="siguiente"></pagination-controls>
+            <pagination-controls (pageChange)="currentPage = $event" previousLabel="anterior" nextLabel="siguiente"></pagination-controls>
         </div>
         <div>
-            <button mat-raised-button class="enabled-button">Enviar respuestas</button>
+            <button mat-raised-button 
+            class="enabled-button" 
+            type="submit" 
+            [disabled]="!chasideTestForm.valid" 
+            [ngClass]="{
+                'enabled-button': chasideTestForm.valid,
+                'disabled-button': !chasideTestForm.valid
+            }">Enviar respuestas</button>
         </div>
     </form>
 </div>

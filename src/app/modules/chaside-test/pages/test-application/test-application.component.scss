@@ -34,3 +34,8 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
+
+#progresss-bar-custom {
+    --mdc-linear-progress-active-indicator-color: #23c423;
+    --mdc-linear-progress-track-color: rgba(27, 161, 116, 0.25);
+}

@@ -12,11 +12,22 @@ import { ChasidePregunta, ChasideResult } from '../../models';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/modules/authentication/services';
 import { Usuario } from 'src/app/modules/authentication/models';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-test-application',
   standalone: true,
-  imports: [ReactiveFormsModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatCardModule, MatRadioModule, NgxPaginationModule, MatProgressBarModule],
+  imports: [
+    ReactiveFormsModule, 
+    MatButtonModule, 
+    MatInputModule, 
+    MatFormFieldModule, 
+    MatCardModule, 
+    MatRadioModule, 
+    NgxPaginationModule, 
+    MatProgressBarModule,
+    NgClass
+  ],
   templateUrl: './test-application.component.html',
   styleUrl: './test-application.component.scss'
 })
@@ -25,13 +36,11 @@ export class TestApplicationComponent {
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private _router: Router = inject(Router); 
   authenticationServices = inject(AuthenticationService);
-  
   user: Usuario | undefined;
   chasideTestForm: FormGroup = new FormGroup({});
   answers: number[] = [];
-
   questions: ChasidePregunta[] = [];
-  p: number = 1;
+  currentPage: number = 1;
   progressBarValue:number = 0;
 
   // Objeto para mantener un registro del estado de cada grupo de radio-buttons
@@ -51,7 +60,6 @@ export class TestApplicationComponent {
     }
     this._chasideTestServices.getQuestions().subscribe(
       (response: ChasidePregunta[]) => {
-        //console.log(response);
         this.questions = response;
         this.chasideTestForm = this.initializeForm();
       }
@@ -59,7 +67,6 @@ export class TestApplicationComponent {
   }
 
   initializeForm(): FormGroup {
-    //limpia el formulario
     const formControls: { [key: string]: FormControl } = {};
     this.questions.forEach((question, index) => {
       formControls[`answer_${index + 1}`] = new FormControl('');
@@ -71,7 +78,6 @@ export class TestApplicationComponent {
     this.answers = [];
 
     for (let i = 0; i < this.questions.length; i++) {
-      // Verificar si la pregunta fue respondida con "sí"
       const answerControl = this.chasideTestForm.get(`answer_${i}`); 
       if (answerControl instanceof FormControl && answerControl.value === 'si') {
         this.answers.push(i);
@@ -82,7 +88,6 @@ export class TestApplicationComponent {
     this._chasideTestServices.submitAnswers(this.answers).subscribe(
       (results: ChasideResult[]) => {
         console.log('Respuestas del test:', results);
-        // Asignar los resultados a una señal en chaside-test-service
         this._chasideTestServices.currentChasideResultSignal.set(results);
         this._router.navigateByUrl('/chaside/result');
       },
