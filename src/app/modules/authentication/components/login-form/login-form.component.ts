@@ -16,7 +16,17 @@ import { catchError } from 'rxjs';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule, RouterModule, NgClass, NgIf, MatSnackBarModule],
+  imports: [
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatIconModule, 
+    MatButtonModule, 
+    ReactiveFormsModule, 
+    RouterModule, 
+    NgClass, 
+    NgIf, 
+    MatSnackBarModule
+  ],
 })
 export class LoginFormComponent {
   private _router: Router = inject(Router);

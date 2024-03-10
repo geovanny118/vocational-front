@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { AuthenticationService } from '../authentication/services';
 import { Usuario } from '../authentication/models';
+import { DialogTestDescriptionComponent } from './components';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-chaside-test',
@@ -10,13 +12,13 @@ import { Usuario } from '../authentication/models';
 export class ChasideTestComponent {
   user: Usuario | undefined;
   authenticationServices = inject(AuthenticationService);
+  testDescriptionDialog = inject(MatDialog);
 
   ngOnInit(): void {
     const userId = localStorage.getItem('identificacion');
     if (userId) {
       this.authenticationServices.getLoggedInUserInfo(userId).subscribe({
         next: (response) => {
-          //console.log('response', response);
           this.authenticationServices.currentUserSignal.set(response);
         },
         error: () => {
@@ -24,5 +26,9 @@ export class ChasideTestComponent {
         }
       });
     }
+  }
+
+  openTextDescription(): void {
+    this.testDescriptionDialog.open(DialogTestDescriptionComponent);
   }
 }

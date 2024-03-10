@@ -8,11 +8,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChasidePregunta, ChasideResult } from '../../models';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/modules/authentication/services';
 import { Usuario } from 'src/app/modules/authentication/models';
-import { NgClass } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-test-application',
@@ -26,7 +27,9 @@ import { NgClass } from '@angular/common';
     MatRadioModule, 
     NgxPaginationModule, 
     MatProgressBarModule,
-    NgClass
+    NgClass,
+    MatSnackBarModule,
+    NgIf
   ],
   templateUrl: './test-application.component.html',
   styleUrl: './test-application.component.scss'
@@ -34,7 +37,8 @@ import { NgClass } from '@angular/common';
 export class TestApplicationComponent {
   private _chasideTestServices: ChasideTestService = inject(ChasideTestService);
   private _formBuilder: FormBuilder = inject(FormBuilder);
-  private _router: Router = inject(Router); 
+  private _router: Router = inject(Router);
+  private _snackBar: MatSnackBar = inject(MatSnackBar); 
   authenticationServices = inject(AuthenticationService);
   user: Usuario | undefined;
   chasideTestForm: FormGroup = new FormGroup({});
@@ -42,6 +46,7 @@ export class TestApplicationComponent {
   questions: ChasidePregunta[] = [];
   currentPage: number = 1;
   progressBarValue:number = 0;
+  changePage: boolean = false;
 
   // Objeto para mantener un registro del estado de cada grupo de radio-buttons
   radioGroupState: { [key: string]: boolean } = {};
@@ -109,4 +114,52 @@ export class TestApplicationComponent {
       this.radioGroupState[groupName] = true;
     }
   }
+
+  onPageChange(event: number): void {
+    this.changePage = true;
+    if (this.isPageComplete(event)) {
+      this.currentPage = event;
+      this.changePage =  false;
+    }
+  }
+
+  isPageComplete(page: number): boolean {
+    let currentPage = page - 1;
+    let startIndex;
+    let endIndex;
+    let unansweredQuestions: number[] = [];
+
+    // Si se dirige a la pagina 1, evita que startIndex tome numeros negativos
+    if(currentPage === 0 && page === 1){
+      startIndex = 0; 
+      endIndex = 10; 
+    }
+    else {
+      startIndex = (currentPage - 1) * 10; 
+      endIndex = Math.min(startIndex + 10, this.questions.length); 
+    }
+
+    for (let i = startIndex; i < endIndex; i++) {
+      const control = this.chasideTestForm.get(`answer_${i + 1}`);
+      if (!control || !control.value) {
+        unansweredQuestions.push(i + 1);
+      }
+    }
+
+    if (unansweredQuestions.length > 0) {
+      this.showMessageUnansweredQuestions(unansweredQuestions);
+      return false;
+    }
+
+    return true; // Retorna verdadero si todas las respuestas están seleccionadas
+  }
+
+  showMessageUnansweredQuestions(unansweredQuestions: number[]): void{
+    let mensaje = 'Pregunta(s) sin responder: ';
+    unansweredQuestions.forEach((indice, index) => {
+      mensaje += `[${indice}] `; // Agrega cada pregunta sin responder al mensaje
+    });
+    this._snackBar.open(mensaje, '', { duration: 2000 });
+  }
+
 }
