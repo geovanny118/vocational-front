@@ -13,7 +13,7 @@ import { ChasidePregunta, ChasideResult } from '../../models';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/modules/authentication/services';
 import { Usuario } from 'src/app/modules/authentication/models';
-import { NgClass } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-test-application',
@@ -28,7 +28,8 @@ import { NgClass } from '@angular/common';
     NgxPaginationModule, 
     MatProgressBarModule,
     NgClass,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgIf
   ],
   templateUrl: './test-application.component.html',
   styleUrl: './test-application.component.scss'
@@ -45,6 +46,7 @@ export class TestApplicationComponent {
   questions: ChasidePregunta[] = [];
   currentPage: number = 1;
   progressBarValue:number = 0;
+  changePage: boolean = false;
 
   // Objeto para mantener un registro del estado de cada grupo de radio-buttons
   radioGroupState: { [key: string]: boolean } = {};
@@ -114,8 +116,10 @@ export class TestApplicationComponent {
   }
 
   onPageChange(event: number): void {
+    this.changePage = true;
     if (this.isPageComplete(event)) {
       this.currentPage = event;
+      this.changePage =  false;
     }
   }
 
@@ -125,7 +129,7 @@ export class TestApplicationComponent {
     let endIndex;
     let unansweredQuestions: number[] = [];
 
-    // Si se dirige a la pagina 1, evita start index tome numeros negativos
+    // Si se dirige a la pagina 1, evita que startIndex tome numeros negativos
     if(currentPage === 0 && page === 1){
       startIndex = 0; 
       endIndex = 10; 
@@ -157,7 +161,7 @@ export class TestApplicationComponent {
     unansweredQuestions.forEach((indice, index) => {
       mensaje += `[${indice}] `; // Agrega cada pregunta sin responder al mensaje
     });
-    this._snackBar.open(mensaje, '', { duration: 5000 });
+    this._snackBar.open(mensaje, '', { duration: 2000 });
   }
 
 }

@@ -39,3 +39,10 @@
     --mdc-linear-progress-active-indicator-color: #23c423;
     --mdc-linear-progress-track-color: rgba(27, 161, 116, 0.25);
 }
+
+#error-message {
+    color: red;
+    text-align: start;
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+}

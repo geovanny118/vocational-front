@@ -9,11 +9,22 @@
                             {{question.ordenPregunta}}. {{ question.descripcionPregunta }}
                         </div>
                         <div>
-                            <mat-radio-group [formControlName]="'answer_' + question.ordenPregunta" id="answer_{{question.ordenPregunta}}" aria-label="Select an option" (change)="onRadioButtonChange($event, 'answer_' + question.ordenPregunta)">
+                            <mat-radio-group 
+                            [formControlName]="'answer_' + question.ordenPregunta" 
+                            id="answer_{{question.ordenPregunta}}" 
+                            aria-label="Select an option" 
+                            (change)="onRadioButtonChange($event, 'answer_' + question.ordenPregunta)">
                                 <mat-radio-button value="si" for="si">Si</mat-radio-button>
                                 <mat-radio-button value="no" for="no">No</mat-radio-button>
                             </mat-radio-group>
                         </div>
+                        @if(chasideTestForm.get("answer_" + question.ordenPregunta)?.hasError('required') && 
+                            chasideTestForm.get("answer_" + question.ordenPregunta)?.untouched &&
+                            chasideTestForm.get("answer_" + question.ordenPregunta)?.pristine &&
+                            changePage
+                        ){
+                            <div id="error-message">Debe elegir una opcion para continuar</div>
+                        }
                     </mat-card-content>
                 </mat-card>
             </div>
