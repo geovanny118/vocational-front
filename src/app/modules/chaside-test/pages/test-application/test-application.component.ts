@@ -142,7 +142,6 @@ export class TestApplicationComponent {
     for (let i = startIndex; i < endIndex; i++) {
       const control = this.chasideTestForm.get(`answer_${i + 1}`);
       if (!control || !control.value) {
-        //console.log(false, 'pagina actual#: ', currentPage, 'index: ', i);
         unansweredQuestions.push(i + 1);
       }
     }
@@ -152,7 +151,6 @@ export class TestApplicationComponent {
       return false;
     }
 
-    //console.log(true, 'pagina actual#: ', currentPage);
     return true; // Retorna verdadero si todas las respuestas están seleccionadas
   }
 
