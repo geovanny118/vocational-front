@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AuthenticationService } from '../authentication/services';
 import { Usuario } from '../authentication/models';
+import { UserService } from './services';
 
 @Component({
   selector: 'app-user',
@@ -9,7 +10,8 @@ import { Usuario } from '../authentication/models';
 })
 export class UserComponent {
   user: Usuario | undefined;
-  authenticationServices = inject(AuthenticationService); 
+  authenticationServices: AuthenticationService = inject(AuthenticationService);
+  userServices: UserService = inject(UserService); 
 
   ngOnInit(): void {
     const userId = localStorage.getItem('identificacion');
@@ -23,6 +25,14 @@ export class UserComponent {
           this.authenticationServices.currentUserSignal.set(null);
         }
       });
+      this.userServices.getUserInfo(userId).subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+        error: () => {
+          console.log('error user services');
+        }
+      })
     }  
   }
 }
