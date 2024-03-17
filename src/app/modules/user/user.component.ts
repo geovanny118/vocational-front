@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { AuthenticationService } from '../authentication/services';
-import { Usuario } from '../authentication/models';
 import { UserService } from './services';
+import { forkJoin } from 'rxjs/internal/observable/forkJoin';
+import { User } from './models';
 
 @Component({
   selector: 'app-user',
@@ -9,30 +10,27 @@ import { UserService } from './services';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
-  user: Usuario | undefined;
+  user: User | undefined;
   authenticationServices: AuthenticationService = inject(AuthenticationService);
   userServices: UserService = inject(UserService); 
 
   ngOnInit(): void {
     const userId = localStorage.getItem('identificacion');
     if (userId) {
-      this.authenticationServices.getLoggedInUserInfo(userId).subscribe({
-        next: (response) => {
-          //console.log('response', response);
-          this.authenticationServices.currentUserSignal.set(response);
-        },
-        error: () => {
-          this.authenticationServices.currentUserSignal.set(null);
-        }
-      });
-      this.userServices.getUserInfo(userId).subscribe({
-        next: (response) => {
-          console.log(response);
-        },
-        error: () => {
-          console.log('error user services');
-        }
-      })
-    }  
+      forkJoin([
+        this.authenticationServices.getLoggedInUserInfo(userId),
+        this.userServices.getUserInfo(userId)
+      ])
+        .subscribe({
+          next: ([authenticationResponse, userResponse]) => {
+            this.authenticationServices.currentUserSignal.set(authenticationResponse);
+            console.log(userResponse);
+            this.user = userResponse;
+          },
+          error: (error) => {
+            console.error('Error fetching user information:', error);
+          }
+        });
+    }
   }
 }

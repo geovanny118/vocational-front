@@ -3,15 +3,15 @@ import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 import { UserRoutingModule } from './user-routing.module';
 import { MatCardModule } from '@angular/material/card';
-
-
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [UserComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
   ]
 })
 export class UserModule { }
