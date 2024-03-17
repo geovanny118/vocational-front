@@ -1,14 +1,38 @@
 <section>
-  <div class="contenedor">
+  <div class="container">
     <mat-card>
-        <mat-card-header>
+        <mat-card-header id="card-header">
           <mat-card-title>General</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>{{user?.nombres}} {{user?.apellidos}}</p>
-          <p>{{user?.email}}</p>
-          <p>{{user?.direccion}}</p>
-          <p>{{user?.ciudad}}</p>
+          <div class="row">
+            <div class="column">NOMBRE</div>
+            <div class="column">{{user?.nombres}}</div>
+          </div>
+          <div class="row">
+            <div class="column">APELLIDOS</div>
+            <div class="column">{{user?.apellidos}}</div>
+          </div>
+          <div class="row">
+            <div class="column">IDENTIFICACION</div>
+            <div class="column">{{user?.identificacion}} </div>
+          </div>
+          <div class="row">
+            <div class="column">EMAIL</div>
+            <div class="column">{{user?.email}} </div>
+          </div>
+          <div class="row">
+            <div class="column">DIRECCION</div>
+            <div class="column">{{user?.direccion}} </div>
+          </div>
+          <div class="row">
+            <div class="column">CIUDAD</div>
+            <div class="column">{{user?.ciudad}} </div>
+          </div>
+          <div class="row">
+            <div class="column">TELEFONO</div>
+            <div class="column">{{user?.telefono}} </div>
+          </div>
         </mat-card-content>
         <mat-card-actions align="end">
           <button mat-button>Editar</button>

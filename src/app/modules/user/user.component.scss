@@ -1,18 +1,26 @@
-.contenedor {
+.container {
     display: flex;
     flex-direction: column;
 }
 
-.fila {
+#card-header {
+    padding-bottom: 1rem;
+}
+
+.row {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
+    flex-direction: row;
 
-.item {
-    width: 48%;
-}
-
-.icon-before-title {
-    order: -1;
+    .column {
+        padding: 0.5rem;
+        &:first-child {
+                flex: 1; 
+                max-width: 10rem; 
+                color: #808080;
+            }
+        
+        &:not(:first-child) {
+            flex: 2; 
+        }
+    }
 }
