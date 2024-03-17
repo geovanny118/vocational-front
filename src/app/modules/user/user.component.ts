@@ -24,7 +24,6 @@ export class UserComponent {
         .subscribe({
           next: ([authenticationResponse, userResponse]) => {
             this.authenticationServices.currentUserSignal.set(authenticationResponse);
-            console.log(userResponse);
             this.user = userResponse;
           },
           error: (error) => {
