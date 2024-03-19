@@ -51,7 +51,16 @@ export class EditFormComponent {
         .subscribe({
           next: ([authenticationResponse, userResponse]) => {
             this.authenticationServices.currentUserSignal.set(authenticationResponse);
-            this.user = userResponse;
+
+            // Asignar los valores del usuario al formulario
+            this.editForm.patchValue({
+              nombres: userResponse?.nombres,
+              apellidos: userResponse?.apellidos,
+              telefono: userResponse?.telefono,
+              direccion: userResponse?.direccion,
+              ciudad: userResponse?.ciudad,
+              email: userResponse?.email
+            });
           },
           error: (error) => {
             console.error('Error fetching user information:', error);
@@ -60,7 +69,7 @@ export class EditFormComponent {
     }
   }
 
-  submit() {
+  edit() {
     if (this.editForm.valid) {
       this.status = 'loading';
       const user: User = this.editForm.getRawValue();

@@ -1,5 +1,5 @@
 <div id="container">
-    <form [formGroup]="editForm" novalidate (ngSubmit)="submit()" id="form-container">
+    <form [formGroup]="editForm" novalidate (ngSubmit)="edit()" id="form-container">
         <div class="input-container">
             <div id="title">Editar usuario</div>
         </div>
@@ -26,7 +26,6 @@
                 Apellido es requerido.
             </div>
         </div>
-
 
         <div class="input-container">
             <mat-form-field appearance="outline">
@@ -80,14 +79,23 @@
         </div>
 
         <div id="button-container">
-            <button mat-raised-button class="enabled-button" type="submit" [disabled]="!editForm.valid"
-                [ngClass]="{
-          'enabled-button': editForm.valid,
-          'disabled-button': !editForm.valid
-        }">
+            <button 
+            mat-raised-button 
+            class="enabled-button" 
+            type="submit" 
+            [disabled]="!editForm.valid"
+            [ngClass]="{
+            'enabled-button': editForm.valid,
+            'disabled-button': !editForm.valid
+             }">
                 Editar
             </button>
-            <button mat-raised-button type="button" class="cancel-button ">Regresar</button>
+            <button 
+            mat-raised-button 
+            type="button" 
+            class="cancel-button"
+            [routerLink]="['/user']"
+            >Regresar</button>
         </div>
     </form>
 </div>
