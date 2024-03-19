@@ -25,7 +25,7 @@ export class EditFormComponent {
   
   user: User | undefined;
   authenticationServices: AuthenticationService = inject(AuthenticationService);
-  userServices: UserService = inject(UserService); 
+  _userServices: UserService = inject(UserService); 
 
   editForm: FormGroup = this._formBuilder.group({
     nombres: ['', [Validators.required]],
@@ -46,7 +46,7 @@ export class EditFormComponent {
     if (userId) {
       forkJoin([
         this.authenticationServices.getLoggedInUserInfo(userId),
-        this.userServices.getUserInfo(userId)
+        this._userServices.getUserInfo(userId)
       ])
         .subscribe({
           next: ([authenticationResponse, userResponse]) => {
@@ -72,13 +72,14 @@ export class EditFormComponent {
   edit() {
     if (this.editForm.valid) {
       this.status = 'loading';
+      const userId = localStorage.getItem('identificacion') ?? ''; 
       const user: User = this.editForm.getRawValue();
 
-      /*
+      console.log(userId);
       console.log(user);
-      // llama al servicio para el registro, si es correcto redirige a la pantalla de login
-      this._authenticationServices.registration(user).subscribe({
-        next: () => { this._router.navigate(['/authentication/login']) },
+
+      this._userServices.updateUserInfo(userId, user).subscribe({
+        next: () => { this._router.navigate(['/user']) },
         error: () => { this.status = 'failed'; }
       });
 
@@ -89,7 +90,7 @@ export class EditFormComponent {
       Object.keys(this.editForm.controls).forEach(key => {
         this.editForm.get(key)?.setErrors(null);
       });
-      */
+      
     } else {
       this.editForm.markAllAsTouched();
     }

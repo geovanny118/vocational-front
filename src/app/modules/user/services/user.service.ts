@@ -14,4 +14,8 @@ export class UserService {
   getUserInfo(userId: string):Observable<User | any> {
     return this._httpClient.get(`${this._baseUrl}/auth/obtain/${userId}`);
   }
+
+  updateUserInfo(userId: string, user: User): Observable<any>{
+    return this._httpClient.put(`${this._baseUrl}/auth/update/${userId}`, user)
+  }
 }
