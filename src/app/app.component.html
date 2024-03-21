@@ -1,8 +1,7 @@
-<app-toolbar/>
 @if(authenticationService.isLoggedIn()){
+  <app-toolbar/>
   <app-menu/>
-}
-@else {
+}@else {
   <router-outlet />
   <app-footer />
 }
