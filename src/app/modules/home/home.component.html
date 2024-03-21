@@ -1,22 +1,223 @@
-<section class="text-gray-600 body-font">
-    <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-        <div
-            class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Descubre tu futuro
-                <br class="hidden lg:inline-block">con nosotros
-            </h1>
-            <p class="mb-8 leading-relaxed">Explora tus pasiones y habilidades con nuestra plataforma. Encuentra la carrera que resuena con tu
-            verdadero yo y da el primer paso hacia un futuro brillante. En el camino de la autoexploración, estamos aquí para
-            guiarte.</p>
-            <div class="flex justify-center">
-                <button [routerLink]="['/authentication/registration']"
-                    class="inline-flex text-white bg-[#2E5DA8] border-0 py-2 px-6 focus:outline-none hover:bg-[#082A58] rounded text-lg">Registrarse</button>
-                <button [routerLink]="['/authentication/login']"
-                    class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Iniciar sesión</button>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orientation Vocational</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="menu container">
+            <a href="#" class="logo">Logo</a>
+            <input type="checkbox" id="menu"/>
+            <label for="menu">
+                <img src="assets/img/home/menu.png" class="menu-icono" alt="">
+            </label>
+
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Informacion</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a [routerLink]="['/authentication/login']">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="header-content container">
+            <h1>Orientacion Vocacional.</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis commodi quaerat quo architecto magnam
+                iusto sunt quas repellendus
+            </p>
+            <a href="#" class="btn-1">Informacion</a>
+        </div>
+    </header>
+
+    <section class="orientation">
+        <!--<img class="orientation-img" src="assets/img/home/banner_1.jpg" alt="">-->
+
+        <div class="orientation-content container">
+            <h2>Diferentes tipos de test</h2>
+            <p class="txt-p">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, laudantium itaque sequi dolores tenetur
+                eligendi excepturi tempore architecto modi sapiente doloribus quibusdam, alias, tempora ipsa vel
+                obcaecati sint eos voluptatibus.
+            </p>
+
+            <div class="orientation-group">
+                <div class="orientation-1">
+                    <img src="assets/img/home/test_1.jpg" alt="">
+                    <h3>Orientation Lorem</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint soluta necessitatibus natus earum.
+                        Laborum deleniti, quidem totam vero accusamus cupiditate eveniet dolor explicabo iure, eaque
+                        reiciendis perferendis neque, excepturi esse.
+                    </p>
+                </div>
+
+                <div class="orientation-1">
+                    <img src="assets/img/home/test_1.jpg" alt="">
+                    <h3>Orientation Lorem</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint soluta necessitatibus natus earum.
+                        Laborum deleniti, quidem totam vero accusamus cupiditate eveniet dolor explicabo iure, eaque
+                        reiciendis perferendis neque, excepturi esse.
+                    </p>
+                </div>
+
+                <div class="orientation-1">
+                    <img src="assets/img/home/test_1.jpg" alt="">
+                    <h3>Orientation Lorem</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint soluta necessitatibus natus earum.
+                        Laborum deleniti, quidem totam vero accusamus cupiditate eveniet dolor explicabo iure, eaque
+                        reiciendis perferendis neque, excepturi esse.
+                    </p>
+                </div>
+            </div>
+
+            <a href="#" class="btn-1">Informacion</a>
+        </div>
+    </section>
+
+    <main class="services">
+        <div class="services-content container">
+            <h2>Servicios vocacionales</h2>
+
+            <div class="services-group">
+                <div class="services-1">
+                    <img src="assets/img/home/test_1.png" alt="">
+                    <h3>Servicio 1</h3>
+                </div>
+
+                <div class="services-1">
+                    <img src="assets/img/home/test_1.png" alt="">
+                    <h3>Servicio 2</h3>
+                </div>
+
+                <div class="services-1">
+                    <img src="assets/img/home/test_1.png" alt="">
+                    <h3>Servicio 3</h3>
+                </div>
+            </div>
+
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Asperiores sapiente impedit omnis blanditiis error eos
+                minus possimus tempore, assumenda dolores. Ad ipsum
+                molestiae animi voluptas quas? Iure iste nisi sed.
+            </p>
+
+            <a href="#" class="btn-1">Informacion</a>
+        </div>
+    </main>
+
+    <section class="general">
+        <div class="general-1">
+            <h2>Totam similique</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Asperiores sapiente impedit omnis blanditiis error eos
+                minus possimus tempore, assumenda dolores. Ad ipsum
+                molestiae animi voluptas quas? Iure iste nisi sed.
+            </p>
+            <a href="#" class="btn-1">Informacion</a>
+        </div>
+        <div class="general-2"></div>
+    </section>
+
+    <section class="general">
+        <div class="general-3"></div>
+        <div class="general-1">
+            <h2>Totam similique</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Asperiores sapiente impedit omnis blanditiis error eos
+                minus possimus tempore, assumenda dolores. Ad ipsum
+                molestiae animi voluptas quas? Iure iste nisi sed.
+            </p>
+            <a href="#" class="btn-1">Informacion</a>
+        </div>
+    </section>
+
+    <section class="blog container">
+        <h2>Blog</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+        <div class="blog-content">
+            <div class="blog-1">
+                <img src="assets/img/home/blog1.jpg" alt="">
+                <h3>Blog 1</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore doloribus nisi officiis accusamus
+                    debitis voluptatem quo impedit commodi rerum in repudiandae eaque, quas, sint libero veniam illum
+                    explicabo mollitia sapiente?
+                </p>
+            </div>
+
+            <div class="blog-1">
+                <img src="assets/img/home/blog2.jpg" alt="">
+                <h3>Blog 2</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore doloribus nisi officiis accusamus
+                    debitis voluptatem quo impedit commodi rerum in repudiandae eaque, quas, sint libero veniam illum
+                    explicabo mollitia sapiente?
+                </p>
+            </div>
+
+            <div class="blog-1">
+                <img src="assets/img/home/blog3.jpg" alt="">
+                <h3>Blog 3</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore doloribus nisi officiis accusamus
+                    debitis voluptatem quo impedit commodi rerum in repudiandae eaque, quas, sint libero veniam illum
+                    explicabo mollitia sapiente?
+                </p>
             </div>
         </div>
-        <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img class="object-cover object-center rounded" alt="hero" ngSrc="assets/img/banner.jpg" height="400" width="600" priority>
+
+        <a href="#" class="btn-1">Informacion</a>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content container">
+            <div class="link">
+                <h3>Lorem</h3>
+
+                <ul>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                </ul>
+            </div>
+            <div class="link">
+                <h3>Lorem</h3>
+
+                <ul>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                </ul>
+            </div>
+            <div class="link">
+                <h3>Lorem</h3>
+
+                <ul>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                    <li><a href="#">lorem</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</section>
+    </footer>
+
+</body>
+
+</html>
