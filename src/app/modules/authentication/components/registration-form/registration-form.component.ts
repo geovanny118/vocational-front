@@ -63,7 +63,7 @@ export class RegistrationFormComponent {
     private _authenticationServices: AuthenticationService
   ) { }
 
-  submit() {
+  submit():void {
     if (this.registrationForm.valid) {
       this.status = 'loading';
       const user: Usuario = this.registrationForm.getRawValue();
