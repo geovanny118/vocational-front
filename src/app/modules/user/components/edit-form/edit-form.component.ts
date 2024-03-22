@@ -46,7 +46,7 @@ export class EditFormComponent {
     if (userId) {
       forkJoin([
         this.authenticationServices.getLoggedInUserInfo(userId),
-        this._userServices.getUserInfo(userId)
+        this._userServices.search(userId)
       ])
         .subscribe({
           next: ([authenticationResponse, userResponse]) => {
@@ -78,7 +78,7 @@ export class EditFormComponent {
       console.log(userId);
       console.log(user);
 
-      this._userServices.updateUserInfo(userId, user).subscribe({
+      this._userServices.update(userId, user).subscribe({
         next: () => { this._router.navigate(['/user']) },
         error: () => { this.status = 'failed'; }
       });

@@ -70,7 +70,7 @@ export class RegistrationFormComponent {
 
       console.log(user);
       // llama al servicio para el registro, si es correcto redirige a la pantalla de login
-      this._authenticationServices.registration(user).subscribe({
+      this._authenticationServices.register(user).subscribe({
         next: () => { this._router.navigate(['/authentication/login']) },
         error: () => { this.status = 'failed'; }
       });

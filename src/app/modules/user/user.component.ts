@@ -19,7 +19,7 @@ export class UserComponent {
     if (userId) {
       forkJoin([
         this.authenticationServices.getLoggedInUserInfo(userId),
-        this.userServices.getUserInfo(userId)
+        this.userServices.search(userId)
       ])
         .subscribe({
           next: ([authenticationResponse, userResponse]) => {

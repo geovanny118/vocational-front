@@ -11,11 +11,17 @@ export class UserService {
   private _httpClient: HttpClient = inject(HttpClient);
   private _baseUrl: string = environment.apiBaseUrl;
 
-  getUserInfo(userId: string):Observable<User | any> {
+  search(userId: string):Observable<User | any> {
     return this._httpClient.get(`${this._baseUrl}/auth/obtain/${userId}`);
   }
 
-  updateUserInfo(userId: string, user: User): Observable<any>{
+  update(userId: string, user: User): Observable<any>{
     return this._httpClient.put(`${this._baseUrl}/auth/update/${userId}`, user)
+  }
+
+  delete(userId: string): void{}
+
+  save(user: User): Observable<User | any> {
+    return this._httpClient.post(`${this._baseUrl}/auth/nuevo`, user);
   }
 }

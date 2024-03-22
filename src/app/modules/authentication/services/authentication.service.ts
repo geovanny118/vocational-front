@@ -22,7 +22,7 @@ export class AuthenticationService {
     return this._httpClient.post(`${this._baseUrl}/auth/login`, credentials);
   }
 
-  registration(user: Usuario): Observable<any> {
+  register(user: Usuario): Observable<any> {
     return this._httpClient.post(`${this._baseUrl}/auth/nuevo`, user);
   }
 
