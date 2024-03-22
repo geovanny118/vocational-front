@@ -5,7 +5,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [UserComponent],
   imports: [
@@ -13,7 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
     UserRoutingModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ]
 })
 export class UserModule { }

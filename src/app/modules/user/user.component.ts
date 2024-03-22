@@ -3,6 +3,8 @@ import { AuthenticationService } from '../authentication/services';
 import { UserService } from './services';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 import { User } from './models';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteUserDialogComponent } from './components'
 
 @Component({
   selector: 'app-user',
@@ -13,6 +15,7 @@ export class UserComponent {
   user: User | undefined;
   authenticationServices: AuthenticationService = inject(AuthenticationService);
   userServices: UserService = inject(UserService); 
+  deleteUserDialog = inject(MatDialog);
 
   ngOnInit(): void {
     const userId = localStorage.getItem('identificacion');
@@ -31,5 +34,10 @@ export class UserComponent {
           }
         });
     }
+  }
+
+  deleteUser(): void {
+    console.log(this.user?.identificacion);
+    this.deleteUserDialog.open(DeleteUserDialogComponent);
   }
 }
