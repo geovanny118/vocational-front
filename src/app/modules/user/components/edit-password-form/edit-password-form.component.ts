@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthenticationService } from 'src/app/modules/authentication/services';
 import { PasswordChangeRequest } from '../../models';
+import { UserService } from '../../services';
 
 // valida que las contraseñas sean iguales
 const confirmPasswordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -42,6 +43,8 @@ export class EditPasswordFormComponent {
   hideConfirmPassword: boolean = true;
 
   _formBuilder: FormBuilder = inject(FormBuilder);
+  _userServices: UserService = inject(UserService);
+  _router: Router = inject(Router);
   authenticationServices = inject(AuthenticationService);
 
   passwordForm: FormGroup = this._formBuilder.group({
@@ -77,6 +80,21 @@ export class EditPasswordFormComponent {
       };
 
       console.log(passwordRequest);
+
+      this._userServices.changePassword(userId, passwordRequest).subscribe({
+        next: () => { this._router.navigate(['/user']) },
+        error: () => { this.status = 'failed'; }
+      });
+
+      // limpia el formulario despues de enviar la informacion
+      this.passwordForm.reset();
+      this.passwordForm.markAsPristine();
+      this.passwordForm.markAsUntouched();
+      Object.keys(this.passwordForm.controls).forEach(key => {
+        this.passwordForm.get(key)?.setErrors(null);
+      });
+    } else {
+      this.passwordForm.markAllAsTouched();
     }
   }
 

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs/internal/Observable';
-import { User, DeleteMessage } from '../models';
+import { User, DeleteMessage, PasswordChangeRequest } from '../models';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../authentication/services';
 
@@ -21,6 +21,10 @@ export class UserService {
 
   update(userId: string, user: User): Observable<any>{
     return this._httpClient.put(`${this._baseUrl}/auth/update/${userId}`, user)
+  }
+
+  changePassword(userId: string, passwordRequest: PasswordChangeRequest): Observable<any> {
+    return this._httpClient.put(`${this._baseUrl}/auth/update/${userId}`, passwordRequest)
   }
 
   delete(userId: string): void {
