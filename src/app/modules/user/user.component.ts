@@ -36,8 +36,7 @@ export class UserComponent {
     }
   }
 
-  deleteUser(): void {
-    console.log(this.user?.identificacion);
+  openDeleteDialog(): void {
     this.deleteUserDialog.open(DeleteUserDialogComponent);
   }
 }

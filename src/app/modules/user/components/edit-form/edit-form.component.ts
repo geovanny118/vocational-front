@@ -75,8 +75,8 @@ export class EditFormComponent {
       const userId = localStorage.getItem('identificacion') ?? ''; 
       const user: User = this.editForm.getRawValue();
 
-      console.log(userId);
-      console.log(user);
+      //console.log(userId);
+      //console.log(user);
 
       this._userServices.update(userId, user).subscribe({
         next: () => { this._router.navigate(['/user']) },

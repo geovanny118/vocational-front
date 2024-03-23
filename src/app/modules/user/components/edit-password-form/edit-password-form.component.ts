@@ -6,19 +6,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthenticationService } from 'src/app/modules/authentication/services';
+import { PasswordChangeRequest } from '../../models';
 
 // valida que las contraseñas sean iguales
 const confirmPasswordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  let password = control.get('password');
+  let newPassword = control.get('newPassword');
   let confirmPassword = control.get('confirmPassword');
 
   // si cualquier campo esta vacio deshabilita la validacion
-  if (!password?.value || !confirmPassword?.value) {
+  if (!newPassword?.value || !confirmPassword?.value) {
     return null;
   }
 
   // si ambos campos tiene valores, verifica si las contraseñas son iguales
-  if (password.value !== confirmPassword.value) {
+  if (newPassword.value !== confirmPassword.value) {
     return { passwordsNotMatching: true };
   }
 
@@ -40,18 +42,42 @@ export class EditPasswordFormComponent {
   hideConfirmPassword: boolean = true;
 
   _formBuilder: FormBuilder = inject(FormBuilder);
+  authenticationServices = inject(AuthenticationService);
 
   passwordForm: FormGroup = this._formBuilder.group({
     currentPassword: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    newPassword: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
   },
     {
       validators: confirmPasswordValidator
     });
 
-  updatePassword():void {
+  ngOnInit(): void {
+    const userId = localStorage.getItem('identificacion');
+    if (userId) {
+      this.authenticationServices.getLoggedInUserInfo(userId).subscribe({
+        next: (response) => {
+          this.authenticationServices.currentUserSignal.set(response);
+        },
+        error: () => {
+          this.authenticationServices.currentUserSignal.set(null);
+        }
+      });
+    }
+  }
 
+  updatePassword():void {
+    if (this.passwordForm.valid) {
+      const userId = localStorage.getItem('identificacion') ?? '';
+      const formValues = this.passwordForm.getRawValue();
+      const passwordRequest: PasswordChangeRequest = {
+        password: formValues.currentPassword,
+        passwordNew: formValues.newPassword
+      };
+
+      console.log(passwordRequest);
+    }
   }
 
 }

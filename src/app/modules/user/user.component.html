@@ -38,7 +38,7 @@
         <mat-card-actions id="button-container">
           <div><button mat-raised-button color="primary" [routerLink]="['/user/edit']">Editar perfil</button></div>
           <div><button mat-raised-button color="primary" [routerLink]="['/user/change-password']">Cambiar contraseña</button></div>
-          <div><button mat-raised-button color="warn" (click)="deleteUser()">Eliminar cuenta</button></div>
+          <div><button mat-raised-button color="warn" (click)="openDeleteDialog()">Eliminar cuenta</button></div>
         </mat-card-actions>
     </mat-card>
   </div>

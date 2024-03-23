@@ -4,7 +4,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
     <div id="button-container">
-        <button mat-raised-button class="confirm-button" mat-dialog-close>Confirmar</button>
-        <button mat-raised-button class="cancel-button" mat-dialog-close>Cancelar</button>
+        <button mat-raised-button class="confirm-button" mat-dialog-close (click)="deleteAccount()">Confirmar</button>
+        <button mat-raised-button class="cancel-button"  mat-dialog-close>Cancelar</button>
     </div>
 </mat-dialog-actions>
