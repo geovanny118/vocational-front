@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthenticationService } from 'src/app/modules/authentication/services';
 import { PasswordChangeRequest } from '../../models';
 import { UserService } from '../../services';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { catchError } from 'rxjs';
 
 // valida que las contraseñas sean iguales
 const confirmPasswordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -32,7 +34,7 @@ const confirmPasswordValidator: ValidatorFn = (control: AbstractControl): Valida
 @Component({
   selector: 'app-edit-password-form',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule, RouterModule, NgClass, NgIf],
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule, RouterModule, NgClass, NgIf, MatSnackBarModule],
   templateUrl: './edit-password-form.component.html',
   styleUrl: './edit-password-form.component.scss'
 })
@@ -42,10 +44,11 @@ export class EditPasswordFormComponent {
   hidePassword: boolean = true;
   hideConfirmPassword: boolean = true;
 
-  _formBuilder: FormBuilder = inject(FormBuilder);
-  _userServices: UserService = inject(UserService);
-  _router: Router = inject(Router);
   authenticationServices = inject(AuthenticationService);
+  private _formBuilder: FormBuilder = inject(FormBuilder);
+  private _userServices: UserService = inject(UserService);
+  private _router: Router = inject(Router);
+  private _snackBar: MatSnackBar = inject(MatSnackBar); 
 
   passwordForm: FormGroup = this._formBuilder.group({
     currentPassword: ['', [Validators.required]],
@@ -79,9 +82,21 @@ export class EditPasswordFormComponent {
         passwordNew: formValues.newPassword
       };
 
-      console.log(passwordRequest);
-
-      this._userServices.changePassword(userId, passwordRequest).subscribe({
+      this._userServices.changePassword(userId, passwordRequest).pipe(
+        catchError(HttpErrorResponse => {
+          if (HttpErrorResponse.status === 404) {
+            if (HttpErrorResponse?.error?.mensajes === 'Contraseña incorrecta') {
+              console.log("Contraseña incorrecta");
+              // Borra los campos del formulario
+              this.passwordForm.get('currentPassword')?.reset();
+            }
+            this._snackBar.open(HttpErrorResponse?.error?.mensajes, '', {
+              duration: 2000
+            });
+          }
+          return HttpErrorResponse;
+        })
+      ).subscribe({
         next: () => { this._router.navigate(['/user']) },
         error: () => { this.status = 'failed'; }
       });

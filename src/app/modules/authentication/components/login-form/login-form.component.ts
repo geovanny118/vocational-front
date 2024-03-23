@@ -68,10 +68,8 @@ export class LoginFormComponent {
           return HttpErrorResponse; // Propagar el error para que lo maneje el código que llama a esta función
         })
       ).subscribe((response) => {
-        //console.log(response);
         localStorage.setItem('token', response.token);
         localStorage.setItem('identificacion', response.identificacion);
-        //this._authenticationServices.currentUserSig.set(response);
         this._router.navigateByUrl('/user');
       });
 
