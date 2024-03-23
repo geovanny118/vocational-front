@@ -1,0 +1,101 @@
+<div id="container">
+    <form [formGroup]="editForm" novalidate (ngSubmit)="edit()" id="form-container">
+        <div class="input-container">
+            <div id="title">Editar usuario</div>
+        </div>
+
+        <div class="input-container">
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre(s)</mat-label>
+                <input matInput placeholder="Nombre(s)" formControlName="nombres" />
+                <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field>
+            <div *ngIf="editForm.get('nombres')?.hasError('required') && editForm.get('nombres')?.touched"
+                class="error-message">
+                Nombre es requerido.
+            </div>
+        </div>
+        <div class="input-container">
+            <mat-form-field appearance="outline">
+                <mat-label>Apellido(s)</mat-label>
+                <input matInput placeholder="Apellidos" formControlName="apellidos" />
+                <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field>
+            <div *ngIf="editForm.get('apellidos')?.hasError('required') && editForm.get('apellidos')?.touched"
+                class="error-message">
+                Apellido es requerido.
+            </div>
+        </div>
+
+        <div class="input-container">
+            <mat-form-field appearance="outline">
+                <mat-label>Teléfono</mat-label>
+                <input matInput placeholder="Teléfono" formControlName="telefono" />
+                <mat-icon matSuffix>call</mat-icon>
+            </mat-form-field>
+            <div *ngIf="editForm.get('telefono')?.hasError('required') && editForm.get('telefono')?.touched"
+                class="error-message">
+                Teléfono es requerido.
+            </div>
+        </div>
+        <div class="input-container">
+            <mat-form-field appearance="outline">
+                <mat-label>Dirección</mat-label>
+                <input matInput placeholder="Dirección" formControlName="direccion" />
+                <mat-icon matSuffix>home</mat-icon>
+            </mat-form-field>
+            <div *ngIf="editForm.get('direccion')?.hasError('required') && editForm.get('direccion')?.touched"
+                class="error-message">
+                Teléfono es requerido.
+            </div>
+        </div>
+        <div class="input-container">
+            <mat-form-field appearance="outline">
+                <mat-label>Ciudad</mat-label>
+                <input matInput placeholder="Ciudad" formControlName="ciudad" />
+                <mat-icon matSuffix>location_city</mat-icon>
+            </mat-form-field>
+            <div *ngIf="editForm.get('ciudad')?.hasError('required') && editForm.get('ciudad')?.touched"
+                class="error-message">
+                Ciudad es requerido.
+            </div>
+        </div>
+
+
+        <div class="input-container">
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" formControlName="email" />
+                <mat-icon matSuffix>alternate_email</mat-icon>
+            </mat-form-field>
+            <div *ngIf="editForm.get('email')?.hasError('required') && editForm.get('email')?.touched"
+                class="error-message">
+                Email es requerido.
+            </div>
+            <div *ngIf="editForm.get('email')?.hasError('required') && editForm.get('email')?.touched"
+                class="error-message">
+                Ingresa un email válido.
+            </div>
+        </div>
+
+        <div id="button-container">
+            <button 
+            mat-raised-button 
+            class="enabled-button" 
+            type="submit" 
+            [disabled]="!editForm.valid"
+            [ngClass]="{
+            'enabled-button': editForm.valid,
+            'disabled-button': !editForm.valid
+             }">
+            Guardar
+            </button>
+            <button 
+            mat-raised-button 
+            type="button" 
+            class="cancel-button"
+            [routerLink]="['/user']"
+            >Regresar</button>
+        </div>
+    </form>
+</div>

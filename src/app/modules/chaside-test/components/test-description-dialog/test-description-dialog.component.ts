@@ -3,12 +3,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-dialog-test-description',
+  selector: 'app-test-description-dialog',
   standalone: true,
   imports: [MatDialogModule, MatButtonModule],
-  templateUrl: './dialog-test-description.component.html',
-  styleUrl: './dialog-test-description.component.scss'
+  templateUrl: './test-description-dialog.component.html',
+  styleUrl: './test-description-dialog.component.scss'
 })
-export class DialogTestDescriptionComponent {
+export class TestDescriptionDialogComponent {
 
 }

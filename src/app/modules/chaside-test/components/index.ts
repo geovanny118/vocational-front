@@ -1,1 +1,1 @@
-export * from './dialog-test-description/dialog-test-description.component';
+export * from './test-description-dialog/test-description-dialog.component';

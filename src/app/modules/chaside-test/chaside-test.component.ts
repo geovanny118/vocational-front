@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AuthenticationService } from '../authentication/services';
 import { Usuario } from '../authentication/models';
-import { DialogTestDescriptionComponent } from './components';
+import { TestDescriptionDialogComponent } from './components';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -28,7 +28,7 @@ export class ChasideTestComponent {
     }
   }
 
-  openTextDescription(): void {
-    this.testDescriptionDialog.open(DialogTestDescriptionComponent);
+  openTestDescription(): void {
+    this.testDescriptionDialog.open(TestDescriptionDialogComponent);
   }
 }

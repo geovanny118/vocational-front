@@ -63,14 +63,14 @@ export class RegistrationFormComponent {
     private _authenticationServices: AuthenticationService
   ) { }
 
-  submit() {
+  submit():void {
     if (this.registrationForm.valid) {
       this.status = 'loading';
       const user: Usuario = this.registrationForm.getRawValue();
 
       console.log(user);
       // llama al servicio para el registro, si es correcto redirige a la pantalla de login
-      this._authenticationServices.registration(user).subscribe({
+      this._authenticationServices.register(user).subscribe({
         next: () => { this._router.navigate(['/authentication/login']) },
         error: () => { this.status = 'failed'; }
       });

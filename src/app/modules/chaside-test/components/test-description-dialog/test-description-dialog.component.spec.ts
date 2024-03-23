@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogTestDescriptionComponent } from './dialog-test-description.component';
+import { TestDescriptionDialogComponent } from './test-description-dialog.component';
 
 describe('DialogTestDescriptionComponent', () => {
-  let component: DialogTestDescriptionComponent;
-  let fixture: ComponentFixture<DialogTestDescriptionComponent>;
+  let component: TestDescriptionDialogComponent;
+  let fixture: ComponentFixture<TestDescriptionDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogTestDescriptionComponent]
+      imports: [TestDescriptionDialogComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(DialogTestDescriptionComponent);
+    fixture = TestBed.createComponent(TestDescriptionDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

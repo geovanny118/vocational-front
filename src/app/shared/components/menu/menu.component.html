@@ -2,6 +2,9 @@
     <mat-drawer #drawer mode="side" opened>
         <mat-nav-list>
             <mat-list-item>
+                <button mat-button (click)="redirectTo('user')"><mat-icon>person</mat-icon>Perfil de usuario</button>
+            </mat-list-item>
+            <mat-list-item>
                 <button mat-button (click)="redirectTo('chaside')"><mat-icon>extension</mat-icon>Chaside Test</button>
             </mat-list-item>
             <mat-list-item>
@@ -9,9 +12,6 @@
             </mat-list-item>
             <mat-list-item>
                 <button mat-button (click)="redirectTo('result')"><mat-icon>pie_chart</mat-icon>Resultados</button>
-            </mat-list-item>
-            <mat-list-item>
-                <button mat-button (click)="redirectTo('user')"><mat-icon>settings</mat-icon>Configuración</button>
             </mat-list-item>
         </mat-nav-list>
     </mat-drawer>

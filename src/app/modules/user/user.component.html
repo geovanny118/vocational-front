@@ -1,28 +1,45 @@
 <section>
-  <div class="contenedor">
-    <div class="fila">
-      <div class="item">
-        <mat-card>
-          <mat-card-content>Simple card</mat-card-content>
-        </mat-card>
-      </div>
-      <div class="item">
-        <mat-card>
-          <mat-card-content>Simple card</mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-    <div class="fila">
-      <div class="item">
-        <mat-card>
-          <mat-card-content>Simple card</mat-card-content>
-        </mat-card>
-      </div>
-      <div class="item">
-        <mat-card>
-          <mat-card-content>Simple card</mat-card-content>
-        </mat-card>
-      </div>
-    </div>
+  <div class="container">
+    <mat-card>
+        <mat-card-header id="card-header">
+          <mat-icon mat-card-avatar class="icon">account_circle</mat-icon>
+          <mat-card-title>General</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="column">NOMBRE</div>
+            <div class="column">{{user?.nombres}}</div>
+          </div>
+          <div class="row">
+            <div class="column">APELLIDOS</div>
+            <div class="column">{{user?.apellidos}}</div>
+          </div>
+          <div class="row">
+            <div class="column">IDENTIFICACION</div>
+            <div class="column">{{user?.identificacion}} </div>
+          </div>
+          <div class="row">
+            <div class="column">EMAIL</div>
+            <div class="column">{{user?.email}} </div>
+          </div>
+          <div class="row">
+            <div class="column">DIRECCION</div>
+            <div class="column">{{user?.direccion}} </div>
+          </div>
+          <div class="row">
+            <div class="column">CIUDAD</div>
+            <div class="column">{{user?.ciudad}} </div>
+          </div>
+          <div class="row">
+            <div class="column">TELEFONO</div>
+            <div class="column">{{user?.telefono}} </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions id="button-container">
+          <div><button mat-raised-button color="primary" [routerLink]="['/user/edit']">Editar perfil</button></div>
+          <div><button mat-raised-button color="primary" [routerLink]="['/user/change-password']">Cambiar contraseña</button></div>
+          <div><button mat-raised-button color="warn" (click)="openDeleteDialog()">Eliminar cuenta</button></div>
+        </mat-card-actions>
+    </mat-card>
   </div>
 </section>
