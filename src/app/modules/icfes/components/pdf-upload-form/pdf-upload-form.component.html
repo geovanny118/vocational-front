@@ -1,0 +1,23 @@
+<div id="form-container">
+    <div id="row-container">
+        <mat-form-field appearance="outline" id="form-field-container">
+            <mat-label>Cargar archivo pdf</mat-label>
+            <input matInput [readonly]="true" (click)="fileInput.click()" [value]="selectedFileName">
+            <input #fileInput hidden type="file" (change)="onFileSelected($event)" accept=".pdf">
+            @if(selectedFileName == ''){
+                <button mat-icon-button matSuffix aria-label="Select" (click)="fileInput.click()">
+                    <mat-icon matSuffix>attach_file</mat-icon>
+                </button>
+            }@else {
+                <button mat-icon-button matSuffix aria-label="Clear" (click)="clearFileSelection()">
+                    <mat-icon>close</mat-icon>
+                </button>  
+            }
+        </mat-form-field>
+    </div>
+    <div>
+    <button mat-raised-button [ngClass]="{'enabled-button': !isButtonDisabled, 'disabled-button': isButtonDisabled}"
+        [disabled]="isButtonDisabled" (click)="uploadFile()">Procesar
+    </button>
+    </div>
+</div>

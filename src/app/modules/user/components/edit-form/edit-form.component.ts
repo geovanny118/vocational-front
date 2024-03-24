@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
