@@ -1,0 +1,14 @@
+#form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: baseline;
+    width: 25%;
+}
+
+.enabled-button {
+    color: white;
+    background-color: #082A58;
+    font-weight: bold;
+    font-size: 1rem;
+}
