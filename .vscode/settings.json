@@ -1,0 +1,8 @@
+{
+    "exportall.config.folderListener": [
+        "/src/app/modules/icfes/components"
+    ],
+    "exportall.config.relExclusion": [
+        "/src/app/modules/icfes/services/index.ts"
+    ]
+}
