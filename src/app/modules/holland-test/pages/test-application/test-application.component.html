@@ -10,13 +10,16 @@
                                 {{question.ordenPregunta}}. {{ question.descripcionPregunta }}
                             </div>
                             <div>
-                                <mat-checkbox class="example-margin"></mat-checkbox>
+                                <mat-checkbox [formControlName]="'answer_' + question.ordenPregunta" 
+                            id="answer_{{question.ordenPregunta}}" 
+                            aria-label="Select an option" 
+                            (change)="onCheckBoxChange($event, 'answer_' + question.ordenPregunta)"></mat-checkbox>
                             </div>
                         </div>
                         @if(hollandTestForm.get("answer_" + question.ordenPregunta)?.hasError('required') &&
                         hollandTestForm.get("answer_" + question.ordenPregunta)?.untouched &&
                         hollandTestForm.get("answer_" + question.ordenPregunta)?.pristine &&
-                        changePage
+                        isCheckboxSelected
                         ){
                         <div id="error-message">Debe elegir una opcion para continuar</div>
                         }
@@ -32,10 +35,10 @@
             </pagination-controls>
         </div>
         <div>
-            <button mat-raised-button class="enabled-button" type="submit" [disabled]="!hollandTestForm.valid"
+            <button mat-raised-button class="disabled-button" type="submit" [disabled]="!isAnyCheckboxChecked()"
                 [ngClass]="{
-                'enabled-button': hollandTestForm.valid,
-                'disabled-button': !hollandTestForm.valid
+                'enabled-button': isAnyCheckboxChecked(),
+                'disabled-button': !isAnyCheckboxChecked()
             }">Enviar respuestas</button>
         </div>
     </form>

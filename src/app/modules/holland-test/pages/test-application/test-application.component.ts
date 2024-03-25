@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AuthenticationService } from 'src/app/modules/authentication/services';
 import { HollandTestService } from '../../services';
-import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Usuario } from 'src/app/modules/authentication/models';
@@ -42,9 +42,12 @@ export class TestApplicationComponent {
   hollandTestForm: FormGroup = new FormGroup({});
   answers: number[] = [];
   questions: HollandQuestion[] = [];
+  changePage: boolean = true;
   currentPage: number = 1;
-  progressBarValue: number = 0;
-  changePage: boolean = false;
+  isCheckboxSelected: boolean = false;
+
+  // Objeto para mantener un registro del estado de cada grupo de radio-buttons
+  checkboxGroupState: { [key: string]: boolean } = {};
 
   ngOnInit(): void {
     const userId = localStorage.getItem('identificacion');
@@ -61,25 +64,52 @@ export class TestApplicationComponent {
     this._hollandTestServices.getQuestions().subscribe(
       (response: HollandQuestion[]) => {
         this.questions = response;
-        //this.hollandTestForm = this.initializeForm();
+        this.hollandTestForm = this.initializeForm();
       }
     );
   }
 
-  sendAnswer(): void {
+  initializeForm(): FormGroup {
+    const formControls: { [key: string]: FormControl } = {};
+    this.questions.forEach((question, index) => {
+      //formControls[`answer_${index + 1}`] = new FormControl(''); //--- deshabilita validación, solo para pruebas
+      formControls[`answer_${index + 1}`] = new FormControl('');
+    });
+    return this._formBuilder.group(formControls);
+  }
 
+  onCheckBoxChange(event: any, groupName: string) {
+    this.checkboxGroupState[groupName] = !this.checkboxGroupState[groupName];
+    this.answers = this.calculateSumByGroups();
+  }
+
+  sendAnswer(): void {
+    console.log(this.answers);
+  }
+
+  isAnyCheckboxChecked(): boolean {
+    return Object.values(this.checkboxGroupState).some(value => value === true);
   }
 
   onPageChange(event: number): void {
-    this.changePage = true;
-    if (this.isPageComplete(event)) {
-      this.currentPage = event;
-      this.changePage = false;
-    }
+    this.currentPage = event;
   }
 
-  isPageComplete(page: number): boolean {
+  calculateSumByGroups(): number[] {
+    const results: number[] = [];
+    let sumGroup = 0;
 
-    return true; // Retorna verdadero si todas las respuestas están seleccionadas
+    for (let i = 0; i < 54; i++) { 
+      if (this.checkboxGroupState['answer_' + (i + 1)] === true) { 
+        sumGroup++;
+      }
+
+      // Si el índice es divisible por 9 o es el último checkbox, se agrega la suma al arreglo resultados
+      if ((i + 1) % 9 === 0 || i === 53) {
+        results.push(sumGroup);
+        sumGroup = 0;
+      }
+    }
+    return results;
   }
 }

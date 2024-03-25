@@ -90,10 +90,10 @@ export class TestApplicationComponent {
       }
     }
 
-    console.log('Respuestas enviadas:', this.answers);
+    //console.log('Respuestas enviadas:', this.answers);
     this._chasideTestServices.submitAnswers(this.answers).subscribe(
       (results: ChasideResult[]) => {
-        console.log('Respuestas del test:', results);
+        //console.log('Respuestas del test:', results);
         this._chasideTestServices.currentChasideResultSignal.set(results);
         this._router.navigateByUrl('/chaside/result');
       },

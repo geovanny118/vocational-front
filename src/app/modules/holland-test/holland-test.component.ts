@@ -30,6 +30,6 @@ export class HollandTestComponent {
 
   openTestDescription(): void {
     //this.testDescriptionDialog.open(TestDescriptionDialogComponent);
-    console.log("pendiente crear dialog");
+    console.log("PENDIENTE CREAR DIALOG");
   }
 }
