@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { HollandTestService } from '../../services';
 
 @Component({
-  selector: 'app-test-result',
+  selector: 'holland-test-result',
   standalone: true,
   imports: [],
   templateUrl: './test-result.component.html',
