@@ -1,0 +1,6 @@
+<h1>Resultados:</h1>
+@for(result of hollandTestService.currentHollandResultSignal(); track result){
+<h3>{{ result?.areaInteres }}</h3>
+<p>{{ result?.caracteristicas }}</p>
+<br />
+}

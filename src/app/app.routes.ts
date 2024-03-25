@@ -27,6 +27,12 @@ export const routes: Routes = [
     canMatch: [AuthGuard],
   },
   {
+    path: 'holland',
+    loadChildren: () =>
+      import('./modules').then((modules) => modules.HollandTestModule),
+    canMatch: [AuthGuard],
+  },
+  {
     path: 'icfes',
     loadChildren: () =>
       import('./modules').then((modules) => modules.IcfesModule),

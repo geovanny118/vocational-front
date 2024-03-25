@@ -1,0 +1,45 @@
+<div id="questions-container">
+    <form [formGroup]="hollandTestForm" novalidate (ngSubmit)="sendAnswer()" id="form-container">
+        <div>
+            <div class="question-card">
+                <mat-card>
+                    <mat-card-content>
+                    @for (question of questions | paginate: { itemsPerPage: 9, currentPage: currentPage } ; track question) {
+                        <div id="question">
+                            <div>
+                                {{question.ordenPregunta}}. {{ question.descripcionPregunta }}
+                            </div>
+                            <div>
+                                <mat-checkbox [formControlName]="'answer_' + question.ordenPregunta" 
+                            id="answer_{{question.ordenPregunta}}" 
+                            aria-label="Select an option" 
+                            (change)="onCheckBoxChange($event, 'answer_' + question.ordenPregunta)"></mat-checkbox>
+                            </div>
+                        </div>
+                        @if(hollandTestForm.get("answer_" + question.ordenPregunta)?.hasError('required') &&
+                        hollandTestForm.get("answer_" + question.ordenPregunta)?.untouched &&
+                        hollandTestForm.get("answer_" + question.ordenPregunta)?.pristine &&
+                        isCheckboxSelected
+                        ){
+                        <div id="error-message">Debe elegir una opcion para continuar</div>
+                        }
+                    } @empty {
+                    Empty list of questions
+                    }
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div id="paginator-container">
+            <pagination-controls (pageChange)="onPageChange($event)" previousLabel="anterior" nextLabel="siguiente">
+            </pagination-controls>
+        </div>
+        <div>
+            <button mat-raised-button class="disabled-button" type="submit" [disabled]="!isAnyCheckboxChecked()"
+                [ngClass]="{
+                'enabled-button': isAnyCheckboxChecked(),
+                'disabled-button': !isAnyCheckboxChecked()
+            }">Enviar respuestas</button>
+        </div>
+    </form>
+</div>

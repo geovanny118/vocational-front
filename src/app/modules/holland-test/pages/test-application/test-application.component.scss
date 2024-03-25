@@ -1,0 +1,55 @@
+#questions-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.question-card {
+    margin-bottom: 1rem;
+}
+
+#question {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.enabled-button {
+    color: white !important;
+    background-color: #082A58 !important;
+    font-weight: bold;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.disabled-button {
+    background-color: gray;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    width: 100%;
+    cursor: not-allowed;
+}
+
+#paginator-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#progress-bar-container {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+#progresss-bar-custom {
+    --mdc-linear-progress-active-indicator-color: #23c423;
+    --mdc-linear-progress-track-color: rgba(27, 161, 116, 0.25);
+}
+
+#error-message {
+    color: red;
+    text-align: start;
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+}
