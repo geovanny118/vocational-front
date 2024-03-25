@@ -1,1 +1,25 @@
-<p>test-description-dialog works!</p>
+<h2 mat-dialog-title>Test de Holland</h2>
+<mat-dialog-content class="mat-typography">
+    <p>El Test de Holland es una herramienta psicométrica utilizada para evaluar los intereses vocacionales de una persona y ayudar en la toma de
+    decisiones relacionadas con la carrera. A continuación, se detallan las instrucciones para realizar el test:
+    </p>
+
+    <h3>Instrucciones</h3>
+    <ol>
+        <li>Este test consta de 6 secciones en cual incluye 54 declaraciones. Cada una describe actividades y practicas personales en un ambiente educativo, de capacitación o laboral</li>
+        <li>Lea las declaraciones con atención y luego marque la que se refleje su personalidad. Puede cambiar su respuesta si asi lo desea</li>
+        <li>La realizaición de la prueba no esta limitada a un periodo de tiempo específico. Tomese el tiempo que sea necesario para identificar las declaraciones que reflejen su personalidad</li>
+    </ol>
+
+    <p>Esta es una actividad sobre intereses laborales, no una evaluacion de sus capacidades, de forma que no habra declaraciones correctas o incorrectas.</p>
+    <p>Las personalidades varian segun la persona y cada una tiene sus caractersiticas particulares.</p>
+
+    <p>Una vez que haya marcado las declaraciones del Test de Holland adecuadas para usted, puede presionar el boton <strong>Enviar
+            respuestas</strong>. Sus respuestas serán analizadas por la aplicación para proporcionarle recomendaciones
+        personalizadas sobre carreras y
+        universidades que podrían ser adecuadas para usted.</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button id="enabled-button" [mat-dialog-close]="true" cdkFocusInitial>Continuar</button>
+</mat-dialog-actions>
+
