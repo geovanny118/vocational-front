@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { HollandTestService } from '../../services';
 
 @Component({
   selector: 'app-test-result',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './test-result.component.scss'
 })
 export class TestResultComponent {
-
+  hollandTestService: HollandTestService = inject(HollandTestService);
 }

@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angul
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Usuario } from 'src/app/modules/authentication/models';
-import { HollandQuestion } from '../../models';
+import { HollandQuestion, HollandResult } from '../../models';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -85,6 +85,16 @@ export class TestApplicationComponent {
 
   sendAnswer(): void {
     console.log(this.answers);
+    this._hollandTestServices.submitAnswers(this.answers).subscribe(
+      (results: HollandResult[]) => {
+        console.log('Respuestas del test:', results);
+        this._hollandTestServices.currentHollandResultSignal.set(results);
+        this._router.navigateByUrl('/holland/result');
+      },
+      (error) => {
+        console.error('Error al enviar las respuestas:', error);
+      }
+    );
   }
 
   isAnyCheckboxChecked(): boolean {

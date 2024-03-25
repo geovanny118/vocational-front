@@ -16,7 +16,7 @@ export class HollandTestService {
 
   submitAnswers(answer: number[]): Observable<HollandResult | any> {
     const requestBody = { testQuestion: answer };
-    return this._httpClient.post(`${this._baseUrl}/test-holland/result`, requestBody);
+    return this._httpClient.post(`${this._baseUrl}/test-Holland/result`, requestBody);
   }
 
   getQuestions(): Observable<HollandQuestion[] | any> {
