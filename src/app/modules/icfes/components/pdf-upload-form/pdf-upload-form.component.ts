@@ -49,7 +49,7 @@ export class PdfUploadFormComponent {
   }
 
   clearFileSelection(): void {
-    this.fileInput.nativeElement.value = '';
+    this.fileInput.nativeElement.value = null;
     this.clearSelection();
   }
 
