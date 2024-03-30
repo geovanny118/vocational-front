@@ -80,11 +80,11 @@ export class PdfUploadFormComponent {
       this._icfesServices.uploadPdf(formData).subscribe(
         (response) => {
           console.log('File uploaded successfully:', response);
-          this._snackBar.open('examen subido correctamente', '', { duration: 2000 });
+          this._snackBar.open('examen subido correctamente', '✅', { duration: 2000 });
         },
         (error) => {
           console.error('Error uploading file:', error);
-          this._snackBar.open('archivo no compatible', '', { duration: 2000 });
+          this._snackBar.open('archivo no compatible', '❌', { duration: 2000 });
         }
       );
       this.clearSelection();
