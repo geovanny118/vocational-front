@@ -7,13 +7,22 @@ import { FormControl } from '@angular/forms';
 import { AuthenticationService } from 'src/app/modules/authentication/services';
 import { NgIf, NgClass } from '@angular/common';
 import { IcfesService } from '../../services';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pdf-upload-form',
   standalone: true,
-  imports: [MatFormFieldModule, MatButtonModule, MatInputModule, MatIconModule, NgIf, NgClass],
+  imports: [
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    MatIconModule,
+    NgIf,
+    NgClass,
+    MatSnackBarModule,
+  ],
   templateUrl: './pdf-upload-form.component.html',
-  styleUrl: './pdf-upload-form.component.scss'
+  styleUrl: './pdf-upload-form.component.scss',
 })
 export class PdfUploadFormComponent {
   selectedFileName: string = '';
@@ -22,7 +31,8 @@ export class PdfUploadFormComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
 
   authenticationServices = inject(AuthenticationService);
-  _icfesServices = inject(IcfesService);
+  private _icfesServices = inject(IcfesService);
+  private _snackBar: MatSnackBar = inject(MatSnackBar);
 
   ngOnInit(): void {
     const userId = localStorage.getItem('identificacion');
@@ -33,7 +43,7 @@ export class PdfUploadFormComponent {
         },
         error: () => {
           this.authenticationServices.currentUserSignal.set(null);
-        }
+        },
       });
     }
   }
@@ -68,11 +78,13 @@ export class PdfUploadFormComponent {
       formData.append('file', selectedFile);
       formData.append('identificacion', identification);
       this._icfesServices.uploadPdf(formData).subscribe(
-        response => {
+        (response) => {
           console.log('File uploaded successfully:', response);
+          this._snackBar.open('examen subido correctamente', '', { duration: 2000 });
         },
-        error => {
+        (error) => {
           console.error('Error uploading file:', error);
+          this._snackBar.open('archivo no compatible', '', { duration: 2000 });
         }
       );
       this.clearSelection();
@@ -80,5 +92,4 @@ export class PdfUploadFormComponent {
       console.log('No se ha seleccionado ningún archivo.');
     }
   }
-
 }
