@@ -8,6 +8,7 @@ import { AuthenticationService } from 'src/app/modules/authentication/services';
 import { NgIf, NgClass } from '@angular/common';
 import { IcfesService } from '../../services';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Results, IcfesResult } from '../../models';
 
 @Component({
   selector: 'app-pdf-upload-form',
@@ -28,6 +29,15 @@ export class PdfUploadFormComponent {
   selectedFileName: string = '';
   isButtonDisabled: boolean = true;
   fileFormControl = new FormControl();
+  results: Results = {
+    lectura_critica: '',
+    matematicas: '',
+    sociales: '',
+    ciencias_naturales: '',
+    ingles: '',
+    razonamiento: '',
+    competencias: ''
+  };
   @ViewChild('fileInput') fileInput!: ElementRef;
 
   authenticationServices = inject(AuthenticationService);
@@ -80,6 +90,8 @@ export class PdfUploadFormComponent {
       this._icfesServices.uploadPdf(formData).subscribe(
         (response) => {
           console.log('File uploaded successfully:', response);
+          this.mapMaterias(response);
+          console.log(this.results);
           this._snackBar.open('El examen se ha cargado exitosamente.', '✅', { duration: 2000 });
         },
         (error) => {
@@ -91,5 +103,33 @@ export class PdfUploadFormComponent {
     } else {
       console.log('No se ha seleccionado ningún archivo.');
     }
+  }
+
+  mapMaterias(responseData: IcfesResult): void {
+    responseData.listaMaterias.forEach(materia => {
+      switch (materia.prueba) {
+        case 'LECTURA CRÍTICA':
+          this.results.lectura_critica = materia.puntaje;
+          break;
+        case 'MATEMÁTICAS':
+          this.results.matematicas = materia.puntaje;
+          break;
+        case 'SOCIALES Y CIUDADANAS':
+          this.results.sociales = materia.puntaje;
+          break;
+        case 'CIENCIAS NATURALES':
+          this.results.ciencias_naturales = materia.puntaje;
+          break;
+        case 'INGLÉS':
+          this.results.ingles = materia.nivel;
+          break;
+        case 'RAZONAMIENTO CUANTITATIVO':
+          this.results.razonamiento = materia.puntaje;
+          break;
+        case 'COMPETENCIAS CIUDADANAS':
+          this.results.competencias = materia.puntaje;
+          break;
+      }
+    });
   }
 }
