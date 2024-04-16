@@ -1,2 +1,52 @@
 <app-pdf-upload-form></app-pdf-upload-form>
-<p>icfes-score-viewer works!</p>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="lectura crítica">
+        <th mat-header-cell *matHeaderCellDef> lectura crítica </th>
+        <td mat-cell *matCellDef="let element"> {{element?.lectura_critica}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="matemáticas">
+        <th mat-header-cell *matHeaderCellDef> matemáticas </th>
+        <td mat-cell *matCellDef="let element"> {{element?.matematicas}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="sociales y ciudadanas">
+        <th mat-header-cell *matHeaderCellDef> sociales y ciudadanas </th>
+        <td mat-cell *matCellDef="let element"> {{element?.sociales}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="ciencias naturales">
+        <th mat-header-cell *matHeaderCellDef> ciencias naturales </th>
+        <td mat-cell *matCellDef="let element"> {{element?.ciencias_naturales}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="inglés">
+        <th mat-header-cell *matHeaderCellDef> inglés </th>
+        <td mat-cell *matCellDef="let element"> {{element?.ingles}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="razonamiento cuantitativo">
+        <th mat-header-cell *matHeaderCellDef> razonamiento cuantitativo </th>
+        <td mat-cell *matCellDef="let element"> {{element?.razonamiento}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="competencias ciudadanas">
+        <th mat-header-cell *matHeaderCellDef> competencias ciudadanas </th>
+        <td mat-cell *matCellDef="let element"> {{element?.competencias}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
