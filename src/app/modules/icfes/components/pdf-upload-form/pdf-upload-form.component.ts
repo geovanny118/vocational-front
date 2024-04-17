@@ -29,19 +29,20 @@ export class PdfUploadFormComponent {
   selectedFileName: string = '';
   isButtonDisabled: boolean = true;
   fileFormControl = new FormControl();
-  results: Results = {
+  resultIcfes: Results = {
     lectura_critica: '',
     matematicas: '',
     sociales: '',
     ciencias_naturales: '',
     ingles: '',
     razonamiento: '',
-    competencias: ''
+    competencias: '',
   };
+
   @ViewChild('fileInput') fileInput!: ElementRef;
 
-  authenticationServices = inject(AuthenticationService);
-  private _icfesServices = inject(IcfesService);
+  authenticationServices: AuthenticationService = inject(AuthenticationService);
+  private _icfesServices: IcfesService = inject(IcfesService);
   private _snackBar: MatSnackBar = inject(MatSnackBar);
 
   ngOnInit(): void {
@@ -89,14 +90,21 @@ export class PdfUploadFormComponent {
       formData.append('identificacion', identification);
       this._icfesServices.uploadPdf(formData).subscribe(
         (response) => {
-          console.log('File uploaded successfully:', response);
+          //console.log('File uploaded successfully:', response);
           this.mapMaterias(response);
-          console.log(this.results);
-          this._snackBar.open('El examen se ha cargado exitosamente.', '✅', { duration: 2000 });
+          //console.log(this.resultIcfes);
+          const results: Results[] = [this.resultIcfes];
+          console.log(results);
+          this._icfesServices.updateResults(results);
+          this._snackBar.open('El examen se ha cargado exitosamente.', '✅', {
+            duration: 2000,
+          });
         },
         (error) => {
           console.error('Error uploading file:', error);
-          this._snackBar.open('El archivo no es compatible', '❌', { duration: 3000 });
+          this._snackBar.open('El archivo no es compatible', '❌', {
+            duration: 3000,
+          });
         }
       );
       this.clearSelection();
@@ -106,28 +114,28 @@ export class PdfUploadFormComponent {
   }
 
   mapMaterias(responseData: IcfesResult): void {
-    responseData.listaMaterias.forEach(materia => {
+    responseData.listaMaterias.forEach((materia) => {
       switch (materia.prueba) {
         case 'LECTURA CRÍTICA':
-          this.results.lectura_critica = materia.puntaje;
+          this.resultIcfes.lectura_critica = materia.puntaje;
           break;
         case 'MATEMÁTICAS':
-          this.results.matematicas = materia.puntaje;
+          this.resultIcfes.matematicas = materia.puntaje;
           break;
         case 'SOCIALES Y CIUDADANAS':
-          this.results.sociales = materia.puntaje;
+          this.resultIcfes.sociales = materia.puntaje;
           break;
         case 'CIENCIAS NATURALES':
-          this.results.ciencias_naturales = materia.puntaje;
+          this.resultIcfes.ciencias_naturales = materia.puntaje;
           break;
         case 'INGLÉS':
-          this.results.ingles = materia.nivel;
+          this.resultIcfes.ingles = materia.nivel;
           break;
         case 'RAZONAMIENTO CUANTITATIVO':
-          this.results.razonamiento = materia.puntaje;
+          this.resultIcfes.razonamiento = materia.puntaje;
           break;
         case 'COMPETENCIAS CIUDADANAS':
-          this.results.competencias = materia.puntaje;
+          this.resultIcfes.competencias = materia.puntaje;
           break;
       }
     });

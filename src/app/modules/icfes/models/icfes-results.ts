@@ -1,7 +1,7 @@
 import { Materia } from "./materia";
 
 export interface IcfesResult {
-    nombreEstudfante: string;
+    nombreEstudiante: string;
     identificacionUsuario: string;
     registroExamen: string;
     fechaExamen: string;

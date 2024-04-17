@@ -1,47 +1,43 @@
 <app-pdf-upload-form></app-pdf-upload-form>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-    <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
+    <!-- Lectura Crítica Column -->
     <ng-container matColumnDef="lectura crítica">
         <th mat-header-cell *matHeaderCellDef> lectura crítica </th>
         <td mat-cell *matCellDef="let element"> {{element?.lectura_critica}} </td>
     </ng-container>
 
-    <!-- Name Column -->
+    <!-- Matemáticas Column -->
     <ng-container matColumnDef="matemáticas">
         <th mat-header-cell *matHeaderCellDef> matemáticas </th>
         <td mat-cell *matCellDef="let element"> {{element?.matematicas}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
+    <!-- Sociales y ciudadanas Column -->
     <ng-container matColumnDef="sociales y ciudadanas">
         <th mat-header-cell *matHeaderCellDef> sociales y ciudadanas </th>
         <td mat-cell *matCellDef="let element"> {{element?.sociales}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
+    <!-- Ciencias naturales  Column -->
     <ng-container matColumnDef="ciencias naturales">
         <th mat-header-cell *matHeaderCellDef> ciencias naturales </th>
         <td mat-cell *matCellDef="let element"> {{element?.ciencias_naturales}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
+    <!-- Inglés Column -->
     <ng-container matColumnDef="inglés">
         <th mat-header-cell *matHeaderCellDef> inglés </th>
         <td mat-cell *matCellDef="let element"> {{element?.ingles}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
+    <!-- Razonamiento cuantitativo Column -->
     <ng-container matColumnDef="razonamiento cuantitativo">
         <th mat-header-cell *matHeaderCellDef> razonamiento cuantitativo </th>
         <td mat-cell *matCellDef="let element"> {{element?.razonamiento}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
+    <!-- Competencias ciudadanas Column -->
     <ng-container matColumnDef="competencias ciudadanas">
         <th mat-header-cell *matHeaderCellDef> competencias ciudadanas </th>
         <td mat-cell *matCellDef="let element"> {{element?.competencias}} </td>
