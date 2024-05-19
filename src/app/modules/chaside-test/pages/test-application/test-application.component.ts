@@ -19,13 +19,13 @@ import { NgClass, NgIf } from '@angular/common';
   selector: 'app-test-application',
   standalone: true,
   imports: [
-    ReactiveFormsModule, 
-    MatButtonModule, 
-    MatInputModule, 
-    MatFormFieldModule, 
-    MatCardModule, 
-    MatRadioModule, 
-    NgxPaginationModule, 
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatRadioModule,
+    NgxPaginationModule,
     MatProgressBarModule,
     NgClass,
     MatSnackBarModule,
@@ -38,14 +38,14 @@ export class TestApplicationComponent {
   private _chasideTestServices: ChasideTestService = inject(ChasideTestService);
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private _router: Router = inject(Router);
-  private _snackBar: MatSnackBar = inject(MatSnackBar); 
+  private _snackBar: MatSnackBar = inject(MatSnackBar);
   authenticationServices = inject(AuthenticationService);
   user: Usuario | undefined;
   chasideTestForm: FormGroup = new FormGroup({});
   answers: number[] = [];
   questions: ChasidePregunta[] = [];
   currentPage: number = 1;
-  progressBarValue:number = 0;
+  progressBarValue: number = 0;
   changePage: boolean = false;
 
   // Objeto para mantener un registro del estado de cada grupo de radio-buttons
@@ -80,20 +80,20 @@ export class TestApplicationComponent {
     return this._formBuilder.group(formControls);
   }
 
-  sendAnswer(): void {   
+  sendAnswer(): void {
     this.answers = [];
 
     for (let i = 0; i < this.questions.length; i++) {
-      const answerControl = this.chasideTestForm.get(`answer_${i}`); 
+      const answerControl = this.chasideTestForm.get(`answer_${i}`);
       if (answerControl instanceof FormControl && answerControl.value === 'si') {
         this.answers.push(i);
       }
     }
 
-    //console.log('Respuestas enviadas:', this.answers);
+    console.log('Respuestas enviadas:', this.answers);
     this._chasideTestServices.submitAnswers(this.answers).subscribe(
-      (results: ChasideResult[]) => {
-        //console.log('Respuestas del test:', results);
+      (results: ChasideResult) => {
+        console.log('Respuestas del test:', results);
         this._chasideTestServices.currentChasideResultSignal.set(results);
         this._router.navigateByUrl('/chaside/result');
       },
@@ -109,7 +109,7 @@ export class TestApplicationComponent {
       this.progressBarValue = 100;
     }
     if (!this.radioGroupState[groupName]) {
-      this.progressBarValue += (100/98);
+      this.progressBarValue += (100 / 98);
       // Marcar este grupo como seleccionado para evitar incrementar más de una vez
       this.radioGroupState[groupName] = true;
     }
@@ -119,7 +119,7 @@ export class TestApplicationComponent {
     this.changePage = true;
     if (this.isPageComplete(event)) {
       this.currentPage = event;
-      this.changePage =  false;
+      this.changePage = false;
     }
   }
 
@@ -130,13 +130,13 @@ export class TestApplicationComponent {
     let unansweredQuestions: number[] = [];
 
     // Si se dirige a la pagina 1, evita que startIndex tome numeros negativos
-    if(currentPage === 0 && page === 1){
-      startIndex = 0; 
-      endIndex = 10; 
+    if (currentPage === 0 && page === 1) {
+      startIndex = 0;
+      endIndex = 10;
     }
     else {
-      startIndex = (currentPage - 1) * 10; 
-      endIndex = Math.min(startIndex + 10, this.questions.length); 
+      startIndex = (currentPage - 1) * 10;
+      endIndex = Math.min(startIndex + 10, this.questions.length);
     }
 
     for (let i = startIndex; i < endIndex; i++) {
@@ -154,7 +154,7 @@ export class TestApplicationComponent {
     return true; // Retorna verdadero si todas las respuestas están seleccionadas
   }
 
-  showMessageUnansweredQuestions(unansweredQuestions: number[]): void{
+  showMessageUnansweredQuestions(unansweredQuestions: number[]): void {
     let mensaje = 'Pregunta(s) sin responder: ';
     unansweredQuestions.forEach((indice, index) => {
       mensaje += `[${indice}] `; // Agrega cada pregunta sin responder al mensaje

@@ -1,6 +1,10 @@
+import { CardsUniversidades } from './cards-universidades';
+
 export interface ChasideResult {
-    llave: string;
-    resultado: number;
-    areaInteres: string;
-    caracteristicas?: string;
+    cardsUniversidades?: CardsUniversidades[] | null;
+    respuestaBackUp?: string | null;
+    categorias: string;
+    test: string;
+    cantidadUniversidades: number;
+    status: boolean;
 }
