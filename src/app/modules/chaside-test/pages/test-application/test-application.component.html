@@ -9,55 +9,44 @@
                             {{question.ordenPregunta}}. {{ question.descripcionPregunta }}
                         </div>
                         <div>
-                            <mat-radio-group 
-                            [formControlName]="'answer_' + question.ordenPregunta" 
-                            id="answer_{{question.ordenPregunta}}" 
-                            aria-label="Select an option" 
-                            (change)="onRadioButtonChange($event, 'answer_' + question.ordenPregunta)">
+                            <mat-radio-group [formControlName]="'answer_' + question.ordenPregunta"
+                                id="answer_{{question.ordenPregunta}}" aria-label="Select an option"
+                                (change)="onRadioButtonChange($event, 'answer_' + question.ordenPregunta)">
                                 <mat-radio-button value="si" for="si">Si</mat-radio-button>
                                 <mat-radio-button value="no" for="no">No</mat-radio-button>
                             </mat-radio-group>
                         </div>
-                        @if(chasideTestForm.get("answer_" + question.ordenPregunta)?.hasError('required') && 
-                            chasideTestForm.get("answer_" + question.ordenPregunta)?.untouched &&
-                            chasideTestForm.get("answer_" + question.ordenPregunta)?.pristine &&
-                            changePage
+                        @if(chasideTestForm.get("answer_" + question.ordenPregunta)?.hasError('required') &&
+                        chasideTestForm.get("answer_" + question.ordenPregunta)?.untouched &&
+                        chasideTestForm.get("answer_" + question.ordenPregunta)?.pristine &&
+                        changePage
                         ){
-                            <div id="error-message">Debe elegir una opcion para continuar</div>
+                        <div id="error-message">Debe elegir una opcion para continuar</div>
                         }
                     </mat-card-content>
                 </mat-card>
             </div>
         </div>
         } @empty {
-            Empty list of questions
+        Empty list of questions
         }
         <div id="progress-bar-container">
-            <mat-progress-bar 
-                id="progresss-bar-custom" 
-                mode="determinate"
-                [value]="progressBarValue">
+            <mat-progress-bar id="progresss-bar-custom" mode="determinate" [value]="progressBarValue">
             </mat-progress-bar>
         </div>
         <div id="paginator-container">
-            <pagination-controls 
-                (pageChange)="onPageChange($event)" 
-                previousLabel="anterior" 
-                nextLabel="siguiente">
+            <pagination-controls (pageChange)="onPageChange($event)" previousLabel="anterior" nextLabel="siguiente">
             </pagination-controls>
         </div>
         <div>
-            <button mat-raised-button 
-            class="enabled-button" 
-            type="submit" 
-            [disabled]="!chasideTestForm.valid" 
-            [ngClass]="{
+            <button mat-raised-button class="enabled-button" type="submit" [disabled]="!chasideTestForm.valid"
+                [ngClass]="{
                 'enabled-button': chasideTestForm.valid,
                 'disabled-button': !chasideTestForm.valid
             }">Enviar respuestas</button>
         </div>
     </form>
+    <div *ngIf="loading" id="spinner-container">
+        <mat-spinner></mat-spinner>
+    </div>
 </div>
-
-
-

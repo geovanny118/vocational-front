@@ -4,16 +4,16 @@
             <div class="question-card">
                 <mat-card>
                     <mat-card-content>
-                    @for (question of questions | paginate: { itemsPerPage: 9, currentPage: currentPage } ; track question) {
+                        @for (question of questions | paginate: { itemsPerPage: 9, currentPage: currentPage } ; track
+                        question) {
                         <div id="question">
                             <div>
                                 {{question.ordenPregunta}}. {{ question.descripcionPregunta }}
                             </div>
                             <div>
-                                <mat-checkbox [formControlName]="'answer_' + question.ordenPregunta" 
-                            id="answer_{{question.ordenPregunta}}" 
-                            aria-label="Select an option" 
-                            (change)="onCheckBoxChange($event, 'answer_' + question.ordenPregunta)"></mat-checkbox>
+                                <mat-checkbox [formControlName]="'answer_' + question.ordenPregunta"
+                                    id="answer_{{question.ordenPregunta}}" aria-label="Select an option"
+                                    (change)="onCheckBoxChange($event, 'answer_' + question.ordenPregunta)"></mat-checkbox>
                             </div>
                         </div>
                         @if(hollandTestForm.get("answer_" + question.ordenPregunta)?.hasError('required') &&
@@ -23,9 +23,9 @@
                         ){
                         <div id="error-message">Debe elegir una opcion para continuar</div>
                         }
-                    } @empty {
-                    Empty list of questions
-                    }
+                        } @empty {
+                        Empty list of questions
+                        }
                     </mat-card-content>
                 </mat-card>
             </div>
@@ -42,4 +42,7 @@
             }">Enviar respuestas</button>
         </div>
     </form>
+    <div *ngIf="loading" id="spinner-container">
+        <mat-spinner></mat-spinner>
+    </div>
 </div>
