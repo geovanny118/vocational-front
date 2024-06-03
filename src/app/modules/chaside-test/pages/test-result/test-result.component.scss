@@ -1,0 +1,10 @@
+.card-container {
+  display: flex;
+  justify-content: start; /* Centra las tarjetas horizontalmente */
+  flex-wrap: wrap; /* Permite que las tarjetas pasen a la siguiente línea si es necesario */
+}
+
+mat-card {
+  margin: 10px; /* Añade un poco de espacio entre las tarjetas */
+  width: 300px; /* Ajusta el ancho de las tarjetas */
+}
