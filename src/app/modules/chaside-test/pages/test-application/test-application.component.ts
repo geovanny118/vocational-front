@@ -77,14 +77,15 @@ export class TestApplicationComponent {
   initializeForm(): FormGroup {
     const formControls: { [key: string]: FormControl } = {};
     this.questions.forEach((question, index) => {
-      //formControls[`answer_${index + 1}`] = new FormControl(''); //--- deshabilita validación, solo para pruebas
-      formControls[`answer_${index + 1}`] = new FormControl('', Validators.required);
+      formControls[`answer_${index + 1}`] = new FormControl(''); //--- deshabilita validación, solo para pruebas
+      //formControls[`answer_${index + 1}`] = new FormControl('', Validators.required);
     });
     return this._formBuilder.group(formControls);
   }
 
   sendAnswer(): void {
-    this.answers = [];
+    //this.answers = [];
+    this.answers = [1, 2, 3, 7, 11, 14, 15, 18, 21, 22, 26, 28, 31, 32, 33, 37, 41, 42, 44, 47, 48, 49, 51, 52, 53, 57, 58, 59, 63, 64, 66, 67, 68, 71, 72, 73, 76, 77, 79, 81, 82, 86, 87, 89, 90, 91, 92, 95, 96, 97]; //--- descomentar solo para pruebas
 
     for (let i = 0; i < this.questions.length; i++) {
       const answerControl = this.chasideTestForm.get(`answer_${i}`);

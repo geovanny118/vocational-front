@@ -6,11 +6,15 @@
 <br />
 }
 -->
-<h3>{{test}}</h3>
-<p>{{status}}</p>
-<p>{{categorias}}</p>
-<p>{{cantidadUniversidades}}</p>
-@for(universidad of cardsUniversidades; track universidad){
-<h3>{{universidad?.titulo}}</h3>
-<p>{{universidad?.semestres}}</p>
-}
+<div class="card-container">
+    @for(categoria of categorias; track categoria){
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{categoria}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-actions>
+            <button mat-button>Ver mas detalles</button>
+        </mat-card-actions>
+    </mat-card>
+    }
+</div>
