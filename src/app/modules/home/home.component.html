@@ -13,16 +13,16 @@
     <header class="header">
         <div class="menu container">
             <a href="#" class="logo">Logo</a>
-            <input type="checkbox" id="menu"/>
+            <input type="checkbox" id="menu" />
             <label for="menu">
                 <img src="assets/img/home/menu.png" class="menu-icono" alt="">
             </label>
 
             <nav class="navbar">
                 <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Informacion</a></li>
-                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#informacion" (click)="scrollToSection($event, 'informacion')">Informacion</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
                     <li><a [routerLink]="['/authentication/login']">Login</a></li>
                 </ul>
             </nav>
@@ -116,7 +116,7 @@
         </div>
     </main>
 
-    <section class="general">
+    <section class="general" id="informacion">
         <div class="general-1">
             <h2>Totam similique</h2>
             <p>

@@ -8,6 +8,7 @@ import { Usuario } from 'src/app/modules/authentication/models';
 import { HollandQuestion, HollandResult } from '../../models';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -27,7 +28,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     NgClass,
     MatSnackBarModule,
     NgIf,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './test-application.component.html',
   styleUrl: './test-application.component.scss'
@@ -45,6 +47,7 @@ export class TestApplicationComponent {
   changePage: boolean = true;
   currentPage: number = 1;
   isCheckboxSelected: boolean = false;
+  loading: boolean = false;
 
   // Objeto para mantener un registro del estado de cada grupo de radio-buttons
   checkboxGroupState: { [key: string]: boolean } = {};
@@ -85,11 +88,14 @@ export class TestApplicationComponent {
 
   sendAnswer(): void {
     console.log(this.answers);
+    this.loading = true;
     this._hollandTestServices.submitAnswers(this.answers).subscribe(
       (results: HollandResult[]) => {
         console.log('Respuestas del test:', results);
         this._hollandTestServices.currentHollandResultSignal.set(results);
-        this._router.navigateByUrl('/holland/result');
+        this._router.navigateByUrl('/holland/result').then(() => {
+          this.loading = false;
+        });
       },
       (error) => {
         console.error('Error al enviar las respuestas:', error);
@@ -109,8 +115,8 @@ export class TestApplicationComponent {
     const results: number[] = [];
     let sumGroup = 0;
 
-    for (let i = 0; i < 54; i++) { 
-      if (this.checkboxGroupState['answer_' + (i + 1)] === true) { 
+    for (let i = 0; i < 54; i++) {
+      if (this.checkboxGroupState['answer_' + (i + 1)] === true) {
         sumGroup++;
       }
 

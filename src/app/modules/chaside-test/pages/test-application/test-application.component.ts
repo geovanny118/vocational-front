@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChasidePregunta, ChasideResult } from '../../models';
 import { Router } from '@angular/router';
@@ -29,7 +30,8 @@ import { NgClass, NgIf } from '@angular/common';
     MatProgressBarModule,
     NgClass,
     MatSnackBarModule,
-    NgIf
+    NgIf,
+    MatProgressSpinnerModule
   ],
   templateUrl: './test-application.component.html',
   styleUrl: './test-application.component.scss'
@@ -47,6 +49,7 @@ export class TestApplicationComponent {
   currentPage: number = 1;
   progressBarValue: number = 0;
   changePage: boolean = false;
+  loading: boolean = false;
 
   // Objeto para mantener un registro del estado de cada grupo de radio-buttons
   radioGroupState: { [key: string]: boolean } = {};
@@ -91,11 +94,14 @@ export class TestApplicationComponent {
     }
 
     console.log('Respuestas enviadas:', this.answers);
+    this.loading = true;
     this._chasideTestServices.submitAnswers(this.answers).subscribe(
       (results: ChasideResult) => {
         console.log('Respuestas del test:', results);
         this._chasideTestServices.currentChasideResultSignal.set(results);
-        this._router.navigateByUrl('/chaside/result');
+        this._router.navigateByUrl('/chaside/result').then(() => {
+          this.loading = false;
+        });
       },
       (error) => {
         console.error('Error al enviar las respuestas:', error);
