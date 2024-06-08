@@ -1,19 +1,29 @@
 <mat-toolbar color="primary">
-  <div>
-    <mat-icon aria-hidden="false" aria-label="Example school icon" fontIcon="school"></mat-icon>
-  </div>
   @if(showTitleSignal()) {
-    <div>
-      <h1>Vocational</h1>
-    </div>
+    <header class="header">
+      <div class="menu container">
+        <a href="#" class="logo">Logo</a>
+        <input type="checkbox" id="menu"/>
+        <label for="menu">
+            <img src="assets/img/home/menu.png" class="menu-icono" alt="">
+        </label>
+  
+        <nav class="navbar">
+            <ul>
+                <li><a [routerLink]="['/authentication/login']">Login</a></li>
+                <li><a [routerLink]="['/authentication/registration']">Registrarse</a></li>
+            </ul>
+        </nav>
+      </div>
+    </header>
   } @else {
     <div id="user-options-container">
       @if(isLoggedIn()) {
         <div id="username"> {{ authenticationService.currentUserSignal()?.nombres }}</div>
         <button mat-button (click)="logout()" routerLinkActive="active-button">Cerrar Sesión</button>
       } @else {
-        <button *ngIf="!isLoggedIn()" mat-button [routerLink]="'/home'" routerLinkActive="active-button">Inicio</button>
-        <button mat-button *ngIf="!isLoggedIn()" [routerLink]="'/authentication'" routerLinkActive="active-button">Log In</button>
+        <button class="boton-menu" mat-button *ngIf="!isLoggedIn()" [routerLink]="'/home'" routerLinkActive="active-button">Inicio</button>
+        <button class="boton-menu" mat-button *ngIf="!isLoggedIn()" [routerLink]="'/authentication'" routerLinkActive="active-button">Log In</button>
       }
     </div>
   }
