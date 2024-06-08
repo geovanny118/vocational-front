@@ -1,19 +1,19 @@
 <h1>Resultados:</h1>
-<!--
-@for(result of chasideTestService.currentChasideResultSignal(); track result){
-<h3>{{ result?.cantidadUniversidades }}</h3>
-<p>{{ result?.categorias }}</p>
-<br />
-}
--->
 <div class="card-container">
     @for(categoria of categorias; track categoria){
     <mat-card>
-        <mat-card-header>
+        <img mat-card-image [src]="getImageUrl(categoria)" alt="Imagen de {{categoria}}" class="card-image">
+        <mat-card-header class="center-title">
             <mat-card-title>{{categoria}}</mat-card-title>
         </mat-card-header>
+        <mat-card-content>
+            <p> {{ getDescription(categoria) }} </p>
+        </mat-card-content>
         <mat-card-actions>
-            <button mat-button>Ver mas detalles</button>
+            <button
+                class="flex mx-auto mt-10 w-full justify-center text-white bg-[#2c5cae] border-0 py-2 px-8 focus:outline-none hover:bg-blue-500 rounded text-lg">Ver
+                mas detalles
+            </button>
         </mat-card-actions>
     </mat-card>
     }
