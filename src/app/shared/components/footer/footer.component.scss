@@ -1,59 +1,59 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
 
-.container{
-    max-width: 1100px;
-    margin: 0 auto;
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
-.btn-1{
-    display: inline-block;
-    padding: 11px 35px;
-    background-color: #2c5cae;
-    color: #F9FAFC;
-    text-transform: uppercase;
+.btn-1 {
+  display: inline-block;
+  padding: 11px 35px;
+  background-color: #2c5cae;
+  color: #f9fafc;
+  text-transform: uppercase;
 }
 
-.btn-1:hover{
-    background-color: #4299e1;
+.btn-1:hover {
+  background-color: #4299e1;
 }
 
-.footer{
-    padding-top: 35px;
-    background-color: #111827;
+.footer {
+  padding-top: 35px;
+  background-color: #111827;
 }
 
 a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
 }
 
 span {
-    margin-left: 0.75rem;
-    font-size: 1.25rem;
-    font-size: small;
-    color: #E1E2E6;
+  margin-left: 0.75rem;
+  font-size: 1.25rem;
+  font-size: small;
+  color: #e1e2e6;
 }
 
 h3 {
-    margin-left: 0.75rem;
-    color: #E1E2E6;
+  margin-left: 0.75rem;
+  color: #e1e2e6;
 }
 
 .container2 {
-    padding: 1rem;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
+  padding: 1rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
 }
 
-.container2 img{
-    width: 55px;
-    margin-bottom: 5px;
+.container2 img {
+  width: 55px;
+  margin-bottom: 5px;
 }
 
 ul {
-    list-style-type: none; /* Esto elimina los puntos de la lista */
+  list-style-type: none; /* Esto elimina los puntos de la lista */
 }

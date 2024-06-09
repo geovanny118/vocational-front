@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChasidePregunta, ChasideResult } from '../../models';
 import { Router } from '@angular/router';
@@ -19,17 +20,18 @@ import { NgClass, NgIf } from '@angular/common';
   selector: 'app-test-application',
   standalone: true,
   imports: [
-    ReactiveFormsModule, 
-    MatButtonModule, 
-    MatInputModule, 
-    MatFormFieldModule, 
-    MatCardModule, 
-    MatRadioModule, 
-    NgxPaginationModule, 
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatCardModule,
+    MatRadioModule,
+    NgxPaginationModule,
     MatProgressBarModule,
     NgClass,
     MatSnackBarModule,
-    NgIf
+    NgIf,
+    MatProgressSpinnerModule
   ],
   templateUrl: './test-application.component.html',
   styleUrl: './test-application.component.scss'
@@ -38,15 +40,16 @@ export class TestApplicationComponent {
   private _chasideTestServices: ChasideTestService = inject(ChasideTestService);
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private _router: Router = inject(Router);
-  private _snackBar: MatSnackBar = inject(MatSnackBar); 
+  private _snackBar: MatSnackBar = inject(MatSnackBar);
   authenticationServices = inject(AuthenticationService);
   user: Usuario | undefined;
   chasideTestForm: FormGroup = new FormGroup({});
   answers: number[] = [];
   questions: ChasidePregunta[] = [];
   currentPage: number = 1;
-  progressBarValue:number = 0;
+  progressBarValue: number = 0;
   changePage: boolean = false;
+  loading: boolean = false;
 
   // Objeto para mantener un registro del estado de cada grupo de radio-buttons
   radioGroupState: { [key: string]: boolean } = {};
@@ -74,28 +77,33 @@ export class TestApplicationComponent {
   initializeForm(): FormGroup {
     const formControls: { [key: string]: FormControl } = {};
     this.questions.forEach((question, index) => {
-      //formControls[`answer_${index + 1}`] = new FormControl(''); //--- deshabilita validación, solo para pruebas
-      formControls[`answer_${index + 1}`] = new FormControl('', Validators.required);
+      formControls[`answer_${index + 1}`] = new FormControl(''); //--- deshabilita validación, solo para pruebas
+      //formControls[`answer_${index + 1}`] = new FormControl('', Validators.required);
     });
     return this._formBuilder.group(formControls);
   }
 
-  sendAnswer(): void {   
-    this.answers = [];
+  sendAnswer(): void {
+    //this.answers = [];
+    //this.answers = [1, 2, 3, 7, 11, 14, 15, 18, 21, 22, 26, 28, 31, 32, 33, 37, 41, 42, 44, 47, 48, 49, 51, 52, 53, 57, 58, 59, 63, 64, 66, 67, 68, 71, 72, 73, 76, 77, 79, 81, 82, 86, 87, 89, 90, 91, 92, 95, 96, 97]; //--- descomentar solo para pruebas
+    this.answers = [1, 12, 53, 71, 91, 49, 61];//--- descomentar solo para pruebas
 
     for (let i = 0; i < this.questions.length; i++) {
-      const answerControl = this.chasideTestForm.get(`answer_${i}`); 
+      const answerControl = this.chasideTestForm.get(`answer_${i}`);
       if (answerControl instanceof FormControl && answerControl.value === 'si') {
         this.answers.push(i);
       }
     }
 
-    //console.log('Respuestas enviadas:', this.answers);
+    console.log('Respuestas enviadas:', this.answers);
+    this.loading = true;
     this._chasideTestServices.submitAnswers(this.answers).subscribe(
-      (results: ChasideResult[]) => {
-        //console.log('Respuestas del test:', results);
+      (results: ChasideResult) => {
+        console.log('Respuestas del test:', results);
         this._chasideTestServices.currentChasideResultSignal.set(results);
-        this._router.navigateByUrl('/chaside/result');
+        this._router.navigateByUrl('/chaside/result').then(() => {
+          this.loading = false;
+        });
       },
       (error) => {
         console.error('Error al enviar las respuestas:', error);
@@ -109,7 +117,7 @@ export class TestApplicationComponent {
       this.progressBarValue = 100;
     }
     if (!this.radioGroupState[groupName]) {
-      this.progressBarValue += (100/98);
+      this.progressBarValue += (100 / 98);
       // Marcar este grupo como seleccionado para evitar incrementar más de una vez
       this.radioGroupState[groupName] = true;
     }
@@ -119,7 +127,7 @@ export class TestApplicationComponent {
     this.changePage = true;
     if (this.isPageComplete(event)) {
       this.currentPage = event;
-      this.changePage =  false;
+      this.changePage = false;
     }
   }
 
@@ -130,13 +138,13 @@ export class TestApplicationComponent {
     let unansweredQuestions: number[] = [];
 
     // Si se dirige a la pagina 1, evita que startIndex tome numeros negativos
-    if(currentPage === 0 && page === 1){
-      startIndex = 0; 
-      endIndex = 10; 
+    if (currentPage === 0 && page === 1) {
+      startIndex = 0;
+      endIndex = 10;
     }
     else {
-      startIndex = (currentPage - 1) * 10; 
-      endIndex = Math.min(startIndex + 10, this.questions.length); 
+      startIndex = (currentPage - 1) * 10;
+      endIndex = Math.min(startIndex + 10, this.questions.length);
     }
 
     for (let i = startIndex; i < endIndex; i++) {
@@ -154,7 +162,7 @@ export class TestApplicationComponent {
     return true; // Retorna verdadero si todas las respuestas están seleccionadas
   }
 
-  showMessageUnansweredQuestions(unansweredQuestions: number[]): void{
+  showMessageUnansweredQuestions(unansweredQuestions: number[]): void {
     let mensaje = 'Pregunta(s) sin responder: ';
     unansweredQuestions.forEach((indice, index) => {
       mensaje += `[${indice}] `; // Agrega cada pregunta sin responder al mensaje

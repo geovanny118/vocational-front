@@ -10,12 +10,16 @@ import { Observable } from 'rxjs';
 export class ChasideTestService {
   private _httpClient: HttpClient = inject(HttpClient);
   private _baseUrl: string = environment.apiBaseUrl;
-  
+
   // undefined: estado inicial | null: sin asignar | ChasideResult resultados
-  currentChasideResultSignal = signal<ChasideResult[] | undefined | null>(undefined);
+  currentChasideResultSignal = signal<ChasideResult | undefined | null>(undefined);
 
   submitAnswers(answer: number[]): Observable<ChasideResult | any> {
-    const requestBody = { testQuestion: answer };
+    const identificacion = localStorage.getItem('identificacion') ?? '';
+    const requestBody = {
+      identificacion: identificacion,
+      testQuestion: answer
+    };
     return this._httpClient.post(`${this._baseUrl}/test-chaside/result`, requestBody);
   }
 
