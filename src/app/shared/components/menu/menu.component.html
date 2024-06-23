@@ -16,6 +16,12 @@
             <mat-list-item>
                 <button mat-button (click)="redirectTo('result')"><mat-icon>pie_chart</mat-icon>Resultados</button>
             </mat-list-item>
+            @if(isAdmin()) {
+            <mat-list-item>
+                <button mat-button
+                    (click)="redirectTo('admin')"><mat-icon>admin_panel_settings</mat-icon>Administrar</button>
+            </mat-list-item>
+            }
         </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content>

@@ -5,6 +5,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
+import { AuthenticationService } from 'src/app/modules/authentication/services';
 
 @Component({
   selector: 'app-menu',
@@ -15,8 +16,13 @@ import { RouterOutlet } from '@angular/router';
 })
 export class MenuComponent {
   router: Router = inject(Router);
+  authenticationService: AuthenticationService = inject(AuthenticationService);
 
   redirectTo(route: string) {
     this.router.navigate([route]);
+  }
+
+  isAdmin(): boolean {
+    return this.authenticationService.isAdmin();
   }
 }

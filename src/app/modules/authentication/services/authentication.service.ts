@@ -12,12 +12,12 @@ export class AuthenticationService {
   private _httpClient: HttpClient = inject(HttpClient);
   private _baseUrl: string = environment.apiBaseUrl;
   private _router: Router = inject(Router);
-  
+
   // undefined: estado inicial | null: no autorizado | Usuario: logueado
   currentUserSignal = signal<Usuario | undefined | null>(undefined);
   // señal para mostrar el loading en la pagina de login
-  loginLoadingSignal = signal<boolean>(false);  
-  
+  loginLoadingSignal = signal<boolean>(false);
+
   login(credentials: LoginCredentials): Observable<UsuarioAutenticado | any> {
     return this._httpClient.post(`${this._baseUrl}/auth/login`, credentials);
   }
@@ -43,5 +43,10 @@ export class AuthenticationService {
     return this._httpClient.get<Usuario>(`${this._baseUrl}/auth/obtain/${userId}`);
   }
 
-  forgotPassword(){}
+  forgotPassword() { }
+
+  isAdmin(): boolean {
+    // Verifica si el usuario es administrador
+    return localStorage.getItem('rol_usuario') === 'ROLE_ADMIN';
+  }
 }
