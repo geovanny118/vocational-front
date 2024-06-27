@@ -13,9 +13,9 @@ import { ImagenesAreaInteres, TextoAreaInteres, ChasideResult } from '../../mode
 })
 export class TestResultComponent {
   chasideTestService: ChasideTestService = inject(ChasideTestService);
-  chasideResult: ChasideResult | undefined | null =
+  chasideResult: ChasideResult[] | undefined | null =
     this.chasideTestService.currentChasideResultSignal();
-  categorias: string[] = [];
+  areasInteres: string[] = [];
 
   readonly imagenesAreasDeInteres: ImagenesAreaInteres = {
     'Área de Ciencias Experimentales':
@@ -52,18 +52,20 @@ export class TestResultComponent {
   };
 
   ngOnInit() {
-    if (this.chasideResult?.categorias) {
-      this.categorias = this.chasideResult.categorias
-        .split(',')
-        .map((categoria) => categoria.trim());
+    if (this.chasideResult) {
+      this.chasideResult.forEach(result => {
+        if (result.areaInteres) {
+          this.areasInteres.push(...result.areaInteres.split(',').map(area => area.trim()));
+        }
+      });
     }
   }
 
-  getImageUrl(categoria: string): string {
-    return this.imagenesAreasDeInteres[categoria] || '';
+  getImageUrl(areaInteres: string): string {
+    return this.imagenesAreasDeInteres[areaInteres] || '';
   }
 
-  getDescription(categoria: string): string {
-    return this.textoAreasDeInteres[categoria] || '';
+  getDescription(areaInteres: string): string {
+    return this.textoAreasDeInteres[areaInteres] || '';
   }
 }

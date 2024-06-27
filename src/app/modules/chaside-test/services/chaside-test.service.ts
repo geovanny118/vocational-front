@@ -12,7 +12,7 @@ export class ChasideTestService {
   private _baseUrl: string = environment.apiBaseUrl;
 
   // undefined: estado inicial | null: sin asignar | ChasideResult resultados
-  currentChasideResultSignal = signal<ChasideResult | undefined | null>(undefined);
+  currentChasideResultSignal = signal<ChasideResult[] | undefined | null>(undefined);
 
   submitAnswers(answer: number[]): Observable<ChasideResult | any> {
     const identificacion = localStorage.getItem('identificacion') ?? '';

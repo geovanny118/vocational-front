@@ -98,7 +98,7 @@ export class TestApplicationComponent {
     console.log('Respuestas enviadas:', this.answers);
     this.loading = true;
     this._chasideTestServices.submitAnswers(this.answers).subscribe(
-      (results: ChasideResult) => {
+      (results: ChasideResult[]) => {
         console.log('Respuestas del test:', results);
         this._chasideTestServices.currentChasideResultSignal.set(results);
         this._router.navigateByUrl('/chaside/result').then(() => {

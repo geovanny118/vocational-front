@@ -1,13 +1,13 @@
 <h1>Resultados:</h1>
 <div class="card-container">
-    @for(categoria of categorias; track categoria){
+    @for(area of areasInteres; track area){
     <mat-card>
-        <img mat-card-image [src]="getImageUrl(categoria)" alt="Imagen de {{categoria}}" class="card-image">
+        <img mat-card-image [src]="getImageUrl(area)" alt="Imagen de {{area}}" class="card-image">
         <mat-card-header class="center-title">
-            <mat-card-title>{{categoria}}</mat-card-title>
+            <mat-card-title>{{area}}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <p> {{ getDescription(categoria) }} </p>
+            <p> {{ getDescription(area) }} </p>
         </mat-card-content>
         <mat-card-actions>
             <button
