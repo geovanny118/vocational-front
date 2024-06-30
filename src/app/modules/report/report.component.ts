@@ -4,6 +4,8 @@ import { MatTableModule } from '@angular/material/table';
 import { NgFor } from '@angular/common';
 import { Usuario } from '../authentication/models';
 import { AuthenticationService } from '../authentication/services';
+import { ReportService } from './services';
+import { Report } from './models';
 
 @Component({
   selector: 'app-report',
@@ -14,9 +16,15 @@ import { AuthenticationService } from '../authentication/services';
 })
 export class ReportComponent {
   user: Usuario | undefined;
-  authenticationServices = inject(AuthenticationService);
+  authenticationServices: AuthenticationService = inject(AuthenticationService);
+  reportServices: ReportService = inject(ReportService);
   displayedColumns: string[] = ['#', 'Tipo de informe', 'Acciones'];
-  reports: string[] = ['Usuarios', 'Universidades', 'Preguntas'];
+  reports: Report[] = [
+    { name: 'Usuarios', apiUrl: 'usuario' },
+    { name: 'Universidades', apiUrl: 'universidad' },
+    { name: 'Preguntas', apiUrl: 'pregunta' },
+    { name: 'Logs', apiUrl: 'logs' }
+  ];
 
   ngOnInit(): void {
     const userId = localStorage.getItem('identificacion');
@@ -30,6 +38,22 @@ export class ReportComponent {
         }
       });
     }
+  }
+
+  downloadReport(report: Report) {
+    this.reportServices.downloadFile(report.apiUrl).subscribe(blob => {
+      const a = document.createElement('a');
+      const objectUrl = URL.createObjectURL(blob);
+      a.href = objectUrl;
+      // Obtener la fecha y hora actual en formato deseado
+      const today = new Date();
+      const date = today.toISOString().slice(0, 10); // Formato YYYY-MM-DD
+      const time = today.toTimeString().slice(0, 8).replace(/:/g, '-'); // Formato HH-MM-SS
+      // Concatenar la fecha y la hora al nombre del archivo
+      a.download = `${report.name}-${date}-${time}.xls`; // Ajusta el nombre y la extensión del archivo según sea necesario
+      a.click();
+      URL.revokeObjectURL(objectUrl);
+    });
   }
 
 }
