@@ -1,5 +1,3 @@
-import { CardsUniversidades } from './cards-universidades';
-
 export interface ChasideResult {
     llave: string;
     resultado: number;

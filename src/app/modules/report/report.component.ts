@@ -17,12 +17,12 @@ import { Report } from './models';
 export class ReportComponent {
   user: Usuario | undefined;
   authenticationServices: AuthenticationService = inject(AuthenticationService);
-  reportServices: ReportService = inject(ReportService);
+  private _reportServices: ReportService = inject(ReportService);
   displayedColumns: string[] = ['#', 'Tipo de informe', 'Acciones'];
   reports: Report[] = [
-    { name: 'Usuarios', apiUrl: 'usuario' },
-    { name: 'Universidades', apiUrl: 'universidad' },
-    { name: 'Preguntas', apiUrl: 'pregunta' },
+    { name: 'Usuarios', apiUrl: 'usuarios' },
+    { name: 'Universidades', apiUrl: 'universidades' },
+    { name: 'Preguntas', apiUrl: 'preguntas' },
     { name: 'Logs', apiUrl: 'logs' }
   ];
 
@@ -41,7 +41,7 @@ export class ReportComponent {
   }
 
   downloadReport(report: Report) {
-    this.reportServices.downloadFile(report.apiUrl).subscribe(blob => {
+    this._reportServices.downloadFile(report.apiUrl).subscribe(blob => {
       const a = document.createElement('a');
       const objectUrl = URL.createObjectURL(blob);
       a.href = objectUrl;

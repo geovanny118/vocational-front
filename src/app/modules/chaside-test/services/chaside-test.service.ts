@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '@environments/environment';
-import { ChasideResult, ChasidePregunta } from '../models';
+import { ChasideResult, ChasidePregunta, University } from '../models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -26,4 +26,15 @@ export class ChasideTestService {
   getQuestions(): Observable<ChasidePregunta[] | any> {
     return this._httpClient.get(`${this._baseUrl}/pregunta/lista-chaside/Chaside`);
   }
+
+  getUniversities(specialty: string): Observable<University | any> {
+    const identificacion = localStorage.getItem('identificacion') ?? '';
+    const requestBody = {
+      identificacion: identificacion,
+      test: 'chaside',
+      especialidad: specialty
+    };
+    return this._httpClient.post(`${this._baseUrl}/university/especiality`, requestBody);
+  }
 }
+

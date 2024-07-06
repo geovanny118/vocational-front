@@ -3,19 +3,27 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ChasideTestService } from 'src/app/modules/chaside-test/services';
 import { ImagenesAreaInteres, TextoAreaInteres, ChasideResult } from '../../models';
+import { Usuario } from 'src/app/modules/authentication/models';
+import { AuthenticationService } from 'src/app/modules/authentication/services';
+import { Router } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'chaside-test-result',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule],
+  imports: [MatCardModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './test-result.component.html',
   styleUrl: './test-result.component.scss',
 })
 export class TestResultComponent {
+  user: Usuario | undefined;
+  authenticationServices = inject(AuthenticationService);
   chasideTestService: ChasideTestService = inject(ChasideTestService);
   chasideResult: ChasideResult[] | undefined | null =
     this.chasideTestService.currentChasideResultSignal();
   areasInteres: string[] = [];
+  loading: boolean = false;
+  private _router: Router = inject(Router);
 
   readonly imagenesAreasDeInteres: ImagenesAreaInteres = {
     'Área de Ciencias Experimentales':
@@ -52,6 +60,18 @@ export class TestResultComponent {
   };
 
   ngOnInit() {
+    const userId = localStorage.getItem('identificacion');
+    if (userId) {
+      this.authenticationServices.getLoggedInUserInfo(userId).subscribe({
+        next: (response) => {
+          this.authenticationServices.currentUserSignal.set(response);
+        },
+        error: () => {
+          this.authenticationServices.currentUserSignal.set(null);
+        }
+      });
+    }
+
     if (this.chasideResult) {
       this.chasideResult.forEach(result => {
         if (result.areaInteres) {
@@ -67,5 +87,17 @@ export class TestResultComponent {
 
   getDescription(areaInteres: string): string {
     return this.textoAreasDeInteres[areaInteres] || '';
+  }
+
+  getUniversities(areaInteres: string): void {
+    this.loading = true;
+    this.chasideTestService.getUniversities(areaInteres).subscribe(
+      (response) => {
+        console.log('Universidades recomendadas:', response);
+        this._router.navigateByUrl('/chaside/universities').then(() => {
+          this.loading = false;
+        });
+      }
+    );
   }
 }
