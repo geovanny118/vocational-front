@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '@environments/environment';
-import { ChasideResult, ChasidePregunta, University } from '../models';
+import { ChasideResult, ChasidePregunta, University, CardsUniversidades } from '../models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,6 +13,12 @@ export class ChasideTestService {
 
   // undefined: estado inicial | null: sin asignar | ChasideResult resultados
   currentChasideResultSignal = signal<ChasideResult[] | undefined | null>(undefined);
+
+  // undefined: estado inicial | null: sin asignar | CardsUniversidades resultados
+  currentUniversitiesResultSignal = signal<CardsUniversidades[] | undefined | null>(undefined);
+
+  // undefined: estado inicial | null: sin asignar | string
+  currentCareerSignal = signal<string | undefined | null>(undefined);
 
   submitAnswers(answer: number[]): Observable<ChasideResult | any> {
     const identificacion = localStorage.getItem('identificacion') ?? '';

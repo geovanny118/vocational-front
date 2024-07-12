@@ -18,6 +18,7 @@ mat-card {
 .center-title {
   display: flex;
   justify-content: center; /* Centra horizontalmente el contenido del header */
+  margin-bottom: 5%;
 }
 
 #spinner-container {
@@ -31,4 +32,9 @@ mat-card {
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.7);
   z-index: 1000;
+}
+
+p {
+  line-height: 1.8;
+  text-align: justify;
 }

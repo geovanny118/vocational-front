@@ -1,1 +1,35 @@
-<p>test-university works!</p>
+<h1 class="center-title">{{career}}</h1>
+<div class="card-container">
+    @for(university of universities; track university){
+    <mat-card>
+        <mat-card-header class="center-title">
+            <mat-card-title>{{university?.titulo}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p> <strong>universidad:</strong> {{ university?.nombreUniversidad }} </p>
+            <p> <strong>valor semestre:</strong> {{ university?.valorSemestre }} </p>
+            <p> <strong>cantidad semestres:</strong> {{ university?.semestres }} </p>
+            <p> <strong>director(a):</strong> {{ university?.directorPrograma }} </p>
+            <p> <strong>modalidad:</strong> {{ university?.modalidad }} </p>
+            <p> <strong>direcciones:</strong> </p>
+            <ul class="aligned-list">
+                @for(direccion of university?.direcciones; track direccion){
+                <li> {{direccion}} </li>
+                }@empty {
+                <li> No hay direcciones disponibles. </li>
+                }
+            </ul>
+            <p> <strong>requisitos:</strong> </p>
+            <ul class="no-bullets">
+                @for(requisito of university?.requisitos; track requisito){
+                <li> {{requisito}} </li>
+                }@empty {
+                <li> No hay requisitos disponibles. </li>
+                }
+            </ul>
+        </mat-card-content>
+    </mat-card>
+    }@empty {
+    <p> No hay resultados disponibles.</p>
+    }
+</div>
