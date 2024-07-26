@@ -49,4 +49,5 @@ export class AuthenticationService {
     // Verifica si el usuario es administrador
     return localStorage.getItem('rol_usuario') === 'ROLE_ADMIN';
   }
+
 }

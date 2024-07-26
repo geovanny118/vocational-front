@@ -1,1 +1,26 @@
-<p>result works!</p>
+<div id="result-container">
+    <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">chaside</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn
+            asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun
+            deep
+            jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
+    </div>
+    <div class="chart-container">
+        <ngx-charts-advanced-pie-chart [view]="view" scheme="vivid" [results]="single" [gradient]="gradient"
+            (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+        </ngx-charts-advanced-pie-chart>
+    </div>
+    <div class="flex flex-col text-center w-full mb-20">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">holland</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn
+            asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun
+            deep
+            jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
+    </div>
+    <div class="chart-container">
+        <ngx-charts-advanced-pie-chart [view]="view" scheme="vivid" [results]="single_two" [gradient]="gradient"
+            (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+        </ngx-charts-advanced-pie-chart>
+    </div>
+</div>

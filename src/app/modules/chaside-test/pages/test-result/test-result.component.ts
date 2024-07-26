@@ -1,4 +1,3 @@
-import { CardsUniversidades } from './../../models/cards-universidades';
 import { Component, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -54,7 +53,7 @@ export class TestResultComponent {
     'Área Administrativa':
       'El Área Administrativa y Financiera se enfoca en la gestión de organizaciones y recursos económicos. Esto incluye la administración de empresas, la contabilidad, las finanzas, el marketing, la economía y la gestión de recursos humanos. Los profesionales en este campo planifican, organizan y controlan las operaciones empresariales, asegurando la eficiencia y la rentabilidad. Trabajan en corporaciones, instituciones financieras, agencias gubernamentales y organizaciones sin fines de lucro.',
     'Área de Ciencias de la Salud':
-      'El Área de Ciencias de la Salud se dedica al bienestar físico y mental de las personas. Incluye disciplinas como la medicina, la enfermería, la nutrición, la fisioterapia, la terapia ocupacional y la salud pública. Los profesionales de la salud diagnostican, tratan y previenen enfermedades, así como promueven hábitos de vida saludables. Trabajan en hospitales, clínicas, centros de rehabilitación y organismos de salud pública.',
+      'El Área de Ciencias de la Salud se dedica al bienestar físico y mental de las personas. Incluye disciplinas como la medicina, la enfermería, la nutrición, la fisioterapia, la terapia ocupacional y la salud pública. Los profesionales de la salud diagnostican, tratan y previenen enfermedades, así como promueven hábitos de vida saludables. Trabajan en hospitales, clínicas, centros de rehabilitación y organismos de salud pública, mejorando la calidad de vida y la esperanza de vida de las comunidades.',
     'Área de Defensa y Seguridad':
       'El Área de Defensa y Seguridad se centra en la enseñanza y formación de profesionales encargados de garantizar la protección y bienestar de la sociedad. Esta área abarca diversos niveles educativos, desde la formación inicial hasta la capacitación avanzada y especialización técnica. Los instructores y expertos en defensa desarrollan estrategias, técnicas y materiales didácticos para impartir conocimientos en tácticas, tecnología y gestión de seguridad. Trabajan en academias militares, instituciones de seguridad pública, centros de formación y organismos gubernamentales, desempeñando un papel crucial en la preparación de los individuos para enfrentar y mitigar amenazas, asegurando la paz y estabilidad en diversas comunidades.',
   };
