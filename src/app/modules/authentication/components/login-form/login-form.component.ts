@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { LoginCredentials } from '../../models';
+import { LoginCredentials, UsuarioAutenticado } from '../../models';
 import { AuthenticationService } from '../../services';
 import { catchError } from 'rxjs';
 
@@ -17,14 +17,14 @@ import { catchError } from 'rxjs';
   styleUrls: ['./login-form.component.scss'],
   standalone: true,
   imports: [
-    MatFormFieldModule, 
-    MatInputModule, 
-    MatIconModule, 
-    MatButtonModule, 
-    ReactiveFormsModule, 
-    RouterModule, 
-    NgClass, 
-    NgIf, 
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    NgClass,
+    NgIf,
     MatSnackBarModule
   ],
 })
@@ -32,7 +32,7 @@ export class LoginFormComponent {
   private _router: Router = inject(Router);
   private _formBuilder: FormBuilder = inject(FormBuilder);
   private _authenticationServices: AuthenticationService = inject(AuthenticationService);
-  private _snackBar: MatSnackBar = inject(MatSnackBar); 
+  private _snackBar: MatSnackBar = inject(MatSnackBar);
 
   // variable utilizada para la accion de mostrar y ocultar contraseñas
   hide: boolean = true;
@@ -46,7 +46,7 @@ export class LoginFormComponent {
     this._authenticationServices.loginLoadingSignal.set(true);
     if (this.loginForm.valid) {
       const credentials: LoginCredentials = this.loginForm.getRawValue();
-      
+
       // servicio para el login
       this._authenticationServices.login(credentials).pipe(
         catchError(HttpErrorResponse => {
@@ -56,7 +56,7 @@ export class LoginFormComponent {
               this.loginForm.get('identificacion')?.reset();
               this.loginForm.get('password')?.reset();
             }
-            if (HttpErrorResponse?.error?.mensajes === 'Contraseña Incorrecta'){
+            if (HttpErrorResponse?.error?.mensajes === 'Contraseña Incorrecta') {
               // Borra el campo de la contraseña
               this.loginForm.get('password')?.reset();
             }
@@ -67,7 +67,12 @@ export class LoginFormComponent {
           }
           return HttpErrorResponse; // Propagar el error para que lo maneje el código que llama a esta función
         })
-      ).subscribe((response) => {
+      ).subscribe((response: UsuarioAutenticado) => {
+        if (response?.authorities.length == 2) {
+          localStorage.setItem('rol_usuario', 'ROLE_ADMIN');
+        } else {
+          localStorage.setItem('rol_usuario', 'ROLE_USER');
+        }
         localStorage.setItem('token', response.token);
         localStorage.setItem('identificacion', response.identificacion);
         this._router.navigateByUrl('/user');

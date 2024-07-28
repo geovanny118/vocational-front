@@ -1,13 +1,12 @@
 .card-container {
   display: flex;
-  justify-content: center; /* Centra horizontalmente las tarjetas */
-  flex-wrap: wrap; /* Permite que las tarjetas pasen a la siguiente línea si es necesario */
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 mat-card {
   margin: 10px; /* Añade un poco de espacio entre las tarjetas */
   width: 500px; /* Ajusta el ancho de las tarjetas */
-  justify-content: space-between;
 }
 
 .card-image {
@@ -22,20 +21,16 @@ mat-card {
   margin-bottom: 5%;
 }
 
-#spinner-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.7);
-  z-index: 1000;
+.no-bullets {
+  list-style-type: none; /* Elimina los puntos */
+  padding-left: 0; /* Elimina el padding izquierdo */
 }
 
 p {
-  line-height: 1.8;
-  text-align: justify;
+  line-height: 2;
+  text-transform: capitalize;
+}
+
+.aligned-list {
+  padding-left: 20px; /* Ajusta este valor según sea necesario */
 }

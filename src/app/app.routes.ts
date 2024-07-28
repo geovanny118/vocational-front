@@ -44,6 +44,12 @@ export const routes: Routes = [
       import('./modules').then((modules) => modules.ResultModule),
     canMatch: [AuthGuard],
   },
+  {
+    path: 'report',
+    loadChildren: () =>
+      import('./modules').then((modules) => modules.ReportModule),
+    canMatch: [AuthGuard],
+  },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', title: 'Not found', component: NotFoundComponent },
 ];

@@ -1,6 +1,33 @@
-<h1>Resultados:</h1>
-@for(result of hollandTestService.currentHollandResultSignal(); track result){
-<h3>{{ result?.areaInteres }}</h3>
-<p>{{ result?.caracteristicas }}</p>
-<br />
+<h1>Personalidades:</h1>
+
+<div class="card-container">
+    @for(result of hollandResults; track result){
+    <mat-card>
+        <img mat-card-image [src]="getImageUrl(result.llave)" alt="Imagen de {{result}}" class="card-image">
+        <mat-card-header class="center-title">
+            <mat-card-title>{{result.llave}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <h3>Áreas de interés:</h3>
+            <p id="area-interes "> {{result.areaInteres}} </p>
+            <br>
+            <h3>Caracteristicas: </h3>
+            <p id="caracteristicas"> {{result.caracteristicas}} </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button
+                class="flex mx-5 mt-10 w-full justify-center text-white bg-[#2c5cae] border-0 py-2 px-8 focus:outline-none hover:bg-blue-500 rounded text-lg"
+                (click)="getUniversities(result.llave)">Ver
+                mas detalles
+            </button>
+        </mat-card-actions>
+    </mat-card>
+    }@empty {
+    <p> No hay resultados disponibles.</p>
+    }
+</div>
+@if(loading){
+<div id="spinner-container">
+    <mat-spinner></mat-spinner>
+</div>
 }

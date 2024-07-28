@@ -1,0 +1,58 @@
+.card-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente las tarjetas */
+  flex-wrap: wrap; /* Permite que las tarjetas pasen a la siguiente línea si es necesario */
+}
+
+mat-card {
+  margin: 10px; /* Añade un poco de espacio entre las tarjetas */
+  width: 500px; /* Ajusta el ancho de las tarjetas */
+  justify-content: space-between;
+}
+
+.card-image {
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+  height: 150px; /* Define una altura fija */
+  object-fit: cover; /* Asegura que la imagen se recorte para llenar el área definida */
+}
+
+.center-title {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el contenido del header */
+  margin-bottom: 5%;
+}
+
+#spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 1000;
+}
+
+p {
+  line-height: 1.8;
+  text-align: justify;
+}
+
+#area-interes {
+  display: -webkit-box; /* Establece el contenedor en modo flex */
+  -webkit-box-orient: vertical; /* Define la orientación vertical */
+  overflow: hidden; /* Oculta el contenido que excede el área del contenedor */
+  text-overflow: ellipsis; /* Aplica los puntos suspensivos al texto truncado */
+  -webkit-line-clamp: 1; /* Limita el número de líneas a mostrar */
+  max-height: 4.5em;
+}
+
+#caracteristicas {
+  display: -webkit-box; /* Establece el contenedor en modo flex */
+  -webkit-box-orient: vertical; /* Define la orientación vertical */
+  overflow: hidden; /* Oculta el contenido que excede el área del contenedor */
+  text-overflow: ellipsis; /* Aplica los puntos suspensivos al texto truncado */
+  -webkit-line-clamp: 5; /* Limita el número de líneas a mostrar */
+}
