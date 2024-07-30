@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from '@environments/environment';
 import { IcfesResult, Results } from '../models';
 
@@ -21,4 +21,13 @@ export class IcfesService {
   updateResults(results: Results[]): void {
     this.resultsSource.next(results);
   }
+
+  getResults(): Observable<Results[]> {
+    const identificacion = localStorage.getItem('identificacion') ?? '';
+    const requestBody = {
+      identificacion: identificacion
+    };
+    return this._httpClient.post<Results[]>(`${this._baseUrl}/icfes/icfes-usuarios/`, requestBody);
+  }
 }
+

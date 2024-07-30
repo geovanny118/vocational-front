@@ -26,7 +26,13 @@ export class IcfesScoreViewerComponent {
   private _icfesServices: IcfesService = inject(IcfesService);
 
   ngOnInit(): void {
+
+    /*
     this._icfesServices.currentResults.subscribe((results) => {
+      this.dataSource = results;
+    });
+    */
+    this._icfesServices.getResults().subscribe((results) => {
       this.dataSource = results;
     });
   }
