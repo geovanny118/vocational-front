@@ -3,7 +3,7 @@ import { Usuario } from 'src/app/modules/authentication/models';
 import { AuthenticationService } from 'src/app/modules/authentication/services';
 import { CardsUniversidades } from '../../models';
 import { MatCardModule } from '@angular/material/card';
-import { ChasideTestService } from '../../services';
+import { HollandTestService } from '../../services';
 
 @Component({
   selector: 'app-test-university',
@@ -15,9 +15,9 @@ import { ChasideTestService } from '../../services';
 export class TestUniversityComponent {
   user: Usuario | undefined;
   authenticationServices = inject(AuthenticationService);
-  chasideTestService: ChasideTestService = inject(ChasideTestService);
-  universities: CardsUniversidades[] | undefined | null = this.chasideTestService.currentUniversitiesResultSignal();
-  career: string | undefined | null = this.chasideTestService.currentCareerSignal();
+  hollandTestService: HollandTestService = inject(HollandTestService);
+  universities: CardsUniversidades[] | undefined | null = this.hollandTestService.currentUniversitiesResultSignal();
+  career: string | undefined | null = this.hollandTestService.currentCareerSignal();
 
   ngOnInit() {
     const userId = localStorage.getItem('identificacion');

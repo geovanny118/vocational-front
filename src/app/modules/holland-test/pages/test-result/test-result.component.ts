@@ -5,8 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Usuario } from 'src/app/modules/authentication/models';
 import { AuthenticationService } from 'src/app/modules/authentication/services';
-import { HollandResult } from '../../models';
+import { HollandResult, University } from '../../models';
 import { ImagenesAreaInteres } from 'src/app/modules/chaside-test/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'holland-test-result',
@@ -21,6 +22,7 @@ export class TestResultComponent {
   hollandTestService: HollandTestService = inject(HollandTestService);
   hollandResults: HollandResult[] | undefined | null = this.hollandTestService.currentHollandResultSignal();
   loading: boolean = false;
+  private _router: Router = inject(Router);
 
   readonly imagenesAreasDeInteres: ImagenesAreaInteres = {
     'Artista':
@@ -56,6 +58,16 @@ export class TestResultComponent {
   }
 
   getUniversities(llave: string): void {
-    //todo implement
+    this.loading = true;
+    this.hollandTestService.getUniversities(llave).subscribe(
+      (response: University) => {
+        console.log('Universidades recomendadas:', response);
+        this.hollandTestService.currentCareerSignal.set(response?.categorias);
+        this.hollandTestService.currentUniversitiesResultSignal.set(response?.cardsUniversidades);
+        this._router.navigateByUrl('/chaside/universities').then(() => {
+          this.loading = false;
+        });
+      }
+    );
   }
 }

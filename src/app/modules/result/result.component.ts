@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { AuthenticationService } from '../authentication/services';
 import { Usuario } from '../authentication/models';
+import { ResultService } from './services';
+import { Results } from './models';
 
 @Component({
   selector: 'app-result',
@@ -10,35 +12,39 @@ import { Usuario } from '../authentication/models';
 export class ResultComponent {
   user: Usuario | undefined;
   authenticationServices = inject(AuthenticationService);
+  resultServices = inject(ResultService);
 
   view: [number, number] = [1000, 700];
 
-  single = [
-    {
-      "name": "Artistico",
-      "value": 8
-    },
-    {
-      "name": "Tecnico",
-      "value": 5
-    },
-    {
-      "name": "Salud",
-      "value": 6
-    }
-  ];
-
-  single_two = [
-    {
-      "name": "Area de Ciencias de la Salud",
-      "value": 30
-    },
-    {
-      "name": "Areas de Enseñanzas Tpecnicas",
-      "value": 70
-    }
-  ];
-
+  /*
+    chasideResults: Results[] = [
+      {
+        "name": "Artistico",
+        "value": 8.0
+      },
+      {
+        "name": "Tecnico",
+        "value": 5.5
+      },
+      {
+        "name": "Salud",
+        "value": 6.7
+      }
+    ];
+  
+    hollandResults: Results[] = [
+      {
+        "name": "Area de Ciencias de la Salud",
+        "value": 30
+      },
+      {
+        "name": "Areas de Enseñanzas Tpecnicas",
+        "value": 70
+      }
+    ];
+  */
+  chasideResults: Results[] = [];
+  hollandResults: Results[] = [];
   // options
   gradient: boolean = true;
   showLegend: boolean = true;
@@ -77,5 +83,27 @@ export class ResultComponent {
         }
       });
     }
+
+    this.resultServices.getResultschaside().subscribe({
+      next: (response) => {
+        console.log('activo chaside');
+        console.log(response);
+        this.chasideResults = response;
+      },
+      error: () => {
+        this.chasideResults = [];
+      }
+    });
+
+    this.resultServices.getResultsHolland().subscribe({
+      next: (responseHolland) => {
+        console.log('activo holland');
+        console.log(responseHolland);
+        this.hollandResults = responseHolland;
+      },
+      error: () => {
+        this.hollandResults = [];
+      }
+    });
   }
 }
