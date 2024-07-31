@@ -57,14 +57,14 @@ export class TestResultComponent {
     return this.imagenesAreasDeInteres[areaInteres] || '';
   }
 
-  getUniversities(llave: string): void {
+  getUniversities(especialidad: string): void {
     this.loading = true;
-    this.hollandTestService.getUniversities(llave).subscribe(
+    this.hollandTestService.getUniversities(especialidad).subscribe(
       (response: University) => {
         console.log('Universidades recomendadas:', response);
         this.hollandTestService.currentCareerSignal.set(response?.categorias);
         this.hollandTestService.currentUniversitiesResultSignal.set(response?.cardsUniversidades);
-        this._router.navigateByUrl('/chaside/universities').then(() => {
+        this._router.navigateByUrl('/holland/universities').then(() => {
           this.loading = false;
         });
       }
