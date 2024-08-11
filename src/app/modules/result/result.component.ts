@@ -3,6 +3,7 @@ import { AuthenticationService } from '../authentication/services';
 import { Usuario } from '../authentication/models';
 import { ResultService } from './services';
 import { Results } from './models';
+import { LegendPosition } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-result',
@@ -14,7 +15,8 @@ export class ResultComponent {
   authenticationServices = inject(AuthenticationService);
   resultServices = inject(ResultService);
 
-  view: [number, number] = [1000, 700];
+  view: [number, number] = [500, 350];
+  legendPosition = LegendPosition.Below;
 
   /*
     chasideResults: Results[] = [

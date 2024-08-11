@@ -1,27 +1,31 @@
 <div id="result-container">
     <div class="flex flex-col text-center w-full mb-20">
-        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">chaside</h1>
-        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
-            ¡Bienvenidos a la presentación de los resultados del Test de CHASIDE! Hoy les 
-            compartiremos los hallazgos principales sobre las competencias y habilidades 
+        <h1 class="text-2xl font-bold capitalize">chaside</h1>
+        <p class="text-base text-gray-700 p-5 mb-10">
+            ¡Bienvenidos a la presentación de los resultados del Test de CHASIDE! Hoy les
+            compartiremos los hallazgos principales sobre las competencias y habilidades
             evaluadas.
         </p>
     </div>
     <div class="chart-container">
-        <ngx-charts-advanced-pie-chart [view]="view" scheme="vivid" [results]="chasideResults" [gradient]="gradient"
-            (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
-        </ngx-charts-advanced-pie-chart>
+        <ngx-charts-pie-chart [view]="view" scheme="vivid" [results]="chasideResults" [labels]="true"
+            [explodeSlices]="true" [legend]="true" legendTitle="Áreas de Competencia" [maxLabelLength]="50"
+            [legendPosition]="legendPosition" [tooltipDisabled]="true" (select)="onSelect($event)"
+            (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+        </ngx-charts-pie-chart>
     </div>
     <div class="flex flex-col text-center w-full mb-20">
-        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">holland</h1>
-        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
-            Acontinuacion compartiremos los hallazgos principales sobre las preferencias 
+        <h1 class="text-2xl font-bold capitalize">holland</h1>
+        <p class="text-base text-gray-700 p-5 mb-10">
+            Acontinuacion compartiremos los hallazgos principales sobre las preferencias
             e intereses profesionales de los participantes.
         </p>
     </div>
     <div class="chart-container">
-        <ngx-charts-advanced-pie-chart [view]="view" scheme="vivid" [results]="hollandResults" [gradient]="gradient"
-            (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
-        </ngx-charts-advanced-pie-chart>
+        <ngx-charts-pie-chart [view]="view" scheme="vivid" [results]="hollandResults" [labels]="true"
+            [explodeSlices]="true" [legend]="true" legendTitle="Tipos de personalidad" [maxLabelLength]="50"
+            [legendPosition]="legendPosition" [tooltipDisabled]="true" (select)="onSelect($event)"
+            (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+        </ngx-charts-pie-chart>
     </div>
 </div>

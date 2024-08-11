@@ -7,7 +7,8 @@
         </mat-card-header>
         <mat-card-content>
             <p> <strong>universidad:</strong> {{ university?.nombreUniversidad }} </p>
-            <p> <strong>valor semestre:</strong> {{ university?.valorSemestre }} </p>
+            <p><strong>Valor semestre:</strong> {{ university?.valorSemestre !== '$ -' ? university.valorSemestre :
+                'Valor no proporcionado' }}</p>
             <p> <strong>cantidad semestres:</strong> {{ university?.semestres }} </p>
             <p> <strong>director(a):</strong> {{ university?.directorPrograma }} </p>
             <p> <strong>modalidad:</strong> {{ university?.modalidad }} </p>
