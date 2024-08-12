@@ -1,8 +1,8 @@
 <div id="result-container">
     <div>
         <p class="text-lg text-gray-700 p-5 mb-10 text-center">
-            ¡Bienvenidos a la presentación de los resultados de los Tests de CHASIDE y Holland! Hoy compartiremos los
-            hallazgos clave sobre las competencias, habilidades, e intereses evaluados en ambos tests.
+            A continuación, compartiremos los principales hallazgos sobre las competencias, habilidades e intereses
+            evaluados en ambos tests.
         </p>
     </div>
     <div id="result-row" class="flex justify-around">
@@ -11,8 +11,7 @@
             <div class="chart-container">
                 <ngx-charts-pie-chart [view]="view" scheme="vivid" [results]="chasideResults" [labels]="true"
                     [explodeSlices]="true" [legend]="true" legendTitle="Áreas de Competencia" [maxLabelLength]="50"
-                    [legendPosition]="legendPosition" [tooltipDisabled]="true" (select)="onSelect($event)"
-                    (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+                    [legendPosition]="legendPosition" [tooltipDisabled]="true" (select)="onSelect($event)">
                 </ngx-charts-pie-chart>
             </div>
         </div>
@@ -21,8 +20,7 @@
             <div class="chart-container">
                 <ngx-charts-pie-chart [view]="view" scheme="vivid" [results]="hollandResults" [labels]="true"
                     [explodeSlices]="true" [legend]="true" legendTitle="Tipos de personalidad" [maxLabelLength]="50"
-                    [legendPosition]="legendPosition" [tooltipDisabled]="true" (select)="onSelect($event)"
-                    (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+                    [legendPosition]="legendPosition" [tooltipDisabled]="true" (select)="onSelect($event)">
                 </ngx-charts-pie-chart>
             </div>
         </div>

@@ -24,7 +24,7 @@ export class ResultService {
       identificacion: identificacion,
       test: 'chaside'
     };
-    console.log(requestBody);
+    //console.log(requestBody);
     return this._httpClient.post(`${this._baseUrl}/auth/obtain-test/`, requestBody);
   }
 
@@ -35,7 +35,7 @@ export class ResultService {
       identificacion: identificacion,
       test: 'holland'
     };
-    console.log(requestBody);
+    //console.log(requestBody);
     return this._httpClient.post(`${this._baseUrl}/auth/obtain-test/`, requestBody);
   }
 }
