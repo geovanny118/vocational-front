@@ -3,6 +3,8 @@ import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
 import { Results } from '../models';
+import { CardsUniversidades, University } from 'src/app/shared/models';
+
 
 @Injectable({
   providedIn: 'root'

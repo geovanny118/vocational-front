@@ -11,7 +11,7 @@
             <div class="chart-container">
                 <ngx-charts-pie-chart [view]="view" scheme="vivid" [results]="chasideResults" [labels]="true"
                     [explodeSlices]="true" [legend]="true" legendTitle="Áreas de Competencia" [maxLabelLength]="50"
-                    [legendPosition]="legendPosition" [tooltipDisabled]="true" (select)="onSelect($event)">
+                    [legendPosition]="legendPosition" [tooltipDisabled]="true" (select)="onSelectChaside($event)">
                 </ngx-charts-pie-chart>
             </div>
         </div>
@@ -20,9 +20,14 @@
             <div class="chart-container">
                 <ngx-charts-pie-chart [view]="view" scheme="vivid" [results]="hollandResults" [labels]="true"
                     [explodeSlices]="true" [legend]="true" legendTitle="Tipos de personalidad" [maxLabelLength]="50"
-                    [legendPosition]="legendPosition" [tooltipDisabled]="true" (select)="onSelect($event)">
+                    [legendPosition]="legendPosition" [tooltipDisabled]="true" (select)="onSelectHolland($event)">
                 </ngx-charts-pie-chart>
             </div>
         </div>
     </div>
 </div>
+@if(loading){
+<div id="spinner-container">
+    <mat-spinner></mat-spinner>
+</div>
+}

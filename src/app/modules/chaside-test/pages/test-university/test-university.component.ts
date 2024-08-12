@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ChasideTestService } from '../../services';
 
 @Component({
-  selector: 'app-test-university',
+  selector: 'app-chaside-university',
   standalone: true,
   imports: [MatCardModule],
   templateUrl: './test-university.component.html',
