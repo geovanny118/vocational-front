@@ -31,3 +31,16 @@ chart-container {
   background-color: rgba(255, 255, 255, 0.7);
   z-index: 1000;
 }
+
+:host ::ng-deep text.data-label,
+:host ::ng-deep text.pie-label {
+  font-size: 16px;
+}
+
+:host ::ng-deep span.legend-title-text {
+  font-size: 20px;
+}
+
+:host ::ng-deep span.legend-label-text {
+  font-size: 18px;
+}
