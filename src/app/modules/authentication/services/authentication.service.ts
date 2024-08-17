@@ -30,6 +30,7 @@ export class AuthenticationService {
     // Limpiar el token almacenado en el localStorage y redireciona a la pagina de login
     localStorage.removeItem('token');
     localStorage.removeItem('identificacion');
+    localStorage.removeItem('expirationToken');
     this.currentUserSignal.set(null);
     this._router.navigateByUrl('/authentication/login');
   }
@@ -50,4 +51,15 @@ export class AuthenticationService {
     return localStorage.getItem('rol_usuario') === 'ROLE_ADMIN';
   }
 
+  isTokenExpired(): boolean {
+    const expirationToken = localStorage.getItem('expirationToken');
+    if (!expirationToken) {
+      return true;
+    }
+
+    const expirationDate = new Date(expirationToken).getTime();
+    const now = new Date().getTime();
+
+    return now >= expirationDate;
+  }
 }

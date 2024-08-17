@@ -5,13 +5,14 @@ import { LoginComponent, PasswordRecoveryComponent, RegistrationComponent } from
 import { LoginFormComponent, PasswordRecoveryFormComponent, RegistrationFormComponent } from './components';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { DateFnsModule } from 'ngx-date-fns';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegistrationComponent,
     PasswordRecoveryComponent
-],
+  ],
   imports: [
     CommonModule,
     AuthenticationRoutingModule,
@@ -19,7 +20,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     RegistrationFormComponent,
     PasswordRecoveryFormComponent,
     MatCardModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    DateFnsModule
   ]
 })
 export class AuthenticationModule { }
