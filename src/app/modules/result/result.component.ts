@@ -45,7 +45,7 @@ export class ResultComponent {
     } else if (data && typeof data === 'object') {
       selectedArea = data.name;
     }
-
+    console.log(selectedArea);
     this.chasideTestService.getUniversities(selectedArea).subscribe(
       (response: University) => {
         console.log('Universidades recomendadas:', response);
@@ -69,6 +69,7 @@ export class ResultComponent {
     } else if (data && typeof data === 'object') {
       selectedName = data.name;
     }
+    console.log(selectedName);
     this.hollandTestService.getUniversities(selectedName).subscribe(
       (response: University) => {
         console.log('Universidades recomendadas:', response);
@@ -115,6 +116,21 @@ export class ResultComponent {
       error: () => {
         this.hollandResults = [];
       }
+    });
+  }
+
+  downloadReport(): void {
+    const identificacion = localStorage.getItem('identificacion') ?? '';
+    this.resultServices.downloadPdf().subscribe((response) => {
+      const blob = new Blob([response], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `resultado_usuario_${identificacion}.pdf`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }, error => {
+      console.error('Error al descargar el PDF', error);
     });
   }
 }

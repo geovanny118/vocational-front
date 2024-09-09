@@ -9,8 +9,8 @@ export const AuthGuard: CanMatchFn = (route: Route, segmente: UrlSegment[]) => {
 
     if (authenticationService.isTokenExpired()) {
         console.log('AuthGuard: Token expired');
-        authenticationService.logout();
-        router.navigateByUrl('/authentication/login');
+        authenticationService.logoutByExpiration();
+        //router.navigateByUrl('/authentication/login');
         return false;
     }
 

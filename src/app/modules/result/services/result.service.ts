@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
@@ -39,5 +39,11 @@ export class ResultService {
     };
     //console.log(requestBody);
     return this._httpClient.post(`${this._baseUrl}/auth/obtain-test/`, requestBody);
+  }
+
+  downloadPdf(): Observable<Blob> {
+    const identificacion = localStorage.getItem('identificacion') ?? '';
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this._httpClient.get(`${this._baseUrl}/reportes/resultado-usuario/${identificacion}`, { headers, responseType: 'blob' });
   }
 }

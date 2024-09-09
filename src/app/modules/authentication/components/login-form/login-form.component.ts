@@ -69,9 +69,9 @@ export class LoginFormComponent {
         })
       ).subscribe((response: UsuarioAutenticado) => {
         if (response?.authorities.length == 2) {
-          localStorage.setItem('rol_usuario', 'ROLE_ADMIN');
+          localStorage.setItem('rolUsuario', 'ROLE_ADMIN');
         } else {
-          localStorage.setItem('rol_usuario', 'ROLE_USER');
+          localStorage.setItem('rolUsuario', 'ROLE_USER');
         }
 
         const expirationToken: string = response.expirationTokenISO.toString();

@@ -8,11 +8,12 @@ import { AuthenticationService } from 'src/app/modules/authentication/services';
 import { HollandResult, University } from '../../models';
 import { ImagenesAreaInteres } from 'src/app/modules/chaside-test/models';
 import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'holland-test-result',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatProgressSpinnerModule],
+  imports: [MatCardModule, MatButtonModule, MatProgressSpinnerModule, MatSnackBarModule],
   templateUrl: './test-result.component.html',
   styleUrl: './test-result.component.scss'
 })
@@ -23,6 +24,7 @@ export class TestResultComponent {
   hollandResults: HollandResult[] | undefined | null = this.hollandTestService.currentHollandResultSignal();
   loading: boolean = false;
   private _router: Router = inject(Router);
+  private _snackBar: MatSnackBar = inject(MatSnackBar);
 
   readonly imagenesAreasDeInteres: ImagenesAreaInteres = {
     'Artista':
@@ -41,6 +43,7 @@ export class TestResultComponent {
 
   ngOnInit() {
     const userId = localStorage.getItem('identificacion');
+    let mensaje: string = '';
     if (userId) {
       this.authenticationServices.getLoggedInUserInfo(userId).subscribe({
         next: (response) => {
@@ -50,6 +53,11 @@ export class TestResultComponent {
           this.authenticationServices.currentUserSignal.set(null);
         }
       });
+    }
+
+    if (this.hollandResults) {
+      mensaje = this.hollandResults[0].mensaje || '';
+      this.showMessage(mensaje);
     }
   }
 
@@ -69,5 +77,9 @@ export class TestResultComponent {
         });
       }
     );
+  }
+
+  showMessage(mensaje: string): void {
+    this._snackBar.open(mensaje, '', { duration: 10000 });
   }
 }
