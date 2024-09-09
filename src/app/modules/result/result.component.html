@@ -1,26 +1,36 @@
 <div id="result-container">
-    <div class="flex flex-col text-center w-full mb-20">
-        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">chaside</h1>
-        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn
-            asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun
-            deep
-            jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
+    <div>
+        <p class="text-lg text-gray-700 p-5 mb-10 text-center">
+            A continuación, compartiremos los principales hallazgos sobre las competencias, habilidades e intereses
+            evaluados en ambos tests.
+        </p>
     </div>
-    <div class="chart-container">
-        <ngx-charts-advanced-pie-chart [view]="view" scheme="vivid" [results]="single" [gradient]="gradient"
-            (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
-        </ngx-charts-advanced-pie-chart>
-    </div>
-    <div class="flex flex-col text-center w-full mb-20">
-        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">holland</h1>
-        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn
-            asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun
-            deep
-            jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
-    </div>
-    <div class="chart-container">
-        <ngx-charts-advanced-pie-chart [view]="view" scheme="vivid" [results]="single_two" [gradient]="gradient"
-            (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
-        </ngx-charts-advanced-pie-chart>
+    <div id="result-row" class="flex justify-around">
+        <div class="flex flex-col items-center mb-20">
+            <h1 class="text-2xl font-bold capitalize text-center mb-4">Chaside</h1>
+            <div class="chart-container">
+                <ngx-charts-pie-chart [view]="view" scheme="vivid" [results]="chasideResults" [labels]="true"
+                    [explodeSlices]="true" [legend]="true" legendTitle="Áreas de Competencia" [maxLabelLength]="50"
+                    [legendPosition]="legendPosition" [tooltipDisabled]="true" (select)="onSelectChaside($event)">
+                </ngx-charts-pie-chart>
+            </div>
+        </div>
+        <div class="flex flex-col items-center mb-20">
+            <h1 class="text-2xl font-bold capitalize text-center mb-4">Holland</h1>
+            <div class="chart-container">
+                <ngx-charts-pie-chart [view]="view" scheme="vivid" [results]="hollandResults" [labels]="true"
+                    [explodeSlices]="true" [legend]="true" legendTitle="Tipos de personalidad" [maxLabelLength]="50"
+                    [legendPosition]="legendPosition" [tooltipDisabled]="true" (select)="onSelectHolland($event)">
+                </ngx-charts-pie-chart>
+            </div>
+        </div>
     </div>
 </div>
+<button (click)="downloadReport()"
+    class="flex mx-auto mt-20 text-white bg-[#2c5cae] border-0 py-2 px-8 focus:outline-none hover:bg-blue-500 rounded text-lg">Descargar
+    reporte</button>
+@if(loading){
+<div id="spinner-container">
+    <mat-spinner></mat-spinner>
+</div>
+}

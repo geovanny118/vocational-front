@@ -3,4 +3,5 @@ export interface HollandResult {
     resultado: number;
     areaInteres: string;
     caracteristicas?: string;
+    mensaje?: string;
 }

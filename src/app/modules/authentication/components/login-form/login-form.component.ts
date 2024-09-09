@@ -10,7 +10,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoginCredentials, UsuarioAutenticado } from '../../models';
 import { AuthenticationService } from '../../services';
 import { catchError } from 'rxjs';
-
+import { parse } from 'date-fns';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -69,11 +69,15 @@ export class LoginFormComponent {
         })
       ).subscribe((response: UsuarioAutenticado) => {
         if (response?.authorities.length == 2) {
-          localStorage.setItem('rol_usuario', 'ROLE_ADMIN');
+          localStorage.setItem('rolUsuario', 'ROLE_ADMIN');
         } else {
-          localStorage.setItem('rol_usuario', 'ROLE_USER');
+          localStorage.setItem('rolUsuario', 'ROLE_USER');
         }
+
+        const expirationToken: string = response.expirationTokenISO.toString();
+
         localStorage.setItem('token', response.token);
+        localStorage.setItem('expirationToken', expirationToken);
         localStorage.setItem('identificacion', response.identificacion);
         this._router.navigateByUrl('/user');
       });

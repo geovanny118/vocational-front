@@ -43,4 +43,3 @@ export class ChasideTestService {
     return this._httpClient.post(`${this._baseUrl}/university/especiality`, requestBody);
   }
 }
-
